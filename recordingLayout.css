@@ -1,0 +1,13 @@
+/*Recording Screen Layout*/
+
+.command_stack{
+	position: fixed;
+	right: 0;
+	top: 0;
+	border: 1px solid black;
+}
+
+.cs_title{
+	font-family: times;
+	font-weight: bold;
+}
