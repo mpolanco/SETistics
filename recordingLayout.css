@@ -1,13 +1,37 @@
 /*Recording Screen Layout*/
 
-.command_stack{
-	position: fixed;
+#title_bar{
+	background-color: #91003A;
+	border-bottom: 1px solid #4D001F;
+	/*min-width: 981px;*/
+	color: rgb(200,200,200);
+	height: 37px;
+	width: 80%;
+}
+
+#command_stack{
 	right: 0;
 	top: 0;
 	border: 1px solid black;
+	height: 100%;
+	width: 20%;
+	z-index: 300;
+	display: block;
 }
 
-.cs_title{
-	font-family: times;
+#left_content{
+	padding-top: 40px;
+}
+
+#title{
+	font-weight: bold;
+}
+
+.fixed_elem{
+	position: fixed;
+}
+
+#cs_title{
+	text-align: center;
 	font-weight: bold;
 }
