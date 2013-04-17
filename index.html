@@ -13,16 +13,14 @@
 <script type="text/javascript" src="external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="external_js/jquery-ui-1.10.0.custom.min.js"></script>
 	<!--Bootstrap found at:
-		http://twitter.github.io/bootstrap/-->
+		http://twitter.github.io/bootstrap/
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
 	<!--Extra canvas utilities found at:
     	http://www.dbp-consulting.com/tutorials/canvas/CanvasArrow.html-->
 <script type="text/javascript" src="external_js/canvasutilities.js"></script>
 	<!-- Initializing JS -->
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript" src="recording.js"></script>
 </head>
 
 
@@ -35,18 +33,18 @@
 
 	<!-- main content -->
 	<div id="left_content">
-		<form class="form-inline">
-			<input type="text" class="input-small" placeholder="Player #" name="player_num">
+		<form id="command_line" class="form-inline">
+			<input id='player_num' type="text" class="input-small" placeholder="Player #" name="player_num">
 			<input type="text" class="input-small" placeholder="Shot Type" name="shot_type">
 			<input type="text" class="input-small" placeholder="Start" name="start_dir">
 			<input type="text" class="input-small" placeholder="End" name="end_dir">
 			<input type="text" class="input-small" placeholder="Outcome" name="shot_outcome">
-			<button type="submit" class="btn">Submit</button>
+			<button id="btn_submit" type="submit" class="btn">Submit</button>
 		</form>
 	</div>
 
 	<!-- right scroller pane -->
-	<div id="command_stack" class="fixed_elem"> 
+	<div id="command_stack" class="fixed_elem gradient-texture"> 
 		<div id="cs_title">Previous Commands</div>
 	</div>
 </div>
