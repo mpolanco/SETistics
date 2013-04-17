@@ -147,3 +147,13 @@ input[type=text].thin{
 	border: 1px solid;
 	border-color: black;
 }
+
+.sb-fi{
+	text-align: center;
+	color: red;
+	width: 100%;
+}
+
+.sb-form{
+	margin-bottom: 0px;
+}
