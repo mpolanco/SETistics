@@ -35,19 +35,54 @@
 
 	<!-- main content -->
 	<div id="left_content">
+		<iframe class="youtube-player" height="345" src="https://www.youtube.com/embed/RisxlgbLT-I"></iframe>
 		<form class="form-inline">
-			<input type="text" class="input-small" placeholder="Player #" name="player_num">
-			<input type="text" class="input-small" placeholder="Shot Type" name="shot_type">
-			<input type="text" class="input-small" placeholder="Start" name="start_dir">
-			<input type="text" class="input-small" placeholder="End" name="end_dir">
-			<input type="text" class="input-small" placeholder="Outcome" name="shot_outcome">
-			<button type="submit" class="btn">Submit</button>
+			<div class="subtistic">
+				<div>
+			 		<input type="text" placeholder="Player #" name="player_num">
+			 		<div id="playerbox" class="box outlined"></div>
+			 	</div>
+			</div>
+			<div class="subtistic">
+				<div>
+					<input type="text" placeholder="Shot Type" name="shot_type">
+					<div id="shotbox" class="box outlined"></div>
+				</div>
+			</div>
+			<div id="path-subtistic" class="subtistic">
+				<div>
+					<input type="text" placeholder="Start" name="start_dir">
+					<input type="text" placeholder="End" name="end_dir">
+					<div id="courtbox" class="box outlined"></div>
+				</div>
+			</div>
+			<div class="subtistic">
+				<div>
+					<input type="text" placeholder="Outcome" name="shot_outcome">
+					<div id="outcomebox" class="box outlined"></div>
+				</div>
+			</div>
+			<button id="submitbtn" type="submit" class="btn">Submit</button>
 		</form>
 	</div>
 
 	<!-- right scroller pane -->
 	<div id="command_stack" class="fixed_elem"> 
 		<div id="cs_title">Previous Commands</div>
+		<table id="stathistory">
+			<tr class="odd"><td class="flabel">F1</td><td><input type="text"></input></td></tr>
+			<tr class="even"><td class="flabel">F2</td><td><input type="text"></input></td></tr>
+			<tr class="odd"><td class="flabel">F3</td><td><input type="text"></input></td></tr>
+			<tr class="even"><td class="flabel">F4</td><td><input type="text"></input></td></tr>
+			<tr class="odd"><td class="flabel">F5</td><td><input type="text"></input></td></tr>
+			<tr class="even"><td class="flabel">F6</td><td><input type="text"></input></td></tr>
+			<tr class="odd"><td class="flabel">F7</td><td><input type="text"></input></td></tr>
+			<tr class="even"><td class="flabel">F8</td><td><input type="text"></input></td></tr>
+			<tr class="odd"><td class="flabel">F9</td><td><input type="text"></input></td></tr>
+			<tr class="even"><td class="flabel">F10</td><td><input type="text"></input></td></tr>
+			<tr class="odd"><td class="flabel">F11</td><td><input type="text"></input></td></tr>
+			<tr class="even"><td class="flabel">F12</td><td><input type="text"></input></td></tr>
+		</table>
 	</div>
 </div>
 </body>
