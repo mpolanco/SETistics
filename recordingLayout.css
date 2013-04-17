@@ -9,6 +9,11 @@
 	width: 79.9%;
 }
 
+#cs_title {
+	padding-top: 7px;
+	height: 30px;
+}
+
 #command_stack{
 	right: 0;
 	top: 0;
@@ -19,8 +24,40 @@
 	display: block;
 }
 
+#stathistory {
+	padding: 0px;
+	margin: 0px;
+	height: 93%;
+	width: 100%;
+}
+
+#stathistory tr{
+	height: 8%;
+	width: 20%;
+}
+
+.flabel {
+	padding-left: 8%;
+	padding-right: 2%;
+}
+
+.odd {
+	background-color: rgb(220,220,220);
+}
+
+.even {
+	background-color: white;
+}
+
+#stathistory tr td input{
+	margin-top: 5%;
+	padding: 2%;
+	width: 90%;
+}
+
 #left_content{
 	padding-top: 40px;
+	width: 80%;
 }
 
 #title{
@@ -69,4 +106,44 @@ input[type=text].transparent{
 
 input[type=text].thin{
 	width: 15%;
+}
+
+#submitbtn {
+	margin: 2%;
+	width: 12%;
+}
+
+.youtube-player {
+	margin: 2%;
+	width: 95%;
+}
+
+.subtistic {
+	margin: 2%;
+	width: 12%;
+	float: left;
+}
+
+.subtistic input {
+	width: 90%;
+}
+
+#path-subtistic {
+	width: 28%;
+}
+
+#path-subtistic input {
+	width: 40%;
+}
+
+
+.box {
+	margin: 5%;
+	width: 90%;
+	height: 100px;
+}
+
+.outlined {
+	border: 1px solid;
+	border-color: black;
 }
