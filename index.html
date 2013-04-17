@@ -35,34 +35,32 @@
 	<!-- main content -->
 	<div id="left_content">
 		<iframe class="youtube-player" height="345" src="https://www.youtube.com/embed/RisxlgbLT-I"></iframe>
-		<form class="form-inline">
-			<div class="subtistic">
-				<div>
-			 		<input type="text" placeholder="Player #" name="player_num">
-			 		<div id="playerbox" class="box outlined"></div>
-			 	</div>
+		<div class="subtistic">
+			<div>
+		 		<input type="text" placeholder="Player #" id="player_num_input">
+		 		<div id="playerbox" class="box outlined"></div>
+		 	</div>
+		</div>
+		<div class="subtistic">
+			<div>
+				<input type="text" placeholder="Shot Type" id="shot_type_input">
+				<div id="shotbox" class="box outlined"></div>
 			</div>
-			<div class="subtistic">
-				<div>
-					<input type="text" placeholder="Shot Type" name="shot_type">
-					<div id="shotbox" class="box outlined"></div>
-				</div>
+		</div>
+		<div id="path-subtistic" class="subtistic">
+			<div>
+				<input type="text" placeholder="Start" id="start_dir_input">
+				<input type="text" placeholder="End" id="end_dir_input">
+				<div id="courtbox" class="box outlined"></div>
 			</div>
-			<div id="path-subtistic" class="subtistic">
-				<div>
-					<input type="text" placeholder="Start" name="start_dir">
-					<input type="text" placeholder="End" name="end_dir">
-					<div id="courtbox" class="box outlined"></div>
-				</div>
+		</div>
+		<div class="subtistic">
+			<div>
+				<input type="text" placeholder="Outcome" id="shot_outcome_input">
+				<div id="outcomebox" class="box outlined"></div>
 			</div>
-			<div class="subtistic">
-				<div>
-					<input type="text" placeholder="Outcome" name="shot_outcome">
-					<div id="outcomebox" class="box outlined"></div>
-				</div>
-			</div>
+		</div>
 			<button id="submitbtn" type="submit" class="btn">Submit</button>
-		</form>
 	</div>
 
 	<!-- right scroller pane -->
