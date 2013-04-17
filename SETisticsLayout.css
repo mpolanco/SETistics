@@ -1,0 +1,77 @@
+#left-content {
+	background-color: rgb(200,200,200);
+	height: 500px;
+}
+
+#right-content {
+	background-color: green;
+	height: 500px;
+}
+
+#title-bar {
+	background-color: #91003A;
+	border-bottom: 1px solid #4D001F;
+	color: rgb(200,200,200);
+	height: 37px;
+}
+
+.title{
+	padding-top: .3em;
+	padding-left: 1em;
+	font-weight: bold;
+	font-family: Helvetica;
+	font-size: 2em;
+}
+
+#youtube-player {
+	height: 300px;
+}
+
+#input-form {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+#input-form input {
+	margin-bottom: 10px;
+}
+
+#submit-button {
+	width: 90%;
+}
+
+.box {
+	height: 100px;
+	background-color: white;
+}
+
+.outlined {
+	border: 1px solid;
+	border-color: black;
+}
+
+#command-stack{
+	right: 0;
+	top: 0;
+	border: 1px solid black;
+	height: 500px;
+	z-index: 300;
+	display: block;
+}
+
+#cs-title {
+	margin-top: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-family: Helvetica;
+	font-size: 1.3em;
+}
+
+.gradient-texture {
+	border-radius: 5px;
+	background: rgba(255,255,255,0.1);
+	background: -moz-linear-gradient(top,rgba(255,255,255,0.1),rgba(0,0,0,0.15));
+	background: -webkit-linear-gradient(top,rgba(255,255,255,0.1),rgba(0,0,0,0.15));
+	background: linear-gradient(top,rgba(255,255,255,0.1),rgba(0,0,0,0.15));
+	height: 100%;
+}
