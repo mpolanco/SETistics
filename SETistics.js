@@ -110,10 +110,11 @@ $(function() {
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
     var wrapper_num = ++num_commands;
-    var spanid = "fi" + wrapper_num;
+    var fiid = "fi" + wrapper_num;
+    var foid = "fo" + wrapper_num;
 
 
-    $(fieldIndicator).attr('id', spanid);
+    $(fieldIndicator).attr('id', fiid);
 
     for (var i = 0; i < command.length; i++) {
       var command_field = document.createElement('input');
@@ -126,12 +127,12 @@ $(function() {
       $(command_field).addClass('thin');
       $(command_field).focusout(function(){
         $(this).addClass('transparent');
-        $('#'+spanid).html('');
+        $('#'+fiid).html('');
       });
       $(command_field).focusin(function(){
         console.log('hit');
         $(this).removeClass('transparent');
-        $('#' + spanid).html($(this).attr('name'));
+        $('#' + fiid).html($(this).attr('name'));
       });
       
 
@@ -142,6 +143,11 @@ $(function() {
     $(translation).html(translateCommand(command));
     $(comForm).addClass('form-inline');
     $(comForm).addClass('sb-form');
+    $(comForm).attr('id', foid);
+    $(comForm).submit(function(){
+      $("#player-num").focus();
+      return false;
+    });
     $(wrapper).addClass('separator');
     $(wrapper).append(comForm);
     $(wrapper).append(fieldIndicator)
