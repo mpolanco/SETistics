@@ -6,7 +6,7 @@ $(function() {
 
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 13 || event.which == 32) {  
+    if (event.which == 32) {  
       $("#player-num").val($("#player-num").val().split(" ").join(""));
       $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
@@ -30,6 +30,8 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-start").val($("#dir-start").val().split(" ").join(""));
+      $("#dir-box").removeClass("court");
+      $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
     }
 
@@ -40,6 +42,8 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-end").val($("#dir-end").val().split(" ").join(""));
+      $("#dir-box").removeClass("shot-start");
+      $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
     }
 
@@ -173,11 +177,51 @@ $(function() {
     $("#player-num-box").removeClass("number12");
     $("#shot-type-box").removeClass("block");
     $("#shot-outcome-box").removeClass("kill");
+    $("#dir-box").removeClass("shot-start");
+    $("#dir-box").removeClass("shot-end");
+    $("#dir-box").addClass("court");
   }
 
   function translateCommand(command){
     return '';
   }
+
+  $(".dir-start-option").click(function(event) {
+      $("#dir-start").val(event.currentTarget.innerHTML);
+  });
+
+  $(".dir-end-option").click(function(event) {
+      $("#dir-end").val(event.currentTarget.innerHTML);
+  });
+
+  $(".shot-outcome-option").click(function(event) {
+      var chosen = event.currentTarget.innerHTML;
+      if (chosen == "Dug") {
+          $("#shot-outcome").val("d");
+      } else if (chosen == "Kill") {
+          $("#shot-outcome").val("k");
+      } else if (chosen == "Error") {
+          $("#shot-outcome").val("e");
+      }
+  });
+
+  $(".shot-type-option").click(function(event) {
+      var chosen = event.currentTarget.innerHTML;
+      if (chosen == "Block") {
+          $("#shot-type").val("bl");
+      } else if (chosen == "Dig") {
+          $("#shot-type").val("dg");
+      } else if (chosen == "Serve") {
+          $("#shot-type").val("sr");
+      } else if (chosen == "Spike") {
+          $("#shot-type").val("sp");
+      }
+  });
+
+  $(".player-num-option").click(function(event) {
+      var chosen = event.currentTarget.innerHTML.split(' ');
+      $("#player-num").val(chosen[0].charAt(0).toLowerCase() + chosen[chosen.length - 1]);
+  });
 
   $("#player-num").focus();
 
