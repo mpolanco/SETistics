@@ -114,9 +114,12 @@ $(function() {
     var comForm = document.createElement('form');
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
+    var command_num = document.createElement('div');
+
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
     var foid = "fo" + wrapper_num;
+    var sb_ele_title = 'Statistic ' + wrapper_num;
 
 
     $(fieldIndicator).attr('id', fiid);
@@ -146,6 +149,8 @@ $(function() {
 
     $(fieldIndicator).addClass('sb-fi');
     $(translation).html(translateCommand(command));
+    $(command_num).html(sb_ele_title);
+    $(command_num).css('font-weight', 'bold');
     $(comForm).addClass('form-inline');
     $(comForm).addClass('sb-form');
     $(comForm).attr('id', foid);
@@ -154,6 +159,7 @@ $(function() {
       return false;
     });
     $(wrapper).addClass('separator');
+    $(wrapper).append(command_num);
     $(wrapper).append(comForm);
     $(wrapper).append(fieldIndicator)
     $(wrapper).append(translation);
@@ -170,7 +176,7 @@ $(function() {
   }
 
   function translateCommand(command){
-    return 'translation';
+    return '';
   }
 
   $("#player-num").focus();
