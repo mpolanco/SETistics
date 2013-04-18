@@ -34,6 +34,7 @@
 
 #input-form input {
 	margin-bottom: 10px;
+	float: right;
 }
 
 #submit-button {
