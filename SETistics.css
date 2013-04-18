@@ -1,6 +1,6 @@
 #left-content {
 	background-color: rgb(200,200,200);
-	height: 500px;
+	height: 600px;
 }
 
 #right-content {
@@ -24,7 +24,7 @@
 }
 
 #youtube-player {
-	height: 300px;
+	height: 375px;
 }
 
 #input-form {
@@ -43,7 +43,7 @@
 
 .box {
 	height: 100px;
-	background-color: white;
+	background-size: 100% 100%;
 }
 
 .outlined {
@@ -106,4 +106,20 @@ input[type=text].transparent{
 
 input[type=text].thin{
 	width: 15%;
+}
+
+#dir-box {
+	background-image: url(icons/numberedcourt.png);
+}
+
+.number12 {
+	background-image: url(icons/playernumber.png);
+}
+
+.block {
+	background-image: url(icons/block.png);
+}
+
+.kill {
+	background-image: url(icons/killshot.png);
 }

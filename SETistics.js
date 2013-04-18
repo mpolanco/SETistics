@@ -8,6 +8,7 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#player-num").val($("#player-num").val().split(" ").join(""));
+      $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
     }
 
@@ -18,6 +19,7 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#shot-type").val($("#shot-type").val().split(" ").join(""));
+      $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
     }
 
@@ -48,6 +50,7 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#shot-outcome").val($("#shot-outcome").val().split(" ").join(""));
+      $("#shot-outcome-box").addClass("kill");
       $("#submit-button").focus();
     }
 
@@ -90,6 +93,8 @@ $(function() {
     console.log(vals);
     addToCallStack(vals);
     $("#player-num").focus();
+
+    resetIcons();
     return false;
   });
 
@@ -150,6 +155,12 @@ $(function() {
     command_stack.push(wrapper);
     
     return wrapper;
+  }
+
+  function resetIcons() {
+    $("#player-num-box").removeClass("number12");
+    $("#shot-type-box").removeClass("block");
+    $("#shot-outcome-box").removeClass("kill");
   }
 
   function translateCommand(command){
