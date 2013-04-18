@@ -118,9 +118,12 @@ $(function() {
     var comForm = document.createElement('form');
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
+    var command_num = document.createElement('div');
+
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
     var foid = "fo" + wrapper_num;
+    var sb_ele_title = 'Statistic ' + wrapper_num;
 
 
     $(fieldIndicator).attr('id', fiid);
@@ -150,6 +153,8 @@ $(function() {
 
     $(fieldIndicator).addClass('sb-fi');
     $(translation).html(translateCommand(command));
+    $(command_num).html(sb_ele_title);
+    $(command_num).css('font-weight', 'bold');
     $(comForm).addClass('form-inline');
     $(comForm).addClass('sb-form');
     $(comForm).attr('id', foid);
@@ -158,6 +163,7 @@ $(function() {
       return false;
     });
     $(wrapper).addClass('separator');
+    $(wrapper).append(command_num);
     $(wrapper).append(comForm);
     $(wrapper).append(fieldIndicator)
     $(wrapper).append(translation);
@@ -177,31 +183,14 @@ $(function() {
   }
 
   function translateCommand(command){
-    return 'translation';
+    return '';
   }
 
-  $(".dir-start-option").click(function(event) {
-      $("#dir-start").val(event.currentTarget.innerHTML);
-      $("#dir-box").removeClass("court");
-      $("#dir-box").addClass("shot-start");
-  });
-
-  $(".dir-end-option").click(function(event) {
-      $("#dir-end").val(event.currentTarget.innerHTML);
-      $("#dir-box").removeClass("shot-start");
-      $("#dir-box").addClass("shot-end");
-  });
-
-  $(".shot-outcome-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML;
-      if (chosen == "Dug") {
-          $("#shot-outcome").val("d");
-      } else if (chosen == "Kill") {
-          $("#shot-outcome").val("k");
-      } else if (chosen == "Error") {
-          $("#shot-outcome").val("e");
-      }
-      $("#shot-outcome-box").addClass("kill")
+  $(".player-num-option").click(function(event) {
+      var chosen = event.currentTarget.innerHTML.split(' ');
+      $("#player-num").val(chosen[0].charAt(0).toLowerCase() + chosen[chosen.length - 1]);
+      $("#player-num-box").addClass("number12");
+      $("#shot-type").focus();
   });
 
   $(".shot-type-option").click(function(event) {
@@ -216,12 +205,34 @@ $(function() {
           $("#shot-type").val("sp");
       }
       $("#shot-type-box").addClass("block");
+      $("#dir-start").focus();
   });
 
-  $(".player-num-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML.split(' ');
-      $("#player-num").val(chosen[0].charAt(0).toLowerCase() + chosen[chosen.length - 1]);
-      $("#player-num-box").addClass("number12");
+  $(".dir-start-option").click(function(event) {
+      $("#dir-start").val(event.currentTarget.innerHTML);
+      $("#dir-box").removeClass("court");
+      $("#dir-box").addClass("shot-start");
+      $("#dir-end").focus();
+  });
+
+  $(".dir-end-option").click(function(event) {
+      $("#dir-end").val(event.currentTarget.innerHTML);
+      $("#dir-box").removeClass("shot-start");
+      $("#dir-box").addClass("shot-end");
+      $("#shot-outcome").focus();
+  });
+
+  $(".shot-outcome-option").click(function(event) {
+      var chosen = event.currentTarget.innerHTML;
+      if (chosen == "Dug") {
+          $("#shot-outcome").val("d");
+      } else if (chosen == "Kill") {
+          $("#shot-outcome").val("k");
+      } else if (chosen == "Error") {
+          $("#shot-outcome").val("e");
+      }
+      $("#shot-outcome-box").addClass("kill")
+      $("#submit-button").focus()
   });
 
   $("#player-num").focus();
