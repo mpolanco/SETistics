@@ -6,7 +6,7 @@ $(function() {
 
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 13 || event.which == 32) {  
+    if (event.which == 32) {  
       $("#player-num").val($("#player-num").val().split(" ").join(""));
       $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
@@ -30,6 +30,8 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-start").val($("#dir-start").val().split(" ").join(""));
+      $("#dir-box").removeClass("court");
+      $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
     }
 
@@ -40,6 +42,8 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-end").val($("#dir-end").val().split(" ").join(""));
+      $("#dir-box").removeClass("shot-start");
+      $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
     }
 
@@ -167,6 +171,9 @@ $(function() {
     $("#player-num-box").removeClass("number12");
     $("#shot-type-box").removeClass("block");
     $("#shot-outcome-box").removeClass("kill");
+    $("#dir-box").removeClass("shot-start");
+    $("#dir-box").removeClass("shot-end");
+    $("#dir-box").addClass("court");
   }
 
   function translateCommand(command){
