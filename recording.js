@@ -43,7 +43,7 @@ $(function(){
 	function addToCallStack(command){
 		var cell = createCommandCell(command);
 		console.log($(cell));
-		$(cell).insertAfter('#cs_title');
+		$(cell).insertAfter('#cs-title');
 	}
 
 	function createCommandCell(command){
