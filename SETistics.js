@@ -119,6 +119,7 @@ $(function() {
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
     var command_num = document.createElement('div');
+    var edit_button = document.createElement('button');
 
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
@@ -127,6 +128,9 @@ $(function() {
 
 
     $(fieldIndicator).attr('id', fiid);
+
+    var command_field;
+    var cfid = 'cf_'+wrapper_num;
 
     for (var i = 0; i < command.length; i++) {
       var command_field = document.createElement('input');
@@ -147,9 +151,57 @@ $(function() {
         $('#' + fiid).html($(this).attr('name'));
       });
       
+      if(i == command.length-1){
+        $(command_field).attr('id', cfid);
+        $(command_field).keyup(function(event) {
+          // Enter is key 13. Space key is 32. 
+          if (event.which == 32) {  
+            $(this).val($(this).val().split(" ").join(""));
+            $(comForm).submit();
+          }
+
+          return false;
+        });
+      }
+      else{
+        $(command_field).keyup(function(event) {
+          // Enter is key 13. Space key is 32. 
+          if (event.which == 32) {  
+            $(this).val($(this).val().split(" ").join(""));
+            $(this).next().focus();
+          }
+
+          return false;
+        });
+      }
+
+      $(command_field).keyup(function(event) {
+          // Enter is key 13. Space key is 32. 
+          if (event.which == 13) {  
+            $(this).val($(this).val().split(" ").join(""));
+            $(comForm).submit();
+          }
+
+          return false;
+      });
 
       $(comForm).append(command_field);
     };
+
+    $(edit_button).html('Edit');
+    $(edit_button).click(function(){
+      $('#'+cfid).focus();
+      return false;
+    });
+    $(edit_button).css('visibility', 'hidden');
+    $(wrapper).mouseover(function(){
+      $(edit_button).css('visibility', 'visible');
+    });
+    $(wrapper).mouseout(function(){
+      $(edit_button).css('visibility', 'hidden');
+    });
+
+    $(comForm).append(edit_button);
 
     $(fieldIndicator).addClass('sb-fi');
     $(translation).html(translateCommand(command));
