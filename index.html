@@ -26,14 +26,17 @@
 
 
 <body>
-<div id="content">
+<div class="container-fluid" id="content">
 	<!-- title bar and navigation-->
-	<div id="title_bar" class="fixed_elem">
-		<div id="title">SETistics</div>
-	</div>
+		
 
 	<!-- main content -->
-	<div id="left_content">
+	<div class="span9" id="left_content">
+		<div class="row-fluid">
+			<div id="title_bar" class="fixed_elem">
+				<div id="title">SETistics</div>
+			</div>
+		</div>
 		<!--
 		<form id="command_line" class="form-inline">
 			<input id='player_num' type="text" class="input-small" placeholder="Player #" name="player_num">
@@ -44,37 +47,34 @@
 			<button id="btn_submit" type="submit" class="btn">Submit</button>
 		</form>
 		-->
-		<iframe class="youtube-player" height="345" src="https://www.youtube.com/embed/RisxlgbLT-I"></iframe>
-		<div class="subtistic">
-			<div>
-		 		<input type="text" placeholder="Player #" id="player_num_input">
-		 		<div id="playerbox" class="box outlined"></div>
-		 	</div>
+		<div class="row-fluid">
+			<iframe class="youtube-player span12" height="345" src="https://www.youtube.com/embed/RisxlgbLT-I"></iframe>
 		</div>
-		<div class="subtistic">
-			<div>
-				<input type="text" placeholder="Shot Type" id="shot_type_input">
-				<div id="shotbox" class="box outlined"></div>
-			</div>
+		<div class="row-fluid">
+			<form class="form-inline">
+			 	<input class="span2" type="text" placeholder="Player #" id="player_num_input">
+				
+				<input class="span2" type="text" placeholder="Shot Type" id="shot_type_input">
+					
+				<input class="span2" type="text" placeholder="Start" id="start_dir_input">
+
+				<input class="span2" type="text" placeholder="End" id="end_dir_input">
+					
+				<input class="span2" type="text" placeholder="Outcome" id="shot_outcome_input">
+					
+				<button class="span2 btn" id="submitbtn" type="submit">Submit</button>
+			</form>
 		</div>
-		<div id="path-subtistic" class="subtistic">
-			<div>
-				<input type="text" placeholder="Start" id="start_dir_input">
-				<input type="text" placeholder="End" id="end_dir_input">
-				<div id="courtbox" class="box outlined"></div>
-			</div>
+		<div class="row-fluid">
+			<div class="outlined box span2"> </div>
+			<div class="outlined box span2"> </div>
+			<div class="outlined box span4"> </div>
+			<div class="outlined box span2"> </div>
 		</div>
-		<div class="subtistic">
-			<div>
-				<input type="text" placeholder="Outcome" id="shot_outcome_input">
-				<div id="outcomebox" class="box outlined"></div>
-			</div>
-		</div>
-			<button id="submitbtn" type="submit" class="btn">Submit</button>
 	</div>
 
 	<!-- right scroller pane -->
-	<div id="command_stack" class="fixed_elem gradient-texture"> 
+	<div id="command_stack" class="fixed_elem gradient-texture span3"> 
 		<div id="cs_title">Previous Commands</div>
 		<!--
 		<table id="stathistory">

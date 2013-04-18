@@ -26,56 +26,58 @@
 					</iframe>
 				</div>
 				<div class="row-fluid">
-				 	<div class="span2">
-				 		<div class="row-fluid">
-				 			<input id="player-num" class="span12" type="text" placeholder="Player #">
-				 			<div class="btn-group">
-							    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-							        Action
-							        <span class="caret"></span>
-							    </a>
-							    <ul class="dropdown-menu">
-							        <li><a href="#">1</a></li>
-							    </ul>
+					<form id="input-form">
+					 	<div class="span2">
+					 		<div class="row-fluid">
+					 			<input id="player-num" class="span12" type="text" placeholder="Player #">
+					 			<div class="btn-group">
+								    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								        Action
+								        <span class="caret"></span>
+								    </a>
+								    <ul class="dropdown-menu">
+								        <li><a href="#">1</a></li>
+								    </ul>
+								</div>
+					 		</div>
+					 		<div class="row-fluid">
+					 			<div class="span12 outlined box"></div>
+					 		</div>
+					 	</div>
+
+						<div class="span2">
+							<div class="row-fluid">
+								<input id="shot-type" class="span12" type="text" placeholder="Shot">
 							</div>
-				 		</div>
-				 		<div class="row-fluid">
-				 			<div class="span12 outlined box"></div>
-				 		</div>
-				 	</div>
+							<div class="row-fluid">
+								<div class="span12 outlined box"></div>
+							</div>
+						</div>
 
-					<div class="span2">
-						<div class="row-fluid">
-							<input id="shot-type" class="span12" type="text" placeholder="Shot">
+						<div class="span4">
+							<div class="row-fluid">
+								<input id="dir-start" class="span5 offset1" type="text" placeholder="Start">
+								<input id="dir-end" class="span5" type="text" placeholder="End">
+							</div>
+							<div class="row-fluid">
+								<div class="span10 offset1 outlined box"></div>
+							</div>
 						</div>
-						<div class="row-fluid">
-							<div class="span12 outlined box"></div>
-						</div>
-					</div>
 
-					<div class="span4">
-						<div class="row-fluid">
-							<input id="dir-start" class="span5 offset1" type="text" placeholder="Start">
-							<input id="dir-end" class="span5" type="text" placeholder="End">
+						<div class="span2">
+							<div class="row-fluid">
+								<input id="shot-outcome" class="span12" type="text" placeholder="Outcome">
+							</div>
+							<div class="row-fluid">
+								<div class="span12 outlined box"></div>
+							</div>
 						</div>
-						<div class="row-fluid">
-							<div class="span10 offset1 outlined box"></div>
+						<div class="span2">
+							<div class="row-fluid">
+								<button class="btn span12" id="submit-button" type="submit">Submit</button>
+							</div>
 						</div>
-					</div>
-
-					<div class="span2">
-						<div class="row-fluid">
-							<input id="shot-outcome" class="span12" type="text" placeholder="Outcome">
-						</div>
-						<div class="row-fluid">
-							<div class="span12 outlined box"></div>
-						</div>
-					</div>
-					<div class="span2">
-						<div class="row-fluid">
-							<button class="btn span12" id="submit-button" type="submit">Submit</button>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 			<div class="span3 gradient-texture" id="command-stack">
