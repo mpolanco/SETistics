@@ -1,28 +1,26 @@
 $(function(){
 	var num_commands = 0;
 
-	$("#player_num").focus();
+	$("#player-num").focus();
 
-	$("#command_line").submit(function(){
+	$("#command-line").submit(function(){
 		console.log('hit');
-		$("#btn_submit").click();
+		$("#submit-button").click();
 		return false;
 	});
 
 	$(".input-small").submit(function(){
 		console.log('hit');
-		$("#btn_submit").click();
+		$("#submit-button").click();
 		return false;
 	});
 
-	$("#btn_submit").click(function(){
-		dummyVals = Array(Array('player_num','99'),Array('shot_type','sp'),Array('start_dir','h5'),Array('end_dir','a5'),Array('shot_outcome','k'));
-		//var command = retrieveFormVals();
-		player_num = $('#player_num').val();
-		shot_type = $('#shot_type').val();
-		start_dir = $('#start_dir').val();
-		end_dir = $('#end_dir').val();
-		shot_outcome = $('#shot_outcome').val();
+	$("#submit-button").click(function(){
+		player_num = $('#player-num').val();
+		shot_type = $('#shot-type').val();
+		start_dir = $('#dir-start').val();
+		end_dir = $('#dir-end').val();
+		shot_outcome = $('#shot-outcome').val();
 
 		var vals = Array();
 		vals.push(Array('Player Number', player_num));
@@ -31,32 +29,16 @@ $(function(){
 		vals.push(Array('End Direction', end_dir));
 		vals.push(Array('Shot Outcome', shot_outcome));
 
-		$('#player_num').val('');
-		$('#shot_type').val('');
-		$('#start_dir').val('');
-		$('#end_dir').val('');
-		$('#shot_outcome').val('');
+		$('#player-num').val('');
+		$('#shot-type').val('');
+		$('#dir-start').val('');
+		$('#dir-end').val('');
+		$('#shot-outcome').val('');
 		console.log(vals);
 		addToCallStack(vals);
-		$("#player_num").focus();
+		$("#player-num").focus();
 		return false;
 	});
-
-   /*
-	*	Retrieves inputs from command line and returns an array with the values of each field
-	*
-	*	@return - Array of (input_type, val) pairs
-	*/
-	function retrieveFormVals(){
-		var vals = Array();
-		vals.append(Array('Player Number', $('#player_num').val()));
-		vals.append(Array('Shot Type', $('#shot_type').val()));
-		vals.append(Array('Start Direction', $('#start_dir').val()));
-		vals.append(Array('End Direction', $('#start_dir').val()));
-		vals.append(Array('Shot Outcome', $('#start_dir').val()));
-		console.log(vals);
-		return vals;
-	}
 
 	function addToCallStack(command){
 		var cell = createCommandCell(command);
@@ -97,9 +79,7 @@ $(function(){
 
 			$(comForm).append(command_field);
 		};
-		/*var comDiv = document.createElement('div');
 
-		$(comDiv).html(command);*/
 		$(fieldIndicator).addClass('sb-fi');
 		$(translation).html(translateCommand(command));
 		$(comForm).addClass('form-inline');
