@@ -153,7 +153,37 @@ $(function() {
       
       if(i == command.length-1){
         $(command_field).attr('id', cfid);
+        $(command_field).keyup(function(event) {
+          // Enter is key 13. Space key is 32. 
+          if (event.which == 32) {  
+            $(this).val($(this).val().split(" ").join(""));
+            $(comForm).submit();
+          }
+
+          return false;
+        });
       }
+      else{
+        $(command_field).keyup(function(event) {
+          // Enter is key 13. Space key is 32. 
+          if (event.which == 32) {  
+            $(this).val($(this).val().split(" ").join(""));
+            $(this).next().focus();
+          }
+
+          return false;
+        });
+      }
+
+      $(command_field).keyup(function(event) {
+          // Enter is key 13. Space key is 32. 
+          if (event.which == 13) {  
+            $(this).val($(this).val().split(" ").join(""));
+            $(comForm).submit();
+          }
+
+          return false;
+      });
 
       $(comForm).append(command_field);
     };
