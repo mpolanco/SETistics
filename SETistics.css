@@ -22,6 +22,11 @@
 	font-size: 2em;
 }
 
+.shortcut {
+    font-style: italic;
+    float: right;
+}
+
 #youtube-player {
 	height: 375px;
 }

@@ -239,50 +239,33 @@ $(function() {
   }
 
   $(".player-num-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML.split(' ');
-      $("#player-num").val(chosen[0].charAt(0).toLowerCase() + chosen[chosen.length - 1]);
+      $("#player-num").val(event.currentTarget.children[0].innerHTML);
       $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
   });
 
   $(".shot-type-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML;
-      if (chosen == "Block") {
-          $("#shot-type").val("bl");
-      } else if (chosen == "Dig") {
-          $("#shot-type").val("dg");
-      } else if (chosen == "Serve") {
-          $("#shot-type").val("sr");
-      } else if (chosen == "Spike") {
-          $("#shot-type").val("sp");
-      }
+      $("#shot-type").val(event.currentTarget.children[0].innerHTML);
       $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
   });
 
   $(".dir-start-option").click(function(event) {
-      $("#dir-start").val(event.currentTarget.innerHTML);
+      $("#dir-start").val(event.currentTarget.children[0].innerHTML);
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
   });
 
   $(".dir-end-option").click(function(event) {
-      $("#dir-end").val(event.currentTarget.innerHTML);
+      $("#dir-end").val(event.currentTarget.children[0].innerHTML);
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
   });
 
   $(".shot-outcome-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML;
-      if (chosen == "Dug") {
-          $("#shot-outcome").val("d");
-      } else if (chosen == "Kill") {
-          $("#shot-outcome").val("k");
-      } else if (chosen == "Error") {
-          $("#shot-outcome").val("e");
-      }
+      $("#shot-outcome").val(event.currentTarget.children[0].innerHTML);
       $("#shot-outcome-box").addClass("kill")
       $("#submit-button").focus()
   });
