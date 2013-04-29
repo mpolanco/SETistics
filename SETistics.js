@@ -6,71 +6,114 @@ $(function() {
 
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 32) {  
+    if (event.which == 13 || event.which == 32) {  
       $("#player-num").val($("#player-num").val().split(" ").join(""));
-      $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
     }
 
     return false;
   });
 
+  $("#player-num").blur(function() {
+    if ($("#player-num").val().length != 0) {
+      $("#player-num-box").addClass("number12");
+    } else {
+      $("#player-num-box").removeClass("number12");
+    }
+
+    return false
+  });
+
   $("#shot-type").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#shot-type").val($("#shot-type").val().split(" ").join(""));
-      $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
     }
 
     return false;
   });
 
+  $("#shot-type").blur(function() {
+    if ($("#shot-type").val().length != 0) {
+      $("#shot-type-box").addClass("block");
+    } else {
+      $("#shot-type-box").removeClass("block");
+    }
+
+    return false
+  });
+
   $("#dir-start").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-start").val($("#dir-start").val().split(" ").join(""));
-      $("#dir-box").removeClass("court");
-      $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
     }
 
     return false;
   });
 
+  $("#dir-start").blur(function() {
+    if ($("#dir-start").val().length != 0) {
+      $("#dir-box").removeClass("court");
+      $("#dir-box").addClass("shot-start");
+    } else {
+      $("#dir-box").addClass("court");
+      $("#dir-box").removeClass("shot-start");
+    }
+
+    return false
+  });
+
   $("#dir-end").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-end").val($("#dir-end").val().split(" ").join(""));
-      $("#dir-box").removeClass("shot-start");
-      $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
     }
 
     return false;
   });
 
+  $("#dir-end").blur(function() {
+    if ($("#dir-end").val().length != 0) {
+      $("#dir-box").removeClass("shot-start");
+      $("#dir-box").addClass("shot-end");
+    } else {
+      $("#dir-box").addClass("shot-start");
+      $("#dir-box").removeClass("shot-end");
+    }
+
+    return false
+  });
+
   $("#shot-outcome").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#shot-outcome").val($("#shot-outcome").val().split(" ").join(""));
-      $("#shot-outcome-box").addClass("kill");
       $("#submit-button").focus();
     }
 
     return false;
   });
 
+  $("#shot-outcome").blur(function() {
+    if ($("#shot-outcome").val().length != 0) {
+      $("#shot-outcome-box").addClass("kill");
+    } else {
+      $("#shot-outcome-box").removeClass("kill");
+    }
 
+    return false
+  });
 
   $("#command-line").submit(function(){
-    console.log('hit');
     $("#submit-button").click();
     return false;
   });
 
   $(".input-small").submit(function(){
-    console.log('hit');
     $("#submit-button").click();
     return false;
   });
