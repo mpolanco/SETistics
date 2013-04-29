@@ -241,7 +241,7 @@ $(function() {
   $(".player-num-option").click(function(event) {
       var chosen = event.currentTarget.innerHTML.split(' ');
       $("#player-num").val(chosen[0].charAt(0).toLowerCase() + chosen[chosen.length - 1]);
-
+      $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
   });
 
@@ -256,19 +256,21 @@ $(function() {
       } else if (chosen == "Spike") {
           $("#shot-type").val("sp");
       }
-
+      $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
   });
 
   $(".dir-start-option").click(function(event) {
       $("#dir-start").val(event.currentTarget.innerHTML);
-
+      $("#dir-box").removeClass("court");
+      $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
   });
 
   $(".dir-end-option").click(function(event) {
       $("#dir-end").val(event.currentTarget.innerHTML);
-
+      $("#dir-box").removeClass("shot-start");
+      $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
   });
 
@@ -281,7 +283,7 @@ $(function() {
       } else if (chosen == "Error") {
           $("#shot-outcome").val("e");
       }
-
+      $("#shot-outcome-box").addClass("kill")
       $("#submit-button").focus()
   });
 
