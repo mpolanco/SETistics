@@ -4,6 +4,14 @@ $(function() {
   var num_commands = 0;
   var command_stack = Array();
 
+  $("*").attr("tabindex", -1);
+  $("#player-num").attr("tabindex", 1);
+  $("#shot-type").attr("tabindex", 2);
+  $("#dir-start").attr("tabindex", 3);
+  $("#dir-end").attr("tabindex", 4);
+  $("#shot-outcome").attr("tabindex", 5);
+  $("#submit-button").attr("tabindex", 6);
+
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
