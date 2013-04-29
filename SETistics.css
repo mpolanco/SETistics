@@ -52,11 +52,20 @@
 	border-color: black;
 }
 
+.height100{
+	height: 100%;
+}
+
+.fixed-elem{
+	position: fixed;
+}
+
 #command-stack{
 	right: 0;
 	top: 0;
 	border: 1px solid black;
 	height: 100%;
+	width: 20%;
 	z-index: 300;
 	display: block;
 }
