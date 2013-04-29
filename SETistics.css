@@ -3,9 +3,8 @@
 	height: 600px;
 }
 
-#right-content {
-	background-color: green;
-	height: 500px;
+#main-container {
+	padding:0px
 }
 
 #title-bar {
