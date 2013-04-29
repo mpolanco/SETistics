@@ -106,11 +106,11 @@ $(function() {
     var cell = createCommandCell(command);
     console.log('hit addToCallStack' + $(cell));
     $(cell).insertAfter('#cs-title');
-    if(command_stack.length > 9){
+    /*if(command_stack.length > 9){
       wrap = command_stack[0];
       $(wrap).remove();
       command_stack.shift();
-    }
+    }*/
   }
 
   function createCommandCell(command){
@@ -124,7 +124,7 @@ $(function() {
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
     var foid = "fo" + wrapper_num;
-    var sb_ele_title = 'Statistic ' + wrapper_num;
+    var sb_ele_title = '#' + wrapper_num;
 
 
     $(fieldIndicator).attr('id', fiid);
