@@ -4,73 +4,124 @@ $(function() {
   var num_commands = 0;
   var command_stack = Array();
 
+  $("*").attr("tabindex", -1);
+  $("#player-num").attr("tabindex", 1);
+  $("#shot-type").attr("tabindex", 2);
+  $("#dir-start").attr("tabindex", 3);
+  $("#dir-end").attr("tabindex", 4);
+  $("#shot-outcome").attr("tabindex", 5);
+  $("#submit-button").attr("tabindex", 6);
+
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 32) {  
+    if (event.which == 13 || event.which == 32) {  
       $("#player-num").val($("#player-num").val().split(" ").join(""));
-      $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
     }
 
     return false;
   });
 
+  $("#player-num").blur(function() {
+    if ($("#player-num").val().length != 0) {
+      $("#player-num-box").addClass("number12");
+    } else {
+      $("#player-num-box").removeClass("number12");
+    }
+
+    return false
+  });
+
   $("#shot-type").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#shot-type").val($("#shot-type").val().split(" ").join(""));
-      $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
     }
 
     return false;
   });
 
+  $("#shot-type").blur(function() {
+    if ($("#shot-type").val().length != 0) {
+      $("#shot-type-box").addClass("block");
+    } else {
+      $("#shot-type-box").removeClass("block");
+    }
+
+    return false
+  });
+
   $("#dir-start").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-start").val($("#dir-start").val().split(" ").join(""));
-      $("#dir-box").removeClass("court");
-      $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
     }
 
     return false;
   });
 
+  $("#dir-start").blur(function() {
+    if ($("#dir-start").val().length != 0) {
+      $("#dir-box").removeClass("court");
+      $("#dir-box").addClass("shot-start");
+    } else {
+      $("#dir-box").addClass("court");
+      $("#dir-box").removeClass("shot-start");
+    }
+
+    return false
+  });
+
   $("#dir-end").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#dir-end").val($("#dir-end").val().split(" ").join(""));
-      $("#dir-box").removeClass("shot-start");
-      $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
     }
 
     return false;
   });
 
+  $("#dir-end").blur(function() {
+    if ($("#dir-end").val().length != 0) {
+      $("#dir-box").removeClass("shot-start");
+      $("#dir-box").addClass("shot-end");
+    } else {
+      $("#dir-box").addClass("shot-start");
+      $("#dir-box").removeClass("shot-end");
+    }
+
+    return false
+  });
+
   $("#shot-outcome").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
       $("#shot-outcome").val($("#shot-outcome").val().split(" ").join(""));
-      $("#shot-outcome-box").addClass("kill");
       $("#submit-button").focus();
     }
 
     return false;
   });
 
+  $("#shot-outcome").blur(function() {
+    if ($("#shot-outcome").val().length != 0) {
+      $("#shot-outcome-box").addClass("kill");
+    } else {
+      $("#shot-outcome-box").removeClass("kill");
+    }
 
+    return false
+  });
 
   $("#command-line").submit(function(){
-    console.log('hit');
     $("#submit-button").click();
     return false;
   });
 
   $(".input-small").submit(function(){
-    console.log('hit');
     $("#submit-button").click();
     return false;
   });
@@ -239,50 +290,33 @@ $(function() {
   }
 
   $(".player-num-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML.split(' ');
-      $("#player-num").val(chosen[0].charAt(0).toLowerCase() + chosen[chosen.length - 1]);
+      $("#player-num").val(event.currentTarget.children[0].innerHTML);
       $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
   });
 
   $(".shot-type-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML;
-      if (chosen == "Block") {
-          $("#shot-type").val("bl");
-      } else if (chosen == "Dig") {
-          $("#shot-type").val("dg");
-      } else if (chosen == "Serve") {
-          $("#shot-type").val("sr");
-      } else if (chosen == "Spike") {
-          $("#shot-type").val("sp");
-      }
+      $("#shot-type").val(event.currentTarget.children[0].innerHTML);
       $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
   });
 
   $(".dir-start-option").click(function(event) {
-      $("#dir-start").val(event.currentTarget.innerHTML);
+      $("#dir-start").val(event.currentTarget.children[0].innerHTML);
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
   });
 
   $(".dir-end-option").click(function(event) {
-      $("#dir-end").val(event.currentTarget.innerHTML);
+      $("#dir-end").val(event.currentTarget.children[0].innerHTML);
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
   });
 
   $(".shot-outcome-option").click(function(event) {
-      var chosen = event.currentTarget.innerHTML;
-      if (chosen == "Dug") {
-          $("#shot-outcome").val("d");
-      } else if (chosen == "Kill") {
-          $("#shot-outcome").val("k");
-      } else if (chosen == "Error") {
-          $("#shot-outcome").val("e");
-      }
+      $("#shot-outcome").val(event.currentTarget.children[0].innerHTML);
       $("#shot-outcome-box").addClass("kill")
       $("#submit-button").focus()
   });
