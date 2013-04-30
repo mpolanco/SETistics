@@ -156,7 +156,7 @@ $(function() {
   function addToCallStack(command){
     var cell = createCommandCell(command);
     console.log('hit addToCallStack' + $(cell));
-    $(cell).insertAfter('#cs-title');
+    $(cell).insertAfter('#command-marker');
     /*if(command_stack.length > 9){
       wrap = command_stack[0];
       $(wrap).remove();
