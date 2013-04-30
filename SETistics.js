@@ -145,7 +145,7 @@ $(function() {
     $('#dir-start').val('');
     $('#dir-end').val('');
     $('#shot-outcome').val('');
-    console.log(vals);
+    //console.log(vals);
     addToCallStack(vals);
     $("#player-num").focus();
 
@@ -155,8 +155,9 @@ $(function() {
 
   function addToCallStack(command){
     var cell = createCommandCell(command);
-    console.log('hit addToCallStack' + $(cell));
+    //console.log('hit addToCallStack' + $(cell));
     $(cell).insertAfter('#command-marker');
+    $(cell).slideDown('fast');
     /*if(command_stack.length > 9){
       wrap = command_stack[0];
       $(wrap).remove();
@@ -165,11 +166,13 @@ $(function() {
   }
 
   function createCommandCell(command){
+    var outer_wrapper = document.createElement('div');
     var wrapper = document.createElement('div');
     var comForm = document.createElement('form');
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
     var command_num = document.createElement('div');
+    var button_div = document.createElement('div');
     var edit_button = document.createElement('button');
 
     var wrapper_num = ++num_commands;
@@ -197,7 +200,7 @@ $(function() {
         $('#'+fiid).html('');
       });
       $(command_field).focusin(function(){
-        console.log('hit');
+        //console.log('hit');
         $(this).removeClass('transparent');
         $('#' + fiid).html($(this).attr('name'));
       });
@@ -244,15 +247,18 @@ $(function() {
       $('#'+cfid).focus();
       return false;
     });
-    $(edit_button).css('visibility', 'hidden');
-    $(wrapper).mouseover(function(){
-      $(edit_button).css('visibility', 'visible');
+    
+    $(edit_button).addClass('edit-button');
+    /*$(wrapper).mouseover(function(){
+      //$(edit_button).css('visibility', 'visible');
+      $(edit_button).fadeIn("slow");
     });
     $(wrapper).mouseout(function(){
-      $(edit_button).css('visibility', 'hidden');
-    });
+      //$(edit_button).css('visibility', 'hidden');
+      $(edit_button).fadeOut();
+    });*/
 
-    $(comForm).append(edit_button);
+    //$(comForm).append(edit_button);
 
     $(fieldIndicator).addClass('sb-fi');
     $(translation).html(translateCommand(command));
@@ -271,9 +277,42 @@ $(function() {
     $(wrapper).append(fieldIndicator)
     $(wrapper).append(translation);
 
+    $(outer_wrapper).mouseenter(function(){
+      if ($(button_div).hasClass('open')) {
+        $(button_div).animate({
+          left : '+=40px'
+        }, 100).removeClass('open');
+      } else {
+        $(button_div).animate({
+          left : 0
+        }, 100).addClass('open');
+      }
+    });
+
+    $(outer_wrapper).mouseleave(function(){
+      if ($(button_div).hasClass('open')) {
+        $(button_div).animate({
+          left : '+=40px'
+        }, 100).removeClass('open');
+      } else {
+        $(button_div).animate({
+          left : 0
+        }, 100).addClass('open');
+      }
+    });
+
+    //$(button_div).append(edit_button);
+    $(button_div).addClass("button-div");
+    $(button_div).html('edit');
+    $(button_div).delay(500).animate({left : '+=40px'},200);
+
+    $(outer_wrapper).addClass('outer-wrapper');
+    $(outer_wrapper).append(button_div);
+    $(outer_wrapper).append(wrapper);
+
     command_stack.push(wrapper);
     
-    return wrapper;
+    return outer_wrapper;
   }
 
   function resetIcons() {
