@@ -1,6 +1,76 @@
 // This allows the Javascript code inside this block to only run when the page
 // has finished loading in the browser.
 $(function() {
+  var player_num_options = {
+      "Home Player 1" : "h1",
+      "Home Player 2" : "h2",
+      "Home Player 3" : "h3",
+      "Home Player 4" : "h4",
+      "Home Player 5" : "h5",
+      "Home Player 6" : "h6",
+      "Away Player 5" : "a5",
+      "Away Player 6" : "a6",
+      "Away Player 7" : "a7",
+      "Away Player 8" : "a8",
+      "Away Player 9" : "a9",
+      "Away Player 10" : "a10"
+  };
+  var shot_type_options = {
+    "Block" : "bl",
+    "Dig" : "dg",
+    "Serve" : "sr",
+    "Spike" : "sp"
+  };
+  var dir_options = {
+    "Home Pos. 1" : "h1",
+    "Home Pos. 2" : "h2",
+    "Home Pos. 3" : "h3",
+    "Home Pos. 4" : "h4",
+    "Home Pos. 5" : "h5",
+    "Home Pos. 6" : "h6",
+    "Away Pos. 1" : "a1",
+    "Away Pos. 2" : "a2",
+    "Away Pos. 3" : "a3",
+    "Away Pos. 4" : "a4",
+    "Away Pos. 5" : "a5",
+    "Away Pos. 6" : "a6"
+  };
+  var shot_outcome_options = {
+    "Dug" : "dg",
+    "Kill" : "kl",
+    "Error" : "er"
+  };
+
+  for (var option in player_num_options) {
+    if (player_num_options.hasOwnProperty(option)) {
+      $('<li><a class="player-num-option">' + option + '<span class="shortcut">' + player_num_options[option] + '</span></a></li>').appendTo("#player-num-options");
+    }
+  }
+
+  for (var option in shot_type_options) {
+    if (shot_type_options.hasOwnProperty(option)) {
+      $('<li><a class="shot-type-option">' + option + '<span class="shortcut">' + shot_type_options[option] + '</span></a></li>').appendTo("#shot-type-options");
+    }
+  }
+
+  for (var option in dir_options) {
+    if (dir_options.hasOwnProperty(option)) {
+      $('<li><a class="dir-start-option">' + option + '<span class="shortcut">' + dir_options[option] + '</span></a></li>').appendTo("#dir-start-options");
+    }
+  }
+
+  for (var option in dir_options) {
+    if (dir_options.hasOwnProperty(option)) {
+      $('<li><a class="dir-end-option">' + option + '<span class="shortcut">' + dir_options[option] + '</span></a></li>').appendTo("#dir-end-options");
+    }
+  }
+
+  for (var option in shot_outcome_options) {
+    if (shot_outcome_options.hasOwnProperty(option)) {
+      $('<li><a class="shot-outcome-option">' + option + '<span class="shortcut">' + shot_outcome_options[option] + '</span></a></li>').appendTo("#shot-outcome-options");
+    }
+  }
+
   var num_commands = 0;
   var command_stack = Array();
 
@@ -23,11 +93,24 @@ $(function() {
   });
 
   $("#player-num").blur(function() {
-    if ($("#player-num").val().length != 0) {
+    var text = $("#player-num").val()
+    if (text.length != 0) {
       $("#player-num-box").addClass("number12");
+      var valid = false;
+      for (var option in player_num_options) {
+        if (player_num_options.hasOwnProperty(option) && (text == option || text == player_num_options[option])) {
+          valid = true;
+          break;
+        }
+      }
+      if (!valid) {
+        $("#player-num").css('background-color', 'pink');
+      } else {
+        $("#player-num").css('background-color', 'white');
+      }
     } else {
       $("#player-num-box").removeClass("number12");
-    }
+    } 
 
     return false
   });
@@ -43,11 +126,24 @@ $(function() {
   });
 
   $("#shot-type").blur(function() {
-    if ($("#shot-type").val().length != 0) {
+    var text = $("#shot-type").val();
+    if (text.length != 0) {
       $("#shot-type-box").addClass("block");
+      var valid = false;
+      for (var option in shot_type_options) {
+        if (shot_type_options.hasOwnProperty(option) && (text == option || text == shot_type_options[option])) {
+          valid = true;
+          break;
+        }
+      }
+      if (!valid) {
+        $("#shot-type").css('background-color', 'pink');
+      } else {
+        $("#shot-type").css('background-color', 'white');
+      }
     } else {
       $("#shot-type-box").removeClass("block");
-    }
+    } 
 
     return false
   });
@@ -63,9 +159,22 @@ $(function() {
   });
 
   $("#dir-start").blur(function() {
-    if ($("#dir-start").val().length != 0) {
+    var text = $("#dir-start").val();
+    if (text.length != 0) {
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
+      var valid = false;
+      for (var option in dir_options) {
+        if (dir_options.hasOwnProperty(option) && (text == option || text == dir_options[option])) {
+          valid = true;
+          break;
+        }
+      }
+      if (!valid) {
+        $("#dir-start").css('background-color', 'pink');
+      } else {
+        $("#dir-start").css('background-color', 'white');
+      }
     } else {
       $("#dir-box").addClass("court");
       $("#dir-box").removeClass("shot-start");
@@ -85,9 +194,22 @@ $(function() {
   });
 
   $("#dir-end").blur(function() {
-    if ($("#dir-end").val().length != 0) {
+    var text = $("#dir-end").val();
+    if (text.length != 0) {
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
+      var valid = false;
+      for (var option in dir_options) {
+        if (dir_options.hasOwnProperty(option) && (text == option || text == dir_options[option])) {
+          valid = true;
+          break;
+        }
+      }
+      if (!valid) {
+        $("#dir-end").css('background-color', 'pink');
+      } else {
+        $("#dir-end").css('background-color', 'white');
+      }
     } else {
       $("#dir-box").addClass("shot-start");
       $("#dir-box").removeClass("shot-end");
@@ -107,11 +229,24 @@ $(function() {
   });
 
   $("#shot-outcome").blur(function() {
-    if ($("#shot-outcome").val().length != 0) {
+    var text = $("#shot-outcome").val();
+    if (text.length != 0) {
       $("#shot-outcome-box").addClass("kill");
+      var valid = false;
+      for (var option in shot_outcome_options) {
+        if (shot_outcome_options.hasOwnProperty(option) && (text == option || text == shot_outcome_options[option])) {
+          valid = true;
+          break;
+        }
+      }
+      if (!valid) {
+        $("#shot-outcome").css('background-color', 'pink');
+      } else {
+        $("#shot-outcome").css('background-color', 'white');
+      }
     } else {
       $("#shot-outcome-box").removeClass("kill");
-    }
+    } 
 
     return false
   });
@@ -145,6 +280,14 @@ $(function() {
     $('#dir-start').val('');
     $('#dir-end').val('');
     $('#shot-outcome').val('');
+<<<<<<< HEAD
+=======
+    $("#player-num").css('background-color', 'white');
+    $("#shot-type").css('background-color', 'white');
+    $("#dir-start").css('background-color', 'white');
+    $("#dir-end").css('background-color', 'white');
+    $("#shot-outcome").css('background-color', 'white');
+>>>>>>> d8488b16902bcfd7d6da9c2047ec3b7de9b7bb92
     addToCallStack(vals);
     $("#player-num").focus();
 
@@ -314,12 +457,14 @@ $(function() {
       $("#player-num").val(event.currentTarget.children[0].innerHTML);
       $("#player-num-box").addClass("number12");
       $("#shot-type").focus();
+      $("#player-num").css('background-color', 'white');
   });
 
   $(".shot-type-option").click(function(event) {
       $("#shot-type").val(event.currentTarget.children[0].innerHTML);
       $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
+      $("#shot-type").css('background-color', 'white');
   });
 
   $(".dir-start-option").click(function(event) {
@@ -327,6 +472,7 @@ $(function() {
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
+      $("#dir-start").css('background-color', 'white');
   });
 
   $(".dir-end-option").click(function(event) {
@@ -334,12 +480,14 @@ $(function() {
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
+      $("#dir-end").css('background-color', 'white');
   });
 
   $(".shot-outcome-option").click(function(event) {
       $("#shot-outcome").val(event.currentTarget.children[0].innerHTML);
       $("#shot-outcome-box").addClass("kill")
-      $("#submit-button").focus()
+      $("#submit-button").focus();
+      $("#shot-outcome").css('background-color', 'white');
   });
 
   $("#player-num").focus();
