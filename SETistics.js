@@ -145,7 +145,6 @@ $(function() {
     $('#dir-start').val('');
     $('#dir-end').val('');
     $('#shot-outcome').val('');
-    //console.log(vals);
     addToCallStack(vals);
     $("#player-num").focus();
 
@@ -155,20 +154,15 @@ $(function() {
 
   function addToCallStack(command){
     var cell = createCommandCell(command);
-    //console.log('hit addToCallStack' + $(cell));
     $(cell).insertAfter('#command-marker');
     $(cell).slideDown('fast');
-    /*if(command_stack.length > 9){
-      wrap = command_stack[0];
-      $(wrap).remove();
-      command_stack.shift();
-    }*/
   }
 
   function createCommandCell(command){
     var outer_wrapper = document.createElement('div');
     var wrapper = document.createElement('div');
-    var comForm = document.createElement('form');
+    var table = document.createElement('table');
+    var comRow = document.createElement('tr');
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
     var command_num = document.createElement('div');
@@ -177,7 +171,7 @@ $(function() {
 
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
-    var foid = "fo" + wrapper_num;
+    var foid = "row" + wrapper_num;
     var sb_ele_title = '#' + wrapper_num;
 
 
@@ -187,15 +181,14 @@ $(function() {
     var cfid = 'cf_'+wrapper_num;
 
     for (var i = 0; i < command.length; i++) {
-      var command_field = document.createElement('input');
-      $(command_field).val(command[i][1]);
-      $(command_field).attr('name', command[i][0]);
-      $(command_field).attr('type', 'text');
-      $(command_field).addClass('transparent');
-      $(command_field).addClass('input-small');
-      $(command_field).addClass('sb-input');
+      var command_field = document.createElement('td');
+      $(command_field).html(command[i][1]);
+      $(command_field).attr('id', command[i][0]+wrapper_num);
+      //$(command_field).addClass('transparent');
+      //$(command_field).addClass('input-small');
+      //$(command_field).addClass('sb-input');
       $(command_field).addClass('thin');
-      $(command_field).focusout(function(){
+      /*$(command_field).focusout(function(){
         $(this).addClass('transparent');
         $('#'+fiid).html('');
       });
@@ -211,7 +204,7 @@ $(function() {
           // Enter is key 13. Space key is 32. 
           if (event.which == 32) {  
             $(this).val($(this).val().split(" ").join(""));
-            $(comForm).submit();
+            $(comRow).submit();
           }
 
           return false;
@@ -233,13 +226,13 @@ $(function() {
           // Enter is key 13. Space key is 32. 
           if (event.which == 13) {  
             $(this).val($(this).val().split(" ").join(""));
-            $(comForm).submit();
+            $(comRow).submit();
           }
 
           return false;
-      });
+      });*/
 
-      $(comForm).append(command_field);
+      $(comRow).append(command_field);
     };
 
     $(edit_button).html('Edit');
@@ -249,31 +242,21 @@ $(function() {
     });
     
     $(edit_button).addClass('edit-button');
-    /*$(wrapper).mouseover(function(){
-      //$(edit_button).css('visibility', 'visible');
-      $(edit_button).fadeIn("slow");
-    });
-    $(wrapper).mouseout(function(){
-      //$(edit_button).css('visibility', 'hidden');
-      $(edit_button).fadeOut();
-    });*/
-
-    //$(comForm).append(edit_button);
 
     $(fieldIndicator).addClass('sb-fi');
     $(translation).html(translateCommand(command));
     $(command_num).html(sb_ele_title);
     $(command_num).css('font-weight', 'bold');
-    $(comForm).addClass('form-inline');
-    $(comForm).addClass('sb-form');
-    $(comForm).attr('id', foid);
-    $(comForm).submit(function(){
+    $(comRow).addClass('form-inline');
+    $(comRow).addClass('sb-form');
+    $(comRow).attr('id', foid);
+    /*$(comRow).submit(function(){
       $("#player-num").focus();
       return false;
-    });
+    });*/
     $(wrapper).addClass('separator');
     $(wrapper).append(command_num);
-    $(wrapper).append(comForm);
+    $(wrapper).append(comRow);
     $(wrapper).append(fieldIndicator)
     $(wrapper).append(translation);
 
@@ -301,7 +284,6 @@ $(function() {
       }
     });
 
-    //$(button_div).append(edit_button);
     $(button_div).addClass("button-div");
     $(button_div).html('edit');
     $(button_div).delay(500).animate({left : '+=40px'},200);
