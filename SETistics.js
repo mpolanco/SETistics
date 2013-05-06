@@ -40,6 +40,48 @@ $(function() {
     "Kill" : "kl",
     "Error" : "er"
   };
+  var alternative_player_nums = {
+    "h0" : "h00",
+    "h1" : "h01",
+    "h2" : "h02",
+    "h3" : "h03",
+    "h4" : "h04",
+    "h5" : "h05",
+    "h6" : "h06",
+    "h7" : "h07",
+    "h8" : "h08",
+    "h9" : "h09",
+    "h00" : "h0",
+    "h01" : "h1",
+    "h02" : "h2",
+    "h03" : "h3",
+    "h04" : "h4",
+    "h05" : "h5",
+    "h06" : "h6",
+    "h07" : "h7",
+    "h08" : "h8",
+    "h09" : "h9",
+    "a0" : "a00",
+    "a1" : "a01",
+    "a2" : "a02",
+    "a3" : "a03",
+    "a4" : "a04",
+    "a5" : "a05",
+    "a6" : "a06",
+    "a7" : "a07",
+    "a8" : "a08",
+    "a9" : "a09",
+    "a00" : "a0",
+    "a01" : "a1",
+    "a02" : "a2",
+    "a03" : "a3",
+    "a04" : "a4",
+    "a05" : "a5",
+    "a06" : "a6",
+    "a07" : "a7",
+    "a08" : "a8",
+    "a09" : "a9"
+  };
 
   for (var option in player_num_options) {
     if (player_num_options.hasOwnProperty(option)) {
@@ -100,9 +142,18 @@ $(function() {
     var text = $("#player-num").val()
     var valid = (text.length == 0);
     for (var option in player_num_options) {
-      if (player_num_options.hasOwnProperty(option) && (text == option || text == player_num_options[option])) {
-        valid = true;
-        break;
+      if (player_num_options.hasOwnProperty(option)) {
+        if (text == option || text == player_num_options[option]) {
+          valid = true;
+          break;
+        }
+        if (text in alternative_player_nums) {
+          var alternative_text = alternative_player_nums[text];
+          if (alternative_text == option || alternative_text == player_num_options[option]) {
+            valid = true;
+            break;
+          }
+        }
       }
     }
     if (!valid) {
