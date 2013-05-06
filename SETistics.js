@@ -347,6 +347,7 @@ $(function() {
     vals.push(Array('StartDirection', start_dir));
     vals.push(Array('EndDirection', end_dir));
     vals.push(Array('ShotOutcome', shot_outcome));
+    vals.push(Array('TimeStamp', Date.now()));
     addToCallStack(vals);
 
     }
@@ -387,10 +388,23 @@ $(function() {
     var edit_button = document.createElement('button');
     var delete_button = document.createElement('button');
 
+    var timestamp = command[command.length-1][1];
+    var date = new Date(timestamp);
+    // hours part from the timestamp
+    var hours = date.getHours();
+    // minutes part from the timestamp
+    var minutes = date.getMinutes();
+    // seconds part from the timestamp
+    var seconds = date.getSeconds();
+    var seconds = (seconds<10)? '0' + seconds: seconds
+
+    // will display time in 10:30:23 format
+    var formattedTime = hours + ':' + minutes + ':' + seconds;
+
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
     var foid = "row" + wrapper_num;
-    var sb_ele_title = '#' + wrapper_num;
+    var sb_ele_title = '#' + wrapper_num + " " + formattedTime;
 
 
     $(fieldIndicator).attr('id', fiid);
@@ -398,7 +412,7 @@ $(function() {
     var command_field;
     var cfid = 'cf_'+wrapper_num;
 
-    for (var i = 0; i < command.length; i++) {
+    for (var i = 0; i < command.length-1; i++) {
       var command_field = document.createElement('div');
       $(command_field).html(command[i][1]);
       $(command_field).attr('id', command[i][0]+wrapper_num);
