@@ -1,10 +1,35 @@
+html, body {
+	height: 100%;
+}
+
+html {
+}
+
+body {
+}
+
+.fill {
+	height: 100%;
+}
+
+#content-row {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
 #left-content {
 	background-color: rgb(200,200,200);
-	height: 600px;
+	height: 100%;
 }
 
 #main-container {
-	padding:0px
+	padding:0px;
+	min-width: 70em;
+	min-height: 37em;
+	position: absolute;
+	top: 0px;
+	bottom: 50px;
 }
 
 #title-bar {
@@ -12,6 +37,7 @@
 	border-bottom: 1px solid #4D001F;
 	color: rgb(200,200,200);
 	height: 50px;
+	width: 100%;
 }
 
 #title {
@@ -28,10 +54,11 @@
 }
 
 #youtube-player {
-	height: 375px;
+	height: 65%;
 }
 
 #input-form {
+	height: 35%;
 	margin-top: 10px;
 	margin-left: 10px;
 }
@@ -60,18 +87,10 @@
 	height: 100%;
 }
 
-.fixed-elem{
-	position: absolute;
-}
-
 #command-stack{
-	right: 0;
-	top: 51px;
 	border: 1px solid black;
-	height: 92%;
-	width: 20%;
+	height: 100%;
 	z-index: 300;
-	display: block;
 }
 
 #prev-commands{
