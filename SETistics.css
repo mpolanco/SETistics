@@ -209,6 +209,14 @@ tr.comRow {
     text-align:center;
 }
 
+.input {
+	width: 67%;
+}
+
+.drop-down {
+	width: 20%;
+}
+
 .court {
 	background-image: url(icons/numberedcourt.png);
 }
@@ -219,10 +227,6 @@ tr.comRow {
 
 .shot-end {
 	background-image:  url(icons/shot-end.png);
-}
-
-.number12 {
-	background-image: url(icons/playernumber.png);
 }
 
 .block {
