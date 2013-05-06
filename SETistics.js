@@ -363,7 +363,6 @@ $(function() {
     $("#dir-end").css('background-color', 'white');
     $("#shot-outcome").css('background-color', 'white');
 
-    $("#player-num-feedback").val("");
     $("#player-num").focus();
 
     resetIcons();
@@ -502,7 +501,7 @@ $(function() {
   }
 
   function resetIcons() {
-    $("#player-num-box").removeClass("number12");
+    $("#player-num-feedback").val("");
     $("#shot-type-box").removeClass("block");
     $("#shot-outcome-box").removeClass("kill");
     $("#dir-box").removeClass("shot-start");
@@ -516,7 +515,7 @@ $(function() {
 
   $(".player-num-option").click(function(event) {
       $("#player-num").val(event.currentTarget.children[0].innerHTML);
-      $("#player-num-box").addClass("number12");
+      $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
       $("#shot-type").focus();
       $("#player-num").css('background-color', 'white');
   });
