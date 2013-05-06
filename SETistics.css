@@ -61,7 +61,7 @@
 }
 
 .fixed-elem{
-	position: fixed;
+	position: absolute;
 }
 
 #command-stack{
@@ -75,7 +75,8 @@
 }
 
 #prev-commands{
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden; 
 	height: 95%;
 }
 
