@@ -375,6 +375,7 @@ $(function() {
     var command_num = document.createElement('div');
     var button_div = document.createElement('div');
     var edit_button = document.createElement('button');
+    var delete_button = document.createElement('button');
 
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
@@ -391,58 +392,12 @@ $(function() {
       var command_field = document.createElement('div');
       $(command_field).html(command[i][1]);
       $(command_field).attr('id', command[i][0]+wrapper_num);
-      //$(command_field).addClass('transparent');
-      //$(command_field).addClass('input-small');
-      //$(command_field).addClass('sb-input');
       $(command_field).addClass('span2');
-      /*$(command_field).focusout(function(){
-        $(this).addClass('transparent');
-        $('#'+fiid).html('');
-      });
-      $(command_field).focusin(function(){
-        //console.log('hit');
-        $(this).removeClass('transparent');
-        $('#' + fiid).html($(this).attr('name'));
-      });
-      
-      if(i == command.length-1){
-        $(command_field).attr('id', cfid);
-        $(command_field).keyup(function(event) {
-          // Enter is key 13. Space key is 32. 
-          if (event.which == 32) {  
-            $(this).val($(this).val().split(" ").join(""));
-            $(comRow).submit();
-          }
-
-          return false;
-        });
-      }
-      else{
-        $(command_field).keyup(function(event) {
-          // Enter is key 13. Space key is 32. 
-          if (event.which == 32) {  
-            $(this).val($(this).val().split(" ").join(""));
-            $(this).next().focus();
-          }
-
-          return false;
-        });
-      }
-
-      $(command_field).keyup(function(event) {
-          // Enter is key 13. Space key is 32. 
-          if (event.which == 13) {  
-            $(this).val($(this).val().split(" ").join(""));
-            $(comRow).submit();
-          }
-
-          return false;
-      });*/
 
       $(comRow).append(command_field);
     };
 
-    $(edit_button).html('Edit');
+    $(edit_button).html('<img src="icons/Edit2.png">');
     $(edit_button).click(function(){
       $('#player-num').val($('#'+command[0][0]+wrapper_num).html());
       $('#shot-type').val($('#'+command[1][0]+wrapper_num).html());
@@ -456,8 +411,15 @@ $(function() {
       $('#player-num').focus();
       return false;
     });
-    
     $(edit_button).addClass('edit-button');
+    
+    $(delete_button).html('<img src="icons/X.png">');
+    $(delete_button).click(function(){
+      $(outer_wrapper).remove();
+      command_stack.splice(wrapper_num,1);
+    });
+    $(delete_button).addClass('edit-button');
+
 
     $(fieldIndicator).addClass('sb-fi');
     $(translation).html(translateCommand(command));
@@ -479,7 +441,7 @@ $(function() {
     $(outer_wrapper).mouseenter(function(){
       if ($(button_div).hasClass('open')) {
         $(button_div).animate({
-          left : '+=40px'
+          left : '+=50px'
         }, 100).removeClass('open');
       } else {
         $(button_div).animate({
@@ -491,7 +453,7 @@ $(function() {
     $(outer_wrapper).mouseleave(function(){
       if ($(button_div).hasClass('open')) {
         $(button_div).animate({
-          left : '+=40px'
+          left : '+=50px'
         }, 100).removeClass('open');
       } else {
         $(button_div).animate({
@@ -502,15 +464,15 @@ $(function() {
 
     $(button_div).addClass("button-div");
     $(button_div).append(edit_button);
-    //$(button_div).html('edit');
-    $(button_div).delay(500).animate({left : '+=40px'},200);
+    $(button_div).append(delete_button);
+    $(button_div).delay(500).animate({left : '+=50px'},200);
 
     $(outer_wrapper).addClass('outer-wrapper');
     $(outer_wrapper).attr('id', 'outer-wrapper'+wrapper_num);
     $(outer_wrapper).append(button_div);
     $(outer_wrapper).append(wrapper);
 
-    command_stack.push(wrapper);
+    command_stack.push(outer_wrapper);
     
     return outer_wrapper;
   }
