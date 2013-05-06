@@ -38,7 +38,7 @@
 
 #input-form input {
 	margin-bottom: 10px;
-	float: right;
+	float: left;
 }
 
 #submit-button {
@@ -225,6 +225,36 @@ tr.comRow {
 
 .drop-down {
 	width: 20%;
+}
+
+#player-num-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#shot-type-options {
+    left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#dir-start-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#dir-end-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#shot-outcome-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
 }
 
 .court {
