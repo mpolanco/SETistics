@@ -219,6 +219,14 @@ tr.comRow {
     text-align:center;
 }
 
+.input {
+	width: 67%;
+}
+
+.drop-down {
+	width: 20%;
+}
+
 .court {
 	background-image: url(icons/numberedcourt.png);
 }
