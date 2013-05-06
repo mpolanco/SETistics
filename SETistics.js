@@ -389,7 +389,7 @@ $(function() {
     var seconds = (seconds<10)? '0' + seconds: seconds
 
     // will display time in 10:30:23 format
-    var formattedTime = hours + ':' + minutes + ':' + seconds;
+    var formattedTime = hours + ':' + minutes + ':' + seconds; 
 
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
@@ -425,6 +425,7 @@ $(function() {
       $('#player-num').focus();
       return false;
     });
+    $(edit_button).css('padding', '3px 3px');
     $(edit_button).addClass('edit-button');
     
     $(delete_button).html('<img src="icons/X.png">');
@@ -436,10 +437,12 @@ $(function() {
 
 
     $(fieldIndicator).addClass('sb-fi');
+
     $(translation).html(translateCommand(command));
+    
     $(command_num).html(sb_ele_title);
-    $(command_num).css('font-weight', 'bold');
-    //$(comRow).addClass('form-inline');
+    $(command_num).addClass('comLabel');
+
     $(comRow).addClass('row-fluid');
     $(comRow).attr('id', foid);
     /*$(comRow).submit(function(){
@@ -478,6 +481,7 @@ $(function() {
 
     $(button_div).addClass("button-div");
     $(button_div).append(edit_button);
+    $(button_div).append("<br>")
     $(button_div).append(delete_button);
     $(button_div).delay(500).animate({left : '+=50px'},200);
 
