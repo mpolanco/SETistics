@@ -280,14 +280,13 @@ $(function() {
     $('#dir-start').val('');
     $('#dir-end').val('');
     $('#shot-outcome').val('');
-<<<<<<< HEAD
-=======
+
     $("#player-num").css('background-color', 'white');
     $("#shot-type").css('background-color', 'white');
     $("#dir-start").css('background-color', 'white');
     $("#dir-end").css('background-color', 'white');
     $("#shot-outcome").css('background-color', 'white');
->>>>>>> d8488b16902bcfd7d6da9c2047ec3b7de9b7bb92
+    $("#player-num-feedback").val("");
     addToCallStack(vals);
     $("#player-num").focus();
 
