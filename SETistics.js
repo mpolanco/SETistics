@@ -5,18 +5,18 @@ $(function() {
   var global_current_edit = -1;
 
   var player_num_options = {
-      "Home Player 1" : "h1",
-      "Home Player 2" : "h2",
-      "Home Player 3" : "h3",
-      "Home Player 4" : "h4",
-      "Home Player 5" : "h5",
-      "Home Player 6" : "h6",
-      "Away Player 5" : "a5",
-      "Away Player 6" : "a6",
-      "Away Player 7" : "a7",
-      "Away Player 8" : "a8",
-      "Away Player 9" : "a9",
-      "Away Player 10" : "a10"
+      "HomePlayer1" : "h1",
+      "HomePlayer2" : "h2",
+      "HomePlayer3" : "h3",
+      "HomePlayer4" : "h4",
+      "HomePlayer5" : "h5",
+      "HomePlayer6" : "h6",
+      "AwayPlayer5" : "a5",
+      "AwayPlayer6" : "a6",
+      "AwayPlayer7" : "a7",
+      "AwayPlayer8" : "a8",
+      "AwayPlayer9" : "a9",
+      "AwayPlayer10" : "a10"
   };
   var shot_type_options = {
     "Block" : "bl",
@@ -25,23 +25,65 @@ $(function() {
     "Spike" : "sp"
   };
   var dir_options = {
-    "Home Pos. 1" : "h1",
-    "Home Pos. 2" : "h2",
-    "Home Pos. 3" : "h3",
-    "Home Pos. 4" : "h4",
-    "Home Pos. 5" : "h5",
-    "Home Pos. 6" : "h6",
-    "Away Pos. 1" : "a1",
-    "Away Pos. 2" : "a2",
-    "Away Pos. 3" : "a3",
-    "Away Pos. 4" : "a4",
-    "Away Pos. 5" : "a5",
-    "Away Pos. 6" : "a6"
+    "HomePosition1" : "h1",
+    "HomePosition2" : "h2",
+    "HomePosition3" : "h3",
+    "HomePosition4" : "h4",
+    "HomePosition5" : "h5",
+    "HomePosition6" : "h6",
+    "AwayPosition1" : "a1",
+    "AwayPosition2" : "a2",
+    "AwayPosition3" : "a3",
+    "AwayPosition4" : "a4",
+    "AwayPosition5" : "a5",
+    "AwayPosition6" : "a6"
   };
   var shot_outcome_options = {
     "Dug" : "dg",
     "Kill" : "kl",
     "Error" : "er"
+  };
+  var alternative_player_nums = {
+    "h0" : "h00",
+    "h1" : "h01",
+    "h2" : "h02",
+    "h3" : "h03",
+    "h4" : "h04",
+    "h5" : "h05",
+    "h6" : "h06",
+    "h7" : "h07",
+    "h8" : "h08",
+    "h9" : "h09",
+    "h00" : "h0",
+    "h01" : "h1",
+    "h02" : "h2",
+    "h03" : "h3",
+    "h04" : "h4",
+    "h05" : "h5",
+    "h06" : "h6",
+    "h07" : "h7",
+    "h08" : "h8",
+    "h09" : "h9",
+    "a0" : "a00",
+    "a1" : "a01",
+    "a2" : "a02",
+    "a3" : "a03",
+    "a4" : "a04",
+    "a5" : "a05",
+    "a6" : "a06",
+    "a7" : "a07",
+    "a8" : "a08",
+    "a9" : "a09",
+    "a00" : "a0",
+    "a01" : "a1",
+    "a02" : "a2",
+    "a03" : "a3",
+    "a04" : "a4",
+    "a05" : "a5",
+    "a06" : "a6",
+    "a07" : "a7",
+    "a08" : "a8",
+    "a09" : "a9"
   };
 
   for (var option in player_num_options) {
@@ -85,6 +127,10 @@ $(function() {
   $("#shot-outcome").attr("tabindex", 5);
   $("#submit-button").attr("tabindex", 6);
 
+  $("#player-num-feedback").focus(function(event) {
+    $("#player-num-feedback").blur();
+  });
+
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
@@ -97,23 +143,28 @@ $(function() {
 
   $("#player-num").blur(function() {
     var text = $("#player-num").val()
-    if (text.length != 0) {
-      $("#player-num-box").addClass("number12");
-      var valid = false;
-      for (var option in player_num_options) {
-        if (player_num_options.hasOwnProperty(option) && (text == option || text == player_num_options[option])) {
+    var valid = (text.length == 0);
+    for (var option in player_num_options) {
+      if (player_num_options.hasOwnProperty(option)) {
+        if (text == option || text == player_num_options[option]) {
           valid = true;
           break;
         }
+        if (text in alternative_player_nums) {
+          var alternative_text = alternative_player_nums[text];
+          if (alternative_text == option || alternative_text == player_num_options[option]) {
+            valid = true;
+            break;
+          }
+        }
       }
-      if (!valid) {
-        $("#player-num").css('background-color', 'pink');
-      } else {
-        $("#player-num").css('background-color', 'white');
-      }
+    }
+    if (!valid) {
+      $("#player-num").css('background-color', 'pink');
     } else {
-      $("#player-num-box").removeClass("number12");
-    } 
+      $("#player-num").css('background-color', 'white');
+      $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
+    }
 
     return false
   });
@@ -294,12 +345,14 @@ $(function() {
     $('#dir-start').val('');
     $('#dir-end').val('');
     $('#shot-outcome').val('');
+
     $("#player-num").css('background-color', 'white');
     $("#shot-type").css('background-color', 'white');
     $("#dir-start").css('background-color', 'white');
     $("#dir-end").css('background-color', 'white');
     $("#shot-outcome").css('background-color', 'white');
-    
+
+    $("#player-num-feedback").val("");
     $("#player-num").focus();
 
     resetIcons();
