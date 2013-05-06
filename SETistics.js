@@ -1,6 +1,9 @@
 // This allows the Javascript code inside this block to only run when the page
 // has finished loading in the browser.
 $(function() {
+
+  var global_current_edit = -1;
+
   var player_num_options = {
       "Home Player 1" : "h1",
       "Home Player 2" : "h2",
@@ -268,27 +271,35 @@ $(function() {
     end_dir = $('#dir-end').val();
     shot_outcome = $('#shot-outcome').val();
 
+    if (global_current_edit != -1){
+      $('#PlayerNumber'+global_current_edit).html(player_num);
+      $('#ShotType'+global_current_edit).html(shot_type);
+      $('#StartDirection'+global_current_edit).html(start_dir);
+      $('#EndDirection'+global_current_edit).html(end_dir);
+      $('#ShotOutcome'+global_current_edit).html(shot_outcome);
+      global_current_edit = -1;
+    }
+    else{
     var vals = Array();
-    vals.push(Array('Player Number', player_num));
-    vals.push(Array('Shot Type', shot_type));
-    vals.push(Array('Start Direction', start_dir));
-    vals.push(Array('End Direction', end_dir));
-    vals.push(Array('Shot Outcome', shot_outcome));
+    vals.push(Array('PlayerNumber', player_num));
+    vals.push(Array('ShotType', shot_type));
+    vals.push(Array('StartDirection', start_dir));
+    vals.push(Array('EndDirection', end_dir));
+    vals.push(Array('ShotOutcome', shot_outcome));
+    addToCallStack(vals);
 
+    }
     $('#player-num').val('');
     $('#shot-type').val('');
     $('#dir-start').val('');
     $('#dir-end').val('');
     $('#shot-outcome').val('');
-<<<<<<< HEAD
-=======
     $("#player-num").css('background-color', 'white');
     $("#shot-type").css('background-color', 'white');
     $("#dir-start").css('background-color', 'white');
     $("#dir-end").css('background-color', 'white');
     $("#shot-outcome").css('background-color', 'white');
->>>>>>> d8488b16902bcfd7d6da9c2047ec3b7de9b7bb92
-    addToCallStack(vals);
+    
     $("#player-num").focus();
 
     resetIcons();
@@ -305,7 +316,7 @@ $(function() {
     var outer_wrapper = document.createElement('div');
     var wrapper = document.createElement('div');
     var table = document.createElement('table');
-    var comRow = document.createElement('tr');
+    var comRow = document.createElement('span');
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
     var command_num = document.createElement('div');
@@ -324,13 +335,13 @@ $(function() {
     var cfid = 'cf_'+wrapper_num;
 
     for (var i = 0; i < command.length; i++) {
-      var command_field = document.createElement('td');
+      var command_field = document.createElement('div');
       $(command_field).html(command[i][1]);
       $(command_field).attr('id', command[i][0]+wrapper_num);
       //$(command_field).addClass('transparent');
       //$(command_field).addClass('input-small');
       //$(command_field).addClass('sb-input');
-      $(command_field).addClass('thin');
+      $(command_field).addClass('span2');
       /*$(command_field).focusout(function(){
         $(this).addClass('transparent');
         $('#'+fiid).html('');
@@ -380,7 +391,16 @@ $(function() {
 
     $(edit_button).html('Edit');
     $(edit_button).click(function(){
-      $('#'+cfid).focus();
+      $('#player-num').val($('#'+command[0][0]+wrapper_num).html());
+      $('#shot-type').val($('#'+command[1][0]+wrapper_num).html());
+      $('#dir-start').val($('#'+command[2][0]+wrapper_num).html());
+      $('#dir-end').val($('#'+command[3][0]+wrapper_num).html());
+      $('#shot-outcome').val($('#'+command[4][0]+wrapper_num).html());
+
+      global_current_edit = wrapper_num;
+      console.log('hit');
+      
+      $('#player-num').focus();
       return false;
     });
     
@@ -390,8 +410,8 @@ $(function() {
     $(translation).html(translateCommand(command));
     $(command_num).html(sb_ele_title);
     $(command_num).css('font-weight', 'bold');
-    $(comRow).addClass('form-inline');
-    $(comRow).addClass('sb-form');
+    //$(comRow).addClass('form-inline');
+    $(comRow).addClass('row-fluid');
     $(comRow).attr('id', foid);
     /*$(comRow).submit(function(){
       $("#player-num").focus();
@@ -428,10 +448,12 @@ $(function() {
     });
 
     $(button_div).addClass("button-div");
-    $(button_div).html('edit');
+    $(button_div).append(edit_button);
+    //$(button_div).html('edit');
     $(button_div).delay(500).animate({left : '+=40px'},200);
 
     $(outer_wrapper).addClass('outer-wrapper');
+    $(outer_wrapper).attr('id', 'outer-wrapper'+wrapper_num);
     $(outer_wrapper).append(button_div);
     $(outer_wrapper).append(wrapper);
 
