@@ -164,6 +164,19 @@ input[type=text].thin{
     background-color : pink;
 }
 
+#player-num-feedback {
+	resize: none; 
+	-moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    cursor:default;
+    font-weight: bold;
+    font-family: sports_jersey;
+    font-size: 4.55em;
+    padding: 39px;
+    text-align:center;
+}
+
 .court {
 	background-image: url(icons/numberedcourt.png);
 }

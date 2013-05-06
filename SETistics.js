@@ -2,18 +2,18 @@
 // has finished loading in the browser.
 $(function() {
   var player_num_options = {
-      "Home Player 1" : "h1",
-      "Home Player 2" : "h2",
-      "Home Player 3" : "h3",
-      "Home Player 4" : "h4",
-      "Home Player 5" : "h5",
-      "Home Player 6" : "h6",
-      "Away Player 5" : "a5",
-      "Away Player 6" : "a6",
-      "Away Player 7" : "a7",
-      "Away Player 8" : "a8",
-      "Away Player 9" : "a9",
-      "Away Player 10" : "a10"
+      "HomePlayer1" : "h1",
+      "HomePlayer2" : "h2",
+      "HomePlayer3" : "h3",
+      "HomePlayer4" : "h4",
+      "HomePlayer5" : "h5",
+      "HomePlayer6" : "h6",
+      "AwayPlayer5" : "a5",
+      "AwayPlayer6" : "a6",
+      "AwayPlayer7" : "a7",
+      "AwayPlayer8" : "a8",
+      "AwayPlayer9" : "a9",
+      "AwayPlayer10" : "a10"
   };
   var shot_type_options = {
     "Block" : "bl",
@@ -22,18 +22,18 @@ $(function() {
     "Spike" : "sp"
   };
   var dir_options = {
-    "Home Pos. 1" : "h1",
-    "Home Pos. 2" : "h2",
-    "Home Pos. 3" : "h3",
-    "Home Pos. 4" : "h4",
-    "Home Pos. 5" : "h5",
-    "Home Pos. 6" : "h6",
-    "Away Pos. 1" : "a1",
-    "Away Pos. 2" : "a2",
-    "Away Pos. 3" : "a3",
-    "Away Pos. 4" : "a4",
-    "Away Pos. 5" : "a5",
-    "Away Pos. 6" : "a6"
+    "HomePosition1" : "h1",
+    "HomePosition2" : "h2",
+    "HomePosition3" : "h3",
+    "HomePosition4" : "h4",
+    "HomePosition5" : "h5",
+    "HomePosition6" : "h6",
+    "AwayPosition1" : "a1",
+    "AwayPosition2" : "a2",
+    "AwayPosition3" : "a3",
+    "AwayPosition4" : "a4",
+    "AwayPosition5" : "a5",
+    "AwayPosition6" : "a6"
   };
   var shot_outcome_options = {
     "Dug" : "dg",
@@ -82,6 +82,10 @@ $(function() {
   $("#shot-outcome").attr("tabindex", 5);
   $("#submit-button").attr("tabindex", 6);
 
+  $("#player-num-feedback").focus(function(event) {
+    $("#player-num-feedback").blur();
+  });
+
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 13 || event.which == 32) {  
@@ -94,23 +98,19 @@ $(function() {
 
   $("#player-num").blur(function() {
     var text = $("#player-num").val()
-    if (text.length != 0) {
-      $("#player-num-box").addClass("number12");
-      var valid = false;
-      for (var option in player_num_options) {
-        if (player_num_options.hasOwnProperty(option) && (text == option || text == player_num_options[option])) {
-          valid = true;
-          break;
-        }
+    var valid = (text.length == 0);
+    for (var option in player_num_options) {
+      if (player_num_options.hasOwnProperty(option) && (text == option || text == player_num_options[option])) {
+        valid = true;
+        break;
       }
-      if (!valid) {
-        $("#player-num").css('background-color', 'pink');
-      } else {
-        $("#player-num").css('background-color', 'white');
-      }
+    }
+    if (!valid) {
+      $("#player-num").css('background-color', 'pink');
     } else {
-      $("#player-num-box").removeClass("number12");
-    } 
+      $("#player-num").css('background-color', 'white');
+      $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
+    }
 
     return false
   });
