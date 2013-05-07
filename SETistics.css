@@ -1,10 +1,35 @@
+html, body {
+	height: 100%;
+}
+
+html {
+}
+
+body {
+}
+
+.fill {
+	height: 100%;
+}
+
+#content-row {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
 #left-content {
 	background-color: rgb(200,200,200);
-	height: 600px;
+	height: 100%;
 }
 
 #main-container {
-	padding:0px
+	padding:0px;
+	min-width: 90em;
+	min-height: 37em;
+	position: absolute;
+	top: 0px;
+	bottom: 50px;
 }
 
 #title-bar {
@@ -12,6 +37,8 @@
 	border-bottom: 1px solid #4D001F;
 	color: rgb(200,200,200);
 	height: 50px;
+	width: 100%;
+	outline: none;
 }
 
 #title {
@@ -20,6 +47,7 @@
 	font-weight: bold;
 	font-family: Helvetica;
 	font-size: 2em;
+	outline: none;
 }
 
 .shortcut {
@@ -28,7 +56,12 @@
 }
 
 #youtube-player {
-	height: 375px;
+	height: 65%;
+}
+
+#input-row {
+	height: 35%;
+	outline: none;
 }
 
 #input-form {
@@ -38,7 +71,7 @@
 
 #input-form input {
 	margin-bottom: 10px;
-	float: right;
+	float: left;
 }
 
 #submit-button {
@@ -49,6 +82,7 @@
 	height: 100px;
 	background-size: 100% 100%;
 	background-color: white;
+	outline: none;
 }
 
 .outlined {
@@ -60,24 +94,18 @@
 	height: 100%;
 }
 
-.fixed-elem{
-	position: absolute;
-}
-
 #command-stack{
-	right: 0;
-	top: 51px;
 	border: 1px solid black;
-	height: 92%;
-	width: 20%;
+	height: 100%;
 	z-index: 300;
-	display: block;
+	outline: none;
 }
 
 #prev-commands{
 	overflow-y: scroll;
 	overflow-x: hidden; 
 	height: 95%;
+	outline: none;
 }
 
 #cs-title {
@@ -86,10 +114,10 @@
 	font-weight: bold;
 	font-family: Helvetica;
 	font-size: 1.3em;
+	outline: none;
 }
 
 .gradient-texture {
-	border-radius: 5px;
 	background: rgba(255,255,255,0.1);
 	background: -moz-linear-gradient(top,rgba(255,255,255,0.1),rgba(0,0,0,0.15));
 	background: -webkit-linear-gradient(top,rgba(255,255,255,0.1),rgba(0,0,0,0.15));
@@ -223,6 +251,36 @@ tr.comRow {
 
 .drop-down {
 	width: 20%;
+}
+
+#player-num-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#shot-type-options {
+    left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#dir-start-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#dir-end-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
+}
+
+#shot-outcome-options {
+	left: -387%;
+	min-width: 0;
+	width: 500%;
 }
 
 .court {
