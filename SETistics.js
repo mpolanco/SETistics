@@ -144,6 +144,7 @@ $(function() {
   });
 
   $("#player-num").blur(function() {
+    $(this).removeClass('invalid');
     var text = $("#player-num").val().toLowerCase();
     var valid = (text.length == 0);
     for (var option in player_num_options) {
@@ -164,9 +165,9 @@ $(function() {
       }
     }
     if (!valid) {
-      $("#player-num").css('background-color', 'pink');
+      $("#player-num").addClass('invalid');
     } else {
-      $("#player-num").css('background-color', 'white');
+      //$("#player-num").css('background-color', 'white');
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
     }
 
@@ -184,6 +185,7 @@ $(function() {
   });
 
   $("#shot-type").blur(function() {
+    $(this).removeClass('invalid');
     var text = $("#shot-type").val().toLowerCase();
     if (text.length != 0) {
       $("#shot-type-box").addClass("block");
@@ -197,9 +199,9 @@ $(function() {
         }
       }
       if (!valid) {
-        $("#shot-type").css('background-color', 'pink');
+        $("#shot-type").addClass('invalid');
       } else {
-        $("#shot-type").css('background-color', 'white');
+        //$("#shot-type").css('background-color', 'white');
       }
     } else {
       $("#shot-type-box").removeClass("block");
@@ -219,6 +221,7 @@ $(function() {
   });
 
   $("#dir-start").blur(function() {
+    $(this).removeClass('invalid');
     var text = $("#dir-start").val().toLowerCase();
     if (text.length != 0) {
       $("#dir-box").removeClass("court");
@@ -233,9 +236,9 @@ $(function() {
         }
       }
       if (!valid) {
-        $("#dir-start").css('background-color', 'pink');
+        $("#dir-start").addClass('invalid');
       } else {
-        $("#dir-start").css('background-color', 'white');
+        //$("#dir-start").css('background-color', 'white');
       }
     } else {
       $("#dir-box").addClass("court");
@@ -256,6 +259,7 @@ $(function() {
   });
 
   $("#dir-end").blur(function() {
+    $(this).removeClass('invalid');
     var text = $("#dir-end").val().toLowerCase();
     if (text.length != 0) {
       $("#dir-box").removeClass("shot-start");
@@ -270,9 +274,9 @@ $(function() {
         }
       }
       if (!valid) {
-        $("#dir-end").css('background-color', 'pink');
+        $("#dir-end").addClass('invalid');
       } else {
-        $("#dir-end").css('background-color', 'white');
+        //$("#dir-end").css('background-color', 'white');
       }
     } else {
       $("#dir-box").addClass("shot-start");
@@ -293,6 +297,7 @@ $(function() {
   });
 
   $("#shot-outcome").blur(function() {
+    $(this).removeClass('invalid');
     var text = $("#shot-outcome").val().toLowerCase();
     if (text.length != 0) {
       $("#shot-outcome-box").addClass("kill");
@@ -306,9 +311,9 @@ $(function() {
         }
       }
       if (!valid) {
-        $("#shot-outcome").css('background-color', 'pink');
+        $("#shot-outcome").addClass('invalid');
       } else {
-        $("#shot-outcome").css('background-color', 'white');
+        //$("#shot-outcome").css('background-color', 'white');
       }
     } else {
       $("#shot-outcome-box").removeClass("kill");
@@ -335,35 +340,57 @@ $(function() {
     shot_outcome = $('#shot-outcome').val();
 
     if (global_current_edit != -1){
-      $('#PlayerNumber'+global_current_edit).html(player_num);
-      $('#ShotType'+global_current_edit).html(shot_type);
-      $('#StartDirection'+global_current_edit).html(start_dir);
-      $('#EndDirection'+global_current_edit).html(end_dir);
-      $('#ShotOutcome'+global_current_edit).html(shot_outcome);
+      $('#PlayerNumber'+global_current_edit).html(player_num).removeClass('invalid-text');
+      $('#ShotType'+global_current_edit).html(shot_type).removeClass('invalid-text');
+      $('#StartDirection'+global_current_edit).html(start_dir).removeClass('invalid-text');
+      $('#EndDirection'+global_current_edit).html(end_dir).removeClass('invalid-text');
+      $('#ShotOutcome'+global_current_edit).html(shot_outcome).removeClass('invalid-text');
+
+      if($('#player-num').hasClass('invalid')){
+        $('#PlayerNumber'+global_current_edit).addClass('invalid-text');
+      }
+      if($('#shot-type').hasClass('invalid')){
+        $('#ShotType'+global_current_edit).addClass('invalid-text');
+      }
+      if($('#dir-start').hasClass('invalid')){
+        $('#StartDirection'+global_current_edit).addClass('invalid-text');
+      }
+      if($('#dir-end').hasClass('invalid')){
+        $('#EndDirection'+global_current_edit).addClass('invalid-text');
+      }
+      if($('#shot-outcome').hasClass('invalid')){
+        $('#ShotOutcome'+global_current_edit).addClass('invalid-text');
+      }
       global_current_edit = -1;
     }
     else{
     var vals = Array();
-    vals.push(Array('PlayerNumber', player_num));
-    vals.push(Array('ShotType', shot_type));
-    vals.push(Array('StartDirection', start_dir));
-    vals.push(Array('EndDirection', end_dir));
-    vals.push(Array('ShotOutcome', shot_outcome));
+    vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
+    vals.push(Array('ShotType', shot_type, $('#shot-type').hasClass('invalid')));
+    vals.push(Array('StartDirection', start_dir, $('#dir-start').hasClass('invalid')));
+    vals.push(Array('EndDirection', end_dir, $('#dir-end').hasClass('invalid')));
+    vals.push(Array('ShotOutcome', shot_outcome, $('#shot-outcome').hasClass('invalid')));
     vals.push(Array('TimeStamp', Date.now()));
     addToCallStack(vals);
 
     }
+    $('#player-num').removeClass('invalid');
+    $('#shot-type').removeClass('invalid');
+    $('#dir-start').removeClass('invalid');
+    $('#dir-end').removeClass('invalid');
+    $('#shot-outcome').removeClass('invalid');
+
     $('#player-num').val('');
     $('#shot-type').val('');
     $('#dir-start').val('');
     $('#dir-end').val('');
     $('#shot-outcome').val('');
 
-    $("#player-num").css('background-color', 'white');
+    /*$("#player-num").css('background-color', 'white');
     $("#shot-type").css('background-color', 'white');
     $("#dir-start").css('background-color', 'white');
     $("#dir-end").css('background-color', 'white');
-    $("#shot-outcome").css('background-color', 'white');
+    $("#shot-outcome").css('background-color', 'white');*/
 
     $("#player-num").focus();
 
@@ -397,7 +424,10 @@ $(function() {
     var minutes = date.getMinutes();
     // seconds part from the timestamp
     var seconds = date.getSeconds();
-    var seconds = (seconds<10)? '0' + seconds: seconds
+
+    var hours = (hours<10)? '0' + hours: hours;
+    var minutes = (minutes<10)? '0' + minutes: minutes;
+    var seconds = (seconds<10)? '0' + seconds: seconds;
 
     // will display time in 10:30:23 format
     var formattedTime = hours + ':' + minutes + ':' + seconds; 
@@ -418,6 +448,9 @@ $(function() {
       $(command_field).html(command[i][1]);
       $(command_field).attr('id', command[i][0]+wrapper_num);
       $(command_field).addClass('span2');
+      if(command[i][2]){
+        $(command_field).addClass('invalid-text');
+      }
 
       $(comRow).append(command_field);
     };
@@ -429,6 +462,12 @@ $(function() {
       $('#dir-start').val($('#'+command[2][0]+wrapper_num).html());
       $('#dir-end').val($('#'+command[3][0]+wrapper_num).html());
       $('#shot-outcome').val($('#'+command[4][0]+wrapper_num).html());
+
+      $('#player-num').blur();
+      $('#shot-type').blur();
+      $('#dir-start').blur();
+      $('#dir-end').blur();
+      $('#shot-outcome').blur();
 
       global_current_edit = wrapper_num;
       console.log('hit');
@@ -528,14 +567,14 @@ $(function() {
       $("#player-num").val(event.currentTarget.children[0].innerHTML);
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
       $("#shot-type").focus();
-      $("#player-num").css('background-color', 'white');
+      //$("#player-num").css('background-color', 'white');
   });
 
   $(".shot-type-option").click(function(event) {
       $("#shot-type").val(event.currentTarget.children[0].innerHTML);
       $("#shot-type-box").addClass("block");
       $("#dir-start").focus();
-      $("#shot-type").css('background-color', 'white');
+      //$("#shot-type").css('background-color', 'white');
   });
 
   $(".dir-start-option").click(function(event) {
@@ -543,7 +582,7 @@ $(function() {
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
-      $("#dir-start").css('background-color', 'white');
+      //$("#dir-start").css('background-color', 'white');
   });
 
   $(".dir-end-option").click(function(event) {
@@ -551,14 +590,14 @@ $(function() {
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
-      $("#dir-end").css('background-color', 'white');
+      //$("#dir-end").css('background-color', 'white');
   });
 
   $(".shot-outcome-option").click(function(event) {
       $("#shot-outcome").val(event.currentTarget.children[0].innerHTML);
       $("#shot-outcome-box").addClass("kill")
       $("#submit-button").focus();
-      $("#shot-outcome").css('background-color', 'white');
+      //$("#shot-outcome").css('background-color', 'white');
   });
 
   $("#player-num").focus();
