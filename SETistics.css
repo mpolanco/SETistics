@@ -243,7 +243,7 @@ tr.comRow {
 }
 
 .invalid-text{
-	color: red;
+	color: rgb(200,0,0);
 }
 
 .invalid{
