@@ -38,6 +38,7 @@ body {
 	color: rgb(200,200,200);
 	height: 50px;
 	width: 100%;
+	outline: none;
 }
 
 #title {
@@ -46,6 +47,7 @@ body {
 	font-weight: bold;
 	font-family: Helvetica;
 	font-size: 2em;
+	outline: none;
 }
 
 .shortcut {
@@ -57,8 +59,12 @@ body {
 	height: 65%;
 }
 
-#input-form {
+#input-row {
 	height: 35%;
+	outline: none;
+}
+
+#input-form {
 	margin-top: 10px;
 	margin-left: 10px;
 }
@@ -76,6 +82,7 @@ body {
 	height: 100px;
 	background-size: 100% 100%;
 	background-color: white;
+	outline: none;
 }
 
 .outlined {
@@ -91,12 +98,14 @@ body {
 	border: 1px solid black;
 	height: 100%;
 	z-index: 300;
+	outline: none;
 }
 
 #prev-commands{
 	overflow-y: scroll;
 	overflow-x: hidden; 
 	height: 95%;
+	outline: none;
 }
 
 #cs-title {
@@ -105,6 +114,7 @@ body {
 	font-weight: bold;
 	font-family: Helvetica;
 	font-size: 1.3em;
+	outline: none;
 }
 
 .gradient-texture {
