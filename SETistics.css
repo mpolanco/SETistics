@@ -175,6 +175,8 @@ tr.comRow {
 	background-color: #8C8C8C;
 	z-index: 400;
 	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
 	/*border-radius: 10px;*/
 	height: 100%;
 	padding-top: 10px;
