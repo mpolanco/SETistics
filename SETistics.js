@@ -216,7 +216,6 @@ $(function() {
       $("#dir-start").val($("#dir-start").val().split(" ").join(""));
       $("#dir-end").focus();
     }
-
     return false;
   });
 
@@ -558,11 +557,6 @@ $(function() {
     return '';
   }
 
-  function onYouTubePlayerReady(playerId) {
-    console.log("YOUTUBE PLAYER READY");
-    youtube_api_player = document.getElementById("ytapiplayer");
-  }
-
   $(".player-num-option").click(function(event) {
       $("#player-num").val(event.currentTarget.children[0].innerHTML);
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
@@ -603,3 +597,8 @@ $(function() {
   $("#player-num").focus();
 
 })
+
+function onYouTubePlayerReady(playerId) {
+  console.log("YOUTUBE PLAYER READY");
+  youtube_api_player = document.getElementById("ytapiplayer");
+}
