@@ -4,6 +4,8 @@ $(function() {
 
   var global_current_edit = -1;
 
+  var youtube_api_player;
+
   var player_num_options = {
       "HomePlayer1" : "h1",
       "HomePlayer2" : "h2",
@@ -133,7 +135,7 @@ $(function() {
 
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 13 || event.which == 32) {  
+    if (event.which == 32) {  
       $("#player-num").val($("#player-num").val().split(" ").join(""));
       $("#shot-type").focus();
     }
@@ -173,7 +175,7 @@ $(function() {
 
   $("#shot-type").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 13 || event.which == 32) {  
+    if (event.which == 32) {  
       $("#shot-type").val($("#shot-type").val().split(" ").join(""));
       $("#dir-start").focus();
     }
@@ -208,7 +210,7 @@ $(function() {
 
   $("#dir-start").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 13 || event.which == 32) {  
+    if (event.which == 32) {  
       $("#dir-start").val($("#dir-start").val().split(" ").join(""));
       $("#dir-end").focus();
     }
@@ -245,7 +247,7 @@ $(function() {
 
   $("#dir-end").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 13 || event.which == 32) {  
+    if (event.which == 32) {  
       $("#dir-end").val($("#dir-end").val().split(" ").join(""));
       $("#shot-outcome").focus();
     }
@@ -282,7 +284,7 @@ $(function() {
 
   $("#shot-outcome").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
-    if (event.which == 13 || event.which == 32) {  
+    if (event.which == 32) {  
       $("#shot-outcome").val($("#shot-outcome").val().split(" ").join(""));
       $("#submit-button").focus();
     }
@@ -515,6 +517,11 @@ $(function() {
 
   function translateCommand(command){
     return '';
+  }
+
+  function onYouTubePlayerReady(playerId) {
+    console.log("YOUTUBE PLAYER READY");
+    youtube_api_player = document.getElementById("ytapiplayer");
   }
 
   $(".player-num-option").click(function(event) {

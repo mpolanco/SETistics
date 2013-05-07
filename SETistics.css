@@ -16,6 +16,7 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	background-color: rgb(150,150,150);
 }
 
 #left-content {
@@ -59,6 +60,11 @@ body {
 	height: 65%;
 }
 
+#ytapiplayer {
+	width: 100%;
+	height: 65%;
+}
+
 #input-row {
 	height: 35%;
 	outline: none;
@@ -95,9 +101,9 @@ body {
 }
 
 #command-stack{
-	border: 1px solid black;
 	height: 100%;
 	z-index: 300;
+	background-color: white;
 	outline: none;
 }
 
