@@ -139,7 +139,6 @@ $(function() {
 
   $(document).bind('keyup', 'F1', function(){
     $('#player-num').focus();
-    console.log('hit');
   });
 
   $(document).bind('keyup', 'F2', function(){
@@ -370,6 +369,18 @@ $(function() {
     start_dir = $('#dir-start').val();
     end_dir = $('#dir-end').val();
     shot_outcome = $('#shot-outcome').val();
+
+    console.log(player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length);
+    if (player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length == 0){
+      console.log('hit');
+      $(".input").each(function(){
+        console.log($(this));
+        $(this).animate({backgroundColor: "#FFC0CB"},200);
+        //$(this).delay(200);
+        $(this).animate({backgroundColor: "#FFFFFF" },500);
+      });
+      return false;
+    }
 
     if (global_current_edit != -1){
       $('#PlayerNumber'+global_current_edit).html(player_num).removeClass('invalid-text');
