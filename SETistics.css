@@ -209,6 +209,14 @@ tr.comRow {
     text-align:center;
 }
 
+.invalid-text{
+	color: red;
+}
+
+.invalid{
+	background-color: pink !important;
+}
+
 .input {
 	width: 67%;
 }
