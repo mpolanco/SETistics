@@ -133,6 +133,39 @@ $(function() {
     $("#player-num-feedback").blur();
   });
 
+//***********************************************************************************
+//***************************   Key Bindings    *************************************
+//***********************************************************************************
+
+  $(document).bind('keyup', 'F1', function(){
+    $('#player-num').focus();
+    console.log('hit');
+  });
+
+  $(document).bind('keyup', 'F2', function(){
+    $('#shot-type').focus();
+  });
+
+  $(document).bind('keyup', 'F3', function(){
+    $('#dir-start').focus();
+  });
+
+  $(document).bind('keyup', 'F4', function(){
+    $('#dir-end').focus();
+  });
+
+  $(document).bind('keyup', 'F5', function(){
+    $('#shot-outcome').focus();
+  });
+
+  $('input').each(function(){
+    $(this).bind('keyup', 'F1', function(){$('#player-num').focus();});
+    $(this).bind('keyup', 'F2', function(){$('#shot-type').focus();});
+    $(this).bind('keyup', 'F3', function(){$('#dir-start').focus();});
+    $(this).bind('keyup', 'F4', function(){$('#dir-end').focus();});
+    $(this).bind('keyup', 'F5', function(){$('#shot-outcome').focus();});
+  });
+
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 32) {  
@@ -469,7 +502,6 @@ $(function() {
       $('#shot-outcome').blur();
 
       global_current_edit = wrapper_num;
-      console.log('hit');
       
       $('#player-num').focus();
       return false;
