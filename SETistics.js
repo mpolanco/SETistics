@@ -351,7 +351,6 @@ $(function() {
         var lower_option = option.toLowerCase();
         var lower_shortcut = shot_outcome_options[option].toLowerCase();
         if (shot_outcome_options.hasOwnProperty(option) && (text == lower_option || text == lower_shortcut)) {
-          console.log('Lower option: ' + lower_option);
           $("#shot-outcome-box").addClass(lower_option);
           valid = true;
           break;
@@ -363,7 +362,6 @@ $(function() {
         //$("#shot-outcome").css('background-color', 'white');
       }
     } else {
-      //$("#shot-outcome-box").removeClass("kill");
     } 
 
     return false
