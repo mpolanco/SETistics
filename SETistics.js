@@ -413,7 +413,6 @@ $(function() {
       $(".input").each(function(){
         console.log($(this));
         $(this).animate({backgroundColor: "#FFC0CB"},200);
-        //$(this).delay(200);
         $(this).animate({backgroundColor: "#FFFFFF" },500);
       });
       return false;
@@ -472,23 +471,6 @@ $(function() {
       $(this).removeClass('valid');
       $(this).val('');
     });
-    /*$('#player-num').removeClass('invalid');
-    $('#shot-type').removeClass('invalid');
-    $('#dir-start').removeClass('invalid');
-    $('#dir-end').removeClass('invalid');
-    $('#shot-outcome').removeClass('invalid');
-
-    $('#player-num').val('');
-    $('#shot-type').val('');
-    $('#dir-start').val('');
-    $('#dir-end').val('');
-    $('#shot-outcome').val('');*/
-
-    /*$("#player-num").css('background-color', 'white');
-    $("#shot-type").css('background-color', 'white');
-    $("#dir-start").css('background-color', 'white');
-    $("#dir-end").css('background-color', 'white');
-    $("#shot-outcome").css('background-color', 'white');*/
 
     $("#player-num").focus();
 
@@ -579,7 +561,7 @@ $(function() {
     
     $(delete_button).html('<img src="icons/X.png">');
     $(delete_button).click(function(){
-      $(outer_wrapper).remove();
+      $(outer_wrapper).slideUp("fast", function() { $(this).remove(); } );
       command_stack.splice(wrapper_num,1);
     });
     $(delete_button).addClass('edit-button');
