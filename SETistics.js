@@ -719,7 +719,7 @@ $(function() {
 
   $("#player-num").focus();
 
-})
+});
 
 function onYouTubePlayerReady(playerId) {
   console.log("YOUTUBE PLAYER READY");
