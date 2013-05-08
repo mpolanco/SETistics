@@ -23,7 +23,7 @@ $(function() {
   var shot_type_options = {
     "Block" : "bl",
     "Dig" : "dg",
-    "Serve" : "sr",
+    "Serve" : "sv",
     "Spike" : "sp"
   };
   var dir_options = {
