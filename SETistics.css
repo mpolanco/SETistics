@@ -327,6 +327,10 @@ tr.comRow {
 	background-image: url(icons/spike.png);
 }
 
+.set {
+	background-image: url(icons/set.png);
+}
+
 .kill {
 	background-image: url(icons/killshot.png);
 }

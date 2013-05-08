@@ -24,6 +24,7 @@ $(function() {
     "Block" : "bl",
     "Dig" : "dg",
     "Serve" : "sr",
+    "Set" : "st",
     "Spike" : "sp"
   };
   var dir_options = {
