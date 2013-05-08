@@ -247,11 +247,6 @@ tr.comRow {
 	padding-top: 7px;
 }
 
-/*.comRow{
-	margin-bottom: 15px;
-	margin-top: 7px;	
-}*/
-
 #player-num-feedback {
 	resize: none; 
 	-moz-border-radius: 0px;
@@ -271,6 +266,10 @@ tr.comRow {
 
 .invalid{
 	background-color: pink !important;
+}
+
+.valid{
+	background-color: rgb(125,200,125) !important;
 }
 
 .input {
