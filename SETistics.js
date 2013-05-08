@@ -541,6 +541,10 @@ $(function() {
       $(this).removeClass('valid');
       $(this).val('');
     });
+    $('.box').each(function(){
+      $(this).removeClass('invalid');
+      $(this).removeClass('valid');
+    });
 
     $("#player-num").focus();
 
