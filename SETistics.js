@@ -147,7 +147,7 @@ $(function() {
   ctx.fillRect(152, 5, 1, 90);
   ctx.fillRect(92, 5, 1, 90);
   ctx.fillRect(212, 5, 1, 90);
-  ctx.font = '0.3em Helvetica';
+  ctx.font = '1.5em Helvetica';
   ctx.fillText("5", 45, 27);
   ctx.fillText("6", 45, 57);
   ctx.fillText("1", 45, 87);
@@ -210,6 +210,7 @@ $(function() {
 
   $("#player-num").blur(function() {
     $(this).removeClass('invalid');
+    $("#player-num-feedback").removeClass('invalid');
     $(this).removeClass('valid');
     var text = $("#player-num").val().toLowerCase().trim();
     var valid = (text.length == 0);
@@ -232,6 +233,7 @@ $(function() {
     }
     if (!valid) {
       $("#player-num").addClass('invalid');
+      $("#player-num-feedback").addClass('invalid');
     } else {
       if (text.length) {$("#player-num").addClass('valid');}
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
@@ -258,6 +260,7 @@ $(function() {
       }
     }
     $(this).removeClass('invalid');
+    $("#shot-type-box").removeClass('invalid');
     $(this).removeClass('valid');
     if (text.length != 0) {
       var lower_text = text.toLowerCase();
@@ -273,6 +276,7 @@ $(function() {
       }
       if (!valid) {
         $("#shot-type").addClass('invalid');
+        $("#shot-type-box").addClass('invalid');
       } 
       else{
         if (text.length) {$("#shot-type").addClass('valid');}
@@ -366,6 +370,7 @@ $(function() {
       }
     }
     $(this).removeClass('invalid');
+    $("#shot-outcome-box").removeClass('invalid');
     $(this).removeClass('valid');
     var text = $("#shot-outcome").val().toLowerCase().trim();
     if (text.length != 0) {
@@ -381,6 +386,7 @@ $(function() {
       }
       if (!valid) {
         $("#shot-outcome").addClass('invalid');
+        $("#shot-outcome-box").addClass('invalid');
       } else {
         if (text.length) {$("#shot-outcome").addClass('valid');}
       }
@@ -434,7 +440,6 @@ $(function() {
       $(".input").each(function(){
         console.log($(this));
         $(this).animate({backgroundColor: "#FFC0CB"},200);
-        //$(this).delay(200);
         $(this).animate({backgroundColor: "#FFFFFF" },500);
       });
       return false;
@@ -493,23 +498,6 @@ $(function() {
       $(this).removeClass('valid');
       $(this).val('');
     });
-    /*$('#player-num').removeClass('invalid');
-    $('#shot-type').removeClass('invalid');
-    $('#dir-start').removeClass('invalid');
-    $('#dir-end').removeClass('invalid');
-    $('#shot-outcome').removeClass('invalid');
-
-    $('#player-num').val('');
-    $('#shot-type').val('');
-    $('#dir-start').val('');
-    $('#dir-end').val('');
-    $('#shot-outcome').val('');*/
-
-    /*$("#player-num").css('background-color', 'white');
-    $("#shot-type").css('background-color', 'white');
-    $("#dir-start").css('background-color', 'white');
-    $("#dir-end").css('background-color', 'white');
-    $("#shot-outcome").css('background-color', 'white');*/
 
     $("#player-num").focus();
 
@@ -600,7 +588,7 @@ $(function() {
     
     $(delete_button).html('<img src="icons/X.png">');
     $(delete_button).click(function(){
-      $(outer_wrapper).remove();
+      $(outer_wrapper).slideUp("fast", function() { $(this).remove(); } );
       command_stack.splice(wrapper_num,1);
     });
     $(delete_button).addClass('edit-button');
@@ -699,8 +687,8 @@ $(function() {
   $(".player-num-option").click(function(event) {
       $("#player-num").val(event.currentTarget.children[0].innerHTML);
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
+      $("#player-num").blur();
       $("#shot-type").focus();
-      //$("#player-num").css('background-color', 'white');
   });
 
   $(".shot-type-option").click(function(event) {
@@ -719,20 +707,21 @@ $(function() {
           }
         }
       }
+      $("#shot-type").blur();
       $("#dir-start").focus();
-      //$("#shot-type").css('background-color', 'white');
+      
   });
 
   $(".dir-start-option").click(function(event) {
       $("#dir-start").val(event.currentTarget.children[0].innerHTML);
+      $("#dir-start").blur();
       $("#dir-end").focus();
-      //$("#dir-start").css('background-color', 'white');
   });
 
   $(".dir-end-option").click(function(event) {
       $("#dir-end").val(event.currentTarget.children[0].innerHTML);
+      $("#dir-end").blur();
       $("#shot-outcome").focus();
-      //$("#dir-end").css('background-color', 'white');
   });
 
   $(".shot-outcome-option").click(function(event) {
@@ -751,13 +740,13 @@ $(function() {
           }
         }
       }
+      $("#shot-outcome").blur();
       $("#submit-button").focus();
-      //$("#shot-outcome").css('background-color', 'white');
   });
 
   $("#player-num").focus();
 
-})
+});
 
 function onYouTubePlayerReady(playerId) {
   console.log("YOUTUBE PLAYER READY");
