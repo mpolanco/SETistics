@@ -393,14 +393,10 @@ $(function() {
 //***********************************************************************************
 
   $('input').each(function(){
-    $(this).autocomplete({delay: 100, minLength: 0});
-  });
-
-  $( 'input' ).each(function(){
-    $(this).on( "autocompletesearch", function( event, ui ) {
+    $(this).autocomplete({source: [], delay: 100, minLength: 0, search: function( event, ui ) {
       $(this).blur();
       $(this).focus();
-    } );
+    }});
   });
 
   $("#command-line").submit(function(){

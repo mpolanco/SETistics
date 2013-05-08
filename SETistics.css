@@ -276,6 +276,8 @@ tr.comRow {
 	width: 67%;
 }
 
+.ui-helper-hidden-accessible { display:none; }
+
 .drop-down {
 	width: 20%;
 }
