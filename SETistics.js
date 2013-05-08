@@ -90,6 +90,34 @@ $(function() {
     "a08" : "a8",
     "a09" : "a9"
   };
+  var position_x = {
+    "h5" : 45,
+    "h6" : 45,
+    "h1" : 45,
+    "h4" : 117,
+    "h3" : 117,
+    "h2" : 117,
+    "a2" : 177,
+    "a3" : 177,
+    "a4" : 177,
+    "a1" : 250,
+    "a6" : 250,
+    "a5" : 250,
+  };
+  var position_y = {
+    "h5" : 27,
+    "h6" : 57,
+    "h1" : 87,
+    "h4" : 27,
+    "h3" : 57,
+    "h2" : 87,
+    "a2" : 27,
+    "a3" : 57,
+    "a4" : 87,
+    "a1" : 27,
+    "a6" : 57,
+    "a5" : 87,
+  };
 
   for (var option in player_num_options) {
     if (player_num_options.hasOwnProperty(option)) {
@@ -136,6 +164,37 @@ $(function() {
   $("#player-num-feedback").focus(function(event) {
     $("#player-num-feedback").blur();
   });
+
+  var canvas = document.getElementById("court");
+  var ctx = canvas.getContext('2d');
+  ctx.fillStyle = "#91003A";
+  ctx.fillRect(0, 0, 305, 100);
+  ctx.fillStyle = "rgb(150,150,150)";
+  ctx.fillRect(5, 5, 295, 90);
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fillRect(152, 5, 1, 90);
+  ctx.fillRect(92, 5, 1, 90);
+  ctx.fillRect(212, 5, 1, 90);
+  ctx.font = '1.5em Helvetica';
+  for (var pos = 1; pos <= 6; pos++) {
+    var pos_string = pos.toString();
+    var home_pos = "h" + pos_string;
+    var away_pos = "a" + pos_string;
+    ctx.fillText(pos_string, position_x[home_pos], position_y[home_pos]);
+    ctx.fillText(pos_string, position_x[away_pos], position_y[away_pos]);
+  }
+
+  // draw an arrow from (fromx, fromy) to (tox, toy)
+  var canvas_arrow = function(context, fromx, fromy, tox, toy) {
+      var headlen = 10;   // length of head in pixels
+      var angle = Math.atan2(toy - fromy, tox - fromx);
+      context.moveTo(fromx, fromy);
+      context.lineTo(tox, toy);
+      context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+      context.moveTo(tox, toy);
+      context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+      context.stroke();
+  }
 
 //***********************************************************************************
 //***************************   Key Bindings    *************************************
@@ -276,8 +335,6 @@ $(function() {
     $(this).removeClass('valid');
     var text = $("#dir-start").val().toLowerCase().trim();
     if (text.length != 0) {
-      $("#dir-box").removeClass("court");
-      $("#dir-box").addClass("shot-start");
       var valid = false;
       for (var option in dir_options) {
         var lower_option = option.toLowerCase();
@@ -292,10 +349,7 @@ $(function() {
       } else {
         $("#dir-start").addClass('valid');
       }
-    } else {
-      if (text.length) {$("#dir-box").addClass("court");}
-      $("#dir-box").removeClass("shot-start");
-    }
+    } 
 
     return false
   });
@@ -315,8 +369,6 @@ $(function() {
     $(this).removeClass('valid');
     var text = $("#dir-end").val().toLowerCase().trim();
     if (text.length != 0) {
-      $("#dir-box").removeClass("shot-start");
-      $("#dir-box").addClass("shot-end");
       var valid = false;
       for (var option in dir_options) {
         var lower_option = option.toLowerCase();
@@ -331,10 +383,7 @@ $(function() {
       } else {
         $("#dir-end").addClass('valid');
       }
-    } else {
-      if (text.length) {$("#dir-box").addClass("shot-start");}
-      $("#dir-box").removeClass("shot-end");
-    }
+    } 
 
     return false
   });
@@ -660,9 +709,6 @@ $(function() {
         $("#shot-outcome-box").removeClass(option.toLowerCase());
       }
     }
-    $("#dir-box").removeClass("shot-start");
-    $("#dir-box").removeClass("shot-end");
-    $("#dir-box").addClass("court");
   }
 
   function translateCommand(command){
@@ -699,17 +745,13 @@ $(function() {
 
   $(".dir-start-option").click(function(event) {
       $("#dir-start").val(event.currentTarget.children[0].innerHTML);
-      $("#dir-box").removeClass("court");
-      $("#dir-box").addClass("shot-start");
       $("#dir-start").blur();
       $("#dir-end").focus();
   });
 
   $(".dir-end-option").click(function(event) {
       $("#dir-end").val(event.currentTarget.children[0].innerHTML);
-      $("#dir-box").removeClass("shot-start");
-      $("#dir-box").addClass("shot-end");
-      $("#dir-end").blur()
+      $("#dir-end").blur();
       $("#shot-outcome").focus();
   });
 
