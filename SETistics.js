@@ -573,21 +573,8 @@ $(function() {
       global_current_edit = -1;
     }
     else{
-      var timestamp = Date.now();
-<<<<<<< HEAD
-=======
-      var statistic = {
-          'player-num' : player_num,
-           'shot-type' : shot_type,
-           'dir-start' : start_dir,
-             'dir-end' : end_dir,
-        'shot-outcome' : shot_outcome,
-           'timestamp' : timestamp
-      };
+      var timestamp = Date.now();      var timestamp = Date.now();
 
-      statistics.push(statistic);
-
->>>>>>> 16ab099b7e13660a6125e4a798c66a4d5b73b81b
 
       var vals = Array();
       vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
