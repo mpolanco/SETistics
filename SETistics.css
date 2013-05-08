@@ -326,7 +326,7 @@ tr.comRow {
 	background-image: url(icons/block.png);
 }
 
-.dig {
+.dig, .dug {
 	background-image: url(icons/dig.png);
 }
 
@@ -344,4 +344,8 @@ tr.comRow {
 
 .kill {
 	background-image: url(icons/killshot.png);
+}
+
+.error {
+	background-image: url(icons/error.png);
 }

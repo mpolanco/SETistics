@@ -2,6 +2,8 @@
 // has finished loading in the browser.
 $(function() {
 
+  var statistics = Array();
+
   var global_current_edit = -1;
 
   var youtube_api_player;
@@ -164,6 +166,11 @@ $(function() {
     $(this).bind('keyup', 'F3', function(){$('#dir-start').focus();});
     $(this).bind('keyup', 'F4', function(){$('#dir-end').focus();});
     $(this).bind('keyup', 'F5', function(){$('#shot-outcome').focus();});
+  });
+
+  $("input[type=text]").click(function() {
+    // Select field contents
+    this.select();
   });
 
   $("#player-num").keyup(function(event) {
@@ -338,16 +345,21 @@ $(function() {
   });
 
   $("#shot-outcome").blur(function() {
+    for (var option in shot_outcome_options) {
+      if (shot_outcome_options.hasOwnProperty(option)) {
+        $("#shot-outcome-box").removeClass(option.toLowerCase());
+      }
+    }
     $(this).removeClass('invalid');
     $(this).removeClass('valid');
     var text = $("#shot-outcome").val().toLowerCase().trim();
     if (text.length != 0) {
-      $("#shot-outcome-box").addClass("kill");
       var valid = false;
       for (var option in shot_outcome_options) {
         var lower_option = option.toLowerCase();
         var lower_shortcut = shot_outcome_options[option].toLowerCase();
         if (shot_outcome_options.hasOwnProperty(option) && (text == lower_option || text == lower_shortcut)) {
+          $("#shot-outcome-box").addClass(lower_option);
           valid = true;
           break;
         }
@@ -358,7 +370,6 @@ $(function() {
         if (text.length) {$("#shot-outcome").addClass('valid');}
       }
     } else {
-      $("#shot-outcome-box").removeClass("kill");
     } 
 
     return false
@@ -433,14 +444,26 @@ $(function() {
       global_current_edit = -1;
     }
     else{
-    var vals = Array();
-    vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
-    vals.push(Array('ShotType', shot_type, $('#shot-type').hasClass('invalid')));
-    vals.push(Array('StartDirection', start_dir, $('#dir-start').hasClass('invalid')));
-    vals.push(Array('EndDirection', end_dir, $('#dir-end').hasClass('invalid')));
-    vals.push(Array('ShotOutcome', shot_outcome, $('#shot-outcome').hasClass('invalid')));
-    vals.push(Array('TimeStamp', Date.now()));
-    addToCallStack(vals);
+      var timestamp = Date.now();
+      var statistic = {
+          'player-num' : player_num,
+           'shot-type' : shot_type,
+           'dir-start' : start_dir,
+             'dir-end' : end_dir,
+        'shot-outcome' : shot_outcome,
+           'timestamp' : timestamp
+      };
+      statistics.push(statistic);
+
+
+      var vals = Array();
+      vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
+      vals.push(Array('ShotType', shot_type, $('#shot-type').hasClass('invalid')));
+      vals.push(Array('StartDirection', start_dir, $('#dir-start').hasClass('invalid')));
+      vals.push(Array('EndDirection', end_dir, $('#dir-end').hasClass('invalid')));
+      vals.push(Array('ShotOutcome', shot_outcome, $('#shot-outcome').hasClass('invalid')));
+      vals.push(Array('TimeStamp', timestamp));
+      addToCallStack(vals);
 
     }
 
@@ -636,7 +659,16 @@ $(function() {
   function resetIcons() {
     $("#player-num-feedback").val("");
     $("#shot-type-box").removeClass("block");
-    $("#shot-outcome-box").removeClass("kill");
+    for (var option in shot_type_options) {
+      if (shot_type_options.hasOwnProperty(option)) {
+        $("#shot-type-box").removeClass(option.toLowerCase());
+      }
+    }
+    for (var option in shot_outcome_options) {
+      if (shot_outcome_options.hasOwnProperty(option)) {
+        $("#shot-outcome-box").removeClass(option.toLowerCase());
+      }
+    }
     $("#dir-box").removeClass("shot-start");
     $("#dir-box").removeClass("shot-end");
     $("#dir-box").addClass("court");
@@ -690,8 +722,21 @@ $(function() {
   });
 
   $(".shot-outcome-option").click(function(event) {
-      $("#shot-outcome").val(event.currentTarget.children[0].innerHTML);
-      $("#shot-outcome-box").addClass("kill")
+      var selection = event.currentTarget.children[0].innerHTML;
+      $("#shot-outcome").val(selection);
+      for (var option in shot_outcome_options) {
+        if (shot_outcome_options.hasOwnProperty(option)) {
+          $("#shot-outcome-box").removeClass(option.toLowerCase());
+        }
+      }
+      for (var option in shot_outcome_options) {
+        if (shot_outcome_options.hasOwnProperty(option)){
+          if (selection == option || selection == shot_outcome_options[option]) {
+            $("#shot-outcome-box").addClass(option.toLowerCase());
+            break;
+          }
+        }
+      }
       $("#submit-button").focus();
       //$("#shot-outcome").css('background-color', 'white');
   });
