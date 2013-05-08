@@ -178,7 +178,8 @@ $(function() {
 
   $("#player-num").blur(function() {
     $(this).removeClass('invalid');
-    var text = $("#player-num").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#player-num").val().toLowerCase().trim();
     var valid = (text.length == 0);
     for (var option in player_num_options) {
       if (player_num_options.hasOwnProperty(option)) {
@@ -200,7 +201,7 @@ $(function() {
     if (!valid) {
       $("#player-num").addClass('invalid');
     } else {
-      //$("#player-num").css('background-color', 'white');
+      if (text.length) {$("#player-num").addClass('valid');}
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
     }
 
@@ -218,13 +219,14 @@ $(function() {
   });
 
   $("#shot-type").blur(function() {
-    var text = $("#shot-type").val();
+    var text = $("#shot-type").val().trim();
     for (var option in shot_type_options) {
       if (shot_type_options.hasOwnProperty(option)) {
         $("#shot-type-box").removeClass(option.toLowerCase());
       }
     }
     $(this).removeClass('invalid');
+    $(this).removeClass('valid');
     if (text.length != 0) {
       var lower_text = text.toLowerCase();
       var valid = false;
@@ -240,6 +242,9 @@ $(function() {
       if (!valid) {
         $("#shot-type").addClass('invalid');
       } 
+      else{
+        if (text.length) {$("#shot-type").addClass('valid');}
+      }
     }
 
     return false
@@ -256,7 +261,8 @@ $(function() {
 
   $("#dir-start").blur(function() {
     $(this).removeClass('invalid');
-    var text = $("#dir-start").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#dir-start").val().toLowerCase().trim();
     if (text.length != 0) {
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
@@ -272,10 +278,10 @@ $(function() {
       if (!valid) {
         $("#dir-start").addClass('invalid');
       } else {
-        //$("#dir-start").css('background-color', 'white');
+        $("#dir-start").addClass('valid');
       }
     } else {
-      $("#dir-box").addClass("court");
+      if (text.length) {$("#dir-box").addClass("court");}
       $("#dir-box").removeClass("shot-start");
     }
 
@@ -294,7 +300,8 @@ $(function() {
 
   $("#dir-end").blur(function() {
     $(this).removeClass('invalid');
-    var text = $("#dir-end").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#dir-end").val().toLowerCase().trim();
     if (text.length != 0) {
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
@@ -310,10 +317,10 @@ $(function() {
       if (!valid) {
         $("#dir-end").addClass('invalid');
       } else {
-        //$("#dir-end").css('background-color', 'white');
+        $("#dir-end").addClass('valid');
       }
     } else {
-      $("#dir-box").addClass("shot-start");
+      if (text.length) {$("#dir-box").addClass("shot-start");}
       $("#dir-box").removeClass("shot-end");
     }
 
@@ -332,7 +339,8 @@ $(function() {
 
   $("#shot-outcome").blur(function() {
     $(this).removeClass('invalid');
-    var text = $("#shot-outcome").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#shot-outcome").val().toLowerCase().trim();
     if (text.length != 0) {
       $("#shot-outcome-box").addClass("kill");
       var valid = false;
@@ -347,7 +355,7 @@ $(function() {
       if (!valid) {
         $("#shot-outcome").addClass('invalid');
       } else {
-        //$("#shot-outcome").css('background-color', 'white');
+        if (text.length) {$("#shot-outcome").addClass('valid');}
       }
     } else {
       $("#shot-outcome-box").removeClass("kill");
@@ -360,6 +368,16 @@ $(function() {
 //********************************* Autocompletes ***********************************
 //***********************************************************************************
 
+  $('input').each(function(){
+    $(this).autocomplete({delay: 100, minLength: 0});
+  });
+
+  $( 'input' ).each(function(){
+    $(this).on( "autocompletesearch", function( event, ui ) {
+      $(this).blur();
+      $(this).focus();
+    } );
+  });
 
   $("#command-line").submit(function(){
     $("#submit-button").click();
@@ -425,7 +443,13 @@ $(function() {
     addToCallStack(vals);
 
     }
-    $('#player-num').removeClass('invalid');
+
+    $('input').each(function(){
+      $(this).removeClass('invalid');
+      $(this).removeClass('valid');
+      $(this).val('');
+    });
+    /*$('#player-num').removeClass('invalid');
     $('#shot-type').removeClass('invalid');
     $('#dir-start').removeClass('invalid');
     $('#dir-end').removeClass('invalid');
@@ -435,7 +459,7 @@ $(function() {
     $('#shot-type').val('');
     $('#dir-start').val('');
     $('#dir-end').val('');
-    $('#shot-outcome').val('');
+    $('#shot-outcome').val('');*/
 
     /*$("#player-num").css('background-color', 'white');
     $("#shot-type").css('background-color', 'white');
