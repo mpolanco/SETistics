@@ -26,6 +26,7 @@ $(function() {
     "Block" : "bl",
     "Dig" : "dg",
     "Serve" : "sv",
+    "Set" : "st",
     "Spike" : "sp"
   };
   var dir_options = {
@@ -165,6 +166,11 @@ $(function() {
     $(this).bind('keyup', 'F3', function(){$('#dir-start').focus();});
     $(this).bind('keyup', 'F4', function(){$('#dir-end').focus();});
     $(this).bind('keyup', 'F5', function(){$('#shot-outcome').focus();});
+  });
+
+  $("input[type=text]").click(function() {
+    // Select field contents
+    this.select();
   });
 
   $("#player-num").keyup(function(event) {
@@ -363,6 +369,11 @@ $(function() {
     return false
   });
 
+//***********************************************************************************
+//********************************* Autocompletes ***********************************
+//***********************************************************************************
+
+
   $("#command-line").submit(function(){
     $("#submit-button").click();
     return false;
@@ -473,16 +484,18 @@ $(function() {
     var outer_wrapper = document.createElement('div');
     var wrapper = document.createElement('div');
     var table = document.createElement('table');
-    var comRow = document.createElement('span');
+    var labelRow = document.createElement('div');
+    var comRow = document.createElement('div');
     var fieldIndicator = document.createElement('div');
     var translation = document.createElement('div');
     var command_num = document.createElement('div');
+    var time_stamp = document.createElement('div');
     var button_div = document.createElement('div');
     var edit_button = document.createElement('button');
     var delete_button = document.createElement('button');
 
-    var timestamp = command[command.length-1][1];
-    var date = new Date(timestamp);
+    var ts = command[command.length-1][1];
+    var date = new Date(ts);
     // hours part from the timestamp
     var hours = date.getHours();
     // minutes part from the timestamp
@@ -500,7 +513,7 @@ $(function() {
     var wrapper_num = ++num_commands;
     var fiid = "fi" + wrapper_num;
     var foid = "row" + wrapper_num;
-    var sb_ele_title = '#' + wrapper_num + " " + formattedTime;
+    var sb_ele_title = '#' + wrapper_num;
 
 
     $(fieldIndicator).attr('id', fiid);
@@ -556,15 +569,27 @@ $(function() {
     
     $(command_num).html(sb_ele_title);
     $(command_num).addClass('comLabel');
+    $(command_num).addClass('span2');
 
+    $(time_stamp).html(formattedTime);
+    $(time_stamp).addClass('comLabel2');
+    $(time_stamp).addClass('span3');
+
+    $(labelRow).append(command_num);
+    $(labelRow).append(time_stamp);
+    //$(labelRow).addClass('row-fluid');
+    $(labelRow).addClass('labelRow');
+    
     $(comRow).addClass('row-fluid');
+    $(comRow).addClass('comRow');
     $(comRow).attr('id', foid);
     /*$(comRow).submit(function(){
       $("#player-num").focus();
       return false;
     });*/
     $(wrapper).addClass('separator');
-    $(wrapper).append(command_num);
+    $(wrapper).append(labelRow);
+    $(wrapper).append('<br>')
     $(wrapper).append(comRow);
     $(wrapper).append(fieldIndicator)
     $(wrapper).append(translation);
