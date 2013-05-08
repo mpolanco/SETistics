@@ -25,6 +25,7 @@ body {
 }
 
 #main-container {
+	width: 100%;
 	padding:0px;
 	min-width: 90em;
 	min-height: 37em;
