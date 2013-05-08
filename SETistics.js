@@ -165,16 +165,21 @@ $(function() {
     $("#player-num-feedback").blur();
   });
 
+  var redraw_court = function(ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#91003A";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgb(150,150,150)";
+    ctx.fillRect(5, 5, 295, 90);
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fillRect(152, 5, 1, 90);
+    ctx.fillRect(92, 5, 1, 90);
+    ctx.fillRect(212, 5, 1, 90);
+  }
+
   var canvas = document.getElementById("court");
   var ctx = canvas.getContext('2d');
-  ctx.fillStyle = "#91003A";
-  ctx.fillRect(0, 0, 305, 100);
-  ctx.fillStyle = "rgb(150,150,150)";
-  ctx.fillRect(5, 5, 295, 90);
-  ctx.fillStyle = "rgb(255, 255, 255)";
-  ctx.fillRect(152, 5, 1, 90);
-  ctx.fillRect(92, 5, 1, 90);
-  ctx.fillRect(212, 5, 1, 90);
+  redraw_court(ctx);
   ctx.font = '1.5em Helvetica';
   for (var pos = 1; pos <= 6; pos++) {
     var pos_string = pos.toString();
@@ -713,6 +718,14 @@ $(function() {
         $("#shot-outcome-box").removeClass(option.toLowerCase());
       }
     }
+    redraw_court(ctx);
+    for (var pos = 1; pos <= 6; pos++) {
+      var pos_string = pos.toString();
+      var home_pos = "h" + pos_string;
+      var away_pos = "a" + pos_string;
+      ctx.fillText(pos_string, position_x[home_pos], position_y[home_pos]);
+      ctx.fillText(pos_string, position_x[away_pos], position_y[away_pos]);
+    }
   }
 
   function translateCommand(command){
@@ -748,13 +761,47 @@ $(function() {
   });
 
   $(".dir-start-option").click(function(event) {
-      $("#dir-start").val(event.currentTarget.children[0].innerHTML);
+      var selection = event.currentTarget.children[0].innerHTML
+      $("#dir-start").val(selection);
+
+      redraw_court(ctx);
+
+      for (var option in dir_options) {
+        if (dir_options.hasOwnProperty(option)){
+          var shortcut = dir_options[option];
+          if (selection == shortcut || $("#dir-end").val() == shortcut) {
+            ctx.fillStyle = "#91003A";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          } else {
+            ctx.fillStyle = "rgb(255, 255, 255)";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          }
+        }
+      }
+      
       $("#dir-start").blur();
       $("#dir-end").focus();
   });
 
   $(".dir-end-option").click(function(event) {
-      $("#dir-end").val(event.currentTarget.children[0].innerHTML);
+      var selection = event.currentTarget.children[0].innerHTML;
+      $("#dir-end").val(selection);
+
+      redraw_court(ctx);
+
+      for (var option in dir_options) {
+        if (dir_options.hasOwnProperty(option)){
+          var shortcut = dir_options[option];
+          if (selection == shortcut || $("#dir-start").val() == shortcut) {
+            ctx.fillStyle = "#91003A";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          } else {
+            ctx.fillStyle = "rgb(255, 255, 255)";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          }
+        }
+      }
+
       $("#dir-end").blur();
       $("#shot-outcome").focus();
   });
