@@ -817,7 +817,21 @@ $(function() {
 
       var timestamp = statistic['timestamp'];
       var timestamp_cell = document.createElement('td');
-      $(timestamp_cell).html(timestamp);
+      var date = new Date(timestamp);
+      // hours part from the timestamp
+      var hours = date.getHours();
+      // minutes part from the timestamp
+      var minutes = date.getMinutes();
+      // seconds part from the timestamp
+      var seconds = date.getSeconds();
+
+      var hours = (hours<10)? '0' + hours: hours;
+      var minutes = (minutes<10)? '0' + minutes: minutes;
+      var seconds = (seconds<10)? '0' + seconds: seconds;
+
+      // will display time in 10:30:23 format
+      var formattedTime = hours + ':' + minutes + ':' + seconds; 
+      $(timestamp_cell).html(formattedTime);
 
       var player_num = statistic['player-num'];
       var player_num_cell = document.createElement('td');
