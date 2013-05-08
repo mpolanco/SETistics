@@ -2,6 +2,8 @@
 // has finished loading in the browser.
 $(function() {
 
+  var statistics = Array();
+
   var global_current_edit = -1;
 
   var youtube_api_player;
@@ -184,7 +186,8 @@ $(function() {
 
   $("#player-num").blur(function() {
     $(this).removeClass('invalid');
-    var text = $("#player-num").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#player-num").val().toLowerCase().trim();
     var valid = (text.length == 0);
     for (var option in player_num_options) {
       if (player_num_options.hasOwnProperty(option)) {
@@ -206,7 +209,7 @@ $(function() {
     if (!valid) {
       $("#player-num").addClass('invalid');
     } else {
-      //$("#player-num").css('background-color', 'white');
+      if (text.length) {$("#player-num").addClass('valid');}
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
     }
 
@@ -224,13 +227,14 @@ $(function() {
   });
 
   $("#shot-type").blur(function() {
-    var text = $("#shot-type").val();
+    var text = $("#shot-type").val().trim();
     for (var option in shot_type_options) {
       if (shot_type_options.hasOwnProperty(option)) {
         $("#shot-type-box").removeClass(option.toLowerCase());
       }
     }
     $(this).removeClass('invalid');
+    $(this).removeClass('valid');
     if (text.length != 0) {
       var lower_text = text.toLowerCase();
       var valid = false;
@@ -246,6 +250,9 @@ $(function() {
       if (!valid) {
         $("#shot-type").addClass('invalid');
       } 
+      else{
+        if (text.length) {$("#shot-type").addClass('valid');}
+      }
     }
 
     return false
@@ -262,7 +269,8 @@ $(function() {
 
   $("#dir-start").blur(function() {
     $(this).removeClass('invalid');
-    var text = $("#dir-start").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#dir-start").val().toLowerCase().trim();
     if (text.length != 0) {
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
@@ -278,10 +286,10 @@ $(function() {
       if (!valid) {
         $("#dir-start").addClass('invalid');
       } else {
-        //$("#dir-start").css('background-color', 'white');
+        $("#dir-start").addClass('valid');
       }
     } else {
-      $("#dir-box").addClass("court");
+      if (text.length) {$("#dir-box").addClass("court");}
       $("#dir-box").removeClass("shot-start");
     }
 
@@ -300,7 +308,8 @@ $(function() {
 
   $("#dir-end").blur(function() {
     $(this).removeClass('invalid');
-    var text = $("#dir-end").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#dir-end").val().toLowerCase().trim();
     if (text.length != 0) {
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
@@ -316,10 +325,10 @@ $(function() {
       if (!valid) {
         $("#dir-end").addClass('invalid');
       } else {
-        //$("#dir-end").css('background-color', 'white');
+        $("#dir-end").addClass('valid');
       }
     } else {
-      $("#dir-box").addClass("shot-start");
+      if (text.length) {$("#dir-box").addClass("shot-start");}
       $("#dir-box").removeClass("shot-end");
     }
 
@@ -337,15 +346,21 @@ $(function() {
   });
 
   $("#shot-outcome").blur(function() {
+    for (var option in shot_outcome_options) {
+      if (shot_outcome_options.hasOwnProperty(option)) {
+        $("#shot-outcome-box").removeClass(option.toLowerCase());
+      }
+    }
     $(this).removeClass('invalid');
-    var text = $("#shot-outcome").val().toLowerCase();
+    $(this).removeClass('valid');
+    var text = $("#shot-outcome").val().toLowerCase().trim();
     if (text.length != 0) {
-      $("#shot-outcome-box").addClass("kill");
       var valid = false;
       for (var option in shot_outcome_options) {
         var lower_option = option.toLowerCase();
         var lower_shortcut = shot_outcome_options[option].toLowerCase();
         if (shot_outcome_options.hasOwnProperty(option) && (text == lower_option || text == lower_shortcut)) {
+          $("#shot-outcome-box").addClass(lower_option);
           valid = true;
           break;
         }
@@ -353,10 +368,9 @@ $(function() {
       if (!valid) {
         $("#shot-outcome").addClass('invalid');
       } else {
-        //$("#shot-outcome").css('background-color', 'white');
+        if (text.length) {$("#shot-outcome").addClass('valid');}
       }
     } else {
-      $("#shot-outcome-box").removeClass("kill");
     } 
 
     return false
@@ -372,6 +386,16 @@ $(function() {
 //********************************* Autocompletes ***********************************
 //***********************************************************************************
 
+  $('input').each(function(){
+    $(this).autocomplete({delay: 100, minLength: 0});
+  });
+
+  $( 'input' ).each(function(){
+    $(this).on( "autocompletesearch", function( event, ui ) {
+      $(this).blur();
+      $(this).focus();
+    } );
+  });
 
   $("#command-line").submit(function(){
     $("#submit-button").click();
@@ -427,17 +451,35 @@ $(function() {
       global_current_edit = -1;
     }
     else{
-    var vals = Array();
-    vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
-    vals.push(Array('ShotType', shot_type, $('#shot-type').hasClass('invalid')));
-    vals.push(Array('StartDirection', start_dir, $('#dir-start').hasClass('invalid')));
-    vals.push(Array('EndDirection', end_dir, $('#dir-end').hasClass('invalid')));
-    vals.push(Array('ShotOutcome', shot_outcome, $('#shot-outcome').hasClass('invalid')));
-    vals.push(Array('TimeStamp', Date.now()));
-    addToCallStack(vals);
+      var timestamp = Date.now();
+      var statistic = {
+          'player-num' : player_num,
+           'shot-type' : shot_type,
+           'dir-start' : start_dir,
+             'dir-end' : end_dir,
+        'shot-outcome' : shot_outcome,
+           'timestamp' : timestamp
+      };
+      statistics.push(statistic);
+
+
+      var vals = Array();
+      vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
+      vals.push(Array('ShotType', shot_type, $('#shot-type').hasClass('invalid')));
+      vals.push(Array('StartDirection', start_dir, $('#dir-start').hasClass('invalid')));
+      vals.push(Array('EndDirection', end_dir, $('#dir-end').hasClass('invalid')));
+      vals.push(Array('ShotOutcome', shot_outcome, $('#shot-outcome').hasClass('invalid')));
+      vals.push(Array('TimeStamp', timestamp));
+      addToCallStack(vals);
 
     }
-    $('#player-num').removeClass('invalid');
+
+    $('input').each(function(){
+      $(this).removeClass('invalid');
+      $(this).removeClass('valid');
+      $(this).val('');
+    });
+    /*$('#player-num').removeClass('invalid');
     $('#shot-type').removeClass('invalid');
     $('#dir-start').removeClass('invalid');
     $('#dir-end').removeClass('invalid');
@@ -447,7 +489,7 @@ $(function() {
     $('#shot-type').val('');
     $('#dir-start').val('');
     $('#dir-end').val('');
-    $('#shot-outcome').val('');
+    $('#shot-outcome').val('');*/
 
     /*$("#player-num").css('background-color', 'white');
     $("#shot-type").css('background-color', 'white');
@@ -624,7 +666,16 @@ $(function() {
   function resetIcons() {
     $("#player-num-feedback").val("");
     $("#shot-type-box").removeClass("block");
-    $("#shot-outcome-box").removeClass("kill");
+    for (var option in shot_type_options) {
+      if (shot_type_options.hasOwnProperty(option)) {
+        $("#shot-type-box").removeClass(option.toLowerCase());
+      }
+    }
+    for (var option in shot_outcome_options) {
+      if (shot_outcome_options.hasOwnProperty(option)) {
+        $("#shot-outcome-box").removeClass(option.toLowerCase());
+      }
+    }
     $("#dir-box").removeClass("shot-start");
     $("#dir-box").removeClass("shot-end");
     $("#dir-box").addClass("court");
@@ -678,8 +729,21 @@ $(function() {
   });
 
   $(".shot-outcome-option").click(function(event) {
-      $("#shot-outcome").val(event.currentTarget.children[0].innerHTML);
-      $("#shot-outcome-box").addClass("kill")
+      var selection = event.currentTarget.children[0].innerHTML;
+      $("#shot-outcome").val(selection);
+      for (var option in shot_outcome_options) {
+        if (shot_outcome_options.hasOwnProperty(option)) {
+          $("#shot-outcome-box").removeClass(option.toLowerCase());
+        }
+      }
+      for (var option in shot_outcome_options) {
+        if (shot_outcome_options.hasOwnProperty(option)){
+          if (selection == option || selection == shot_outcome_options[option]) {
+            $("#shot-outcome-box").addClass(option.toLowerCase());
+            break;
+          }
+        }
+      }
       $("#submit-button").focus();
       //$("#shot-outcome").css('background-color', 'white');
   });
