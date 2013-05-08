@@ -6,6 +6,9 @@ $(function() {
 
   var global_current_edit = -1;
 
+  var current_from_dir = "";
+  var current_to_dir = "";
+
   var youtube_api_player;
 
   var player_num_options = {
@@ -193,6 +196,7 @@ $(function() {
   var canvas_arrow = function(context, fromx, fromy, tox, toy) {
       var headlen = 10;   // length of head in pixels
       var angle = Math.atan2(toy - fromy, tox - fromx);
+      context.beginPath();
       context.moveTo(fromx, fromy);
       context.lineTo(tox, toy);
       context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
@@ -355,6 +359,9 @@ $(function() {
               $("#dir-end").val().toLowerCase() == lower_option || $("#dir-end").val().toLowerCase() == lower_shortcut) {
             if (text == lower_option || text == lower_shortcut) {
               valid = true;
+              current_from_dir = shortcut;
+            } else {
+              current_to_dir = shortcut;
             }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
@@ -370,6 +377,13 @@ $(function() {
         $("#dir-start").addClass('valid');
       }
     } 
+
+    if (current_from_dir.length != 0 && current_to_dir.length != 0) {
+      canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
+    }
+
+    current_from_dir = "";
+    current_to_dir = "";
 
     return false
   });
@@ -400,6 +414,9 @@ $(function() {
               $("#dir-start").val().toLowerCase() == lower_option || $("#dir-start").val().toLowerCase() == lower_shortcut) {
             if (text == lower_option || text == lower_shortcut) {
               valid = true;
+              current_to_dir = shortcut;
+            } else {
+              current_from_dir = shortcut;
             }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
@@ -415,6 +432,13 @@ $(function() {
         $("#dir-end").addClass('valid');
       }
     } 
+
+    if (current_from_dir.length != 0 && current_to_dir.length != 0) {
+      canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
+    }
+
+    current_from_dir = "";
+    current_to_dir = "";
 
     return false
   });
@@ -516,11 +540,8 @@ $(function() {
     end_dir = $('#dir-end').val();
     shot_outcome = $('#shot-outcome').val();
 
-    //console.log(player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length);
     if (player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length == 0){
-      console.log('hit');
       $(".input").each(function(){
-        console.log($(this));
         $(this).animate({backgroundColor: "#FFC0CB"},200);
         $(this).animate({backgroundColor: "#FFFFFF" },500);
       });
@@ -561,8 +582,7 @@ $(function() {
         'shot-outcome' : shot_outcome,
            'timestamp' : timestamp
       };
-      console.log("Pushing new statistic: " +statistic);
-      console.log("Player#: " +  statistic['player-num']);
+
       statistics.push(statistic);
 
 
@@ -760,6 +780,8 @@ $(function() {
 //***********************************************************************************
 
   function resetIcons() {
+    current_from_dir = "";
+    current_to_dir = "";
     $("#player-num-feedback").val("");
     $("#shot-type-box").removeClass("block");
     for (var option in shot_type_options) {
@@ -824,6 +846,11 @@ $(function() {
           var lower_shortcut = shortcut.toLowerCase();
           if (lower_selection == lower_shortcut || $("#dir-end").val().toLowerCase() == lower_shortcut || 
               lower_selection == lower_option || $("#dir-end").val().toLowerCase() == lower_option) {
+            if (lower_selection == lower_shortcut || lower_selection == lower_option) {
+              current_from_dir = shortcut;
+            } else {
+              current_to_dir = shortcut;
+            }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
           } else {
@@ -835,6 +862,13 @@ $(function() {
       
       $("#dir-start").blur();
       $("#dir-end").focus();
+
+      if (current_from_dir.length != 0 && current_to_dir.length != 0) {
+        canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
+      }
+
+      current_from_dir = "";
+      current_to_dir = "";
   });
 
   $(".dir-end-option").click(function(event) {
@@ -851,6 +885,11 @@ $(function() {
           var lower_shortcut = shortcut.toLowerCase();
           if (lower_selection == lower_shortcut || $("#dir-start").val().toLowerCase() == lower_shortcut || 
               lower_selection == lower_option || $("#dir-start").val().toLowerCase() == lower_option) {
+            if (lower_selection == lower_shortcut || lower_selection == lower_option) {
+              current_to_dir = shortcut;
+            } else {
+              current_from_dir = shortcut;
+            }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
           } else {
@@ -862,6 +901,13 @@ $(function() {
 
       $("#dir-end").blur();
       $("#shot-outcome").focus();
+
+      if (current_from_dir.length != 0 && current_to_dir.length != 0) {
+        canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
+      }
+
+      current_from_dir = "";
+      current_to_dir = "";
   });
 
   $(".shot-outcome-option").click(function(event) {
@@ -901,12 +947,6 @@ $(function() {
 
     for (var statisticIndex in statistics) {
       var statistic = statistics[statisticIndex];
-      console.log("Statistic timestamp: " + statistic['timestamp']);
-      console.log("Statistic player #: " + statistic['player-num']);
-      console.log("Statistic shot type: " + statistic['shot-type']);
-      console.log("Statistic start: " + statistic['dir-start']);
-      console.log("Statistic end: " + statistic['dir-end']);
-      console.log("Statistic outcome: " + statistic['timestamp']);
 
       var row = document.createElement('tr');
 
