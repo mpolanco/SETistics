@@ -676,8 +676,8 @@ $(function() {
   $(".player-num-option").click(function(event) {
       $("#player-num").val(event.currentTarget.children[0].innerHTML);
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
+      $("#player-num").blur();
       $("#shot-type").focus();
-      //$("#player-num").css('background-color', 'white');
   });
 
   $(".shot-type-option").click(function(event) {
@@ -696,24 +696,25 @@ $(function() {
           }
         }
       }
+      $("#shot-type").blur();
       $("#dir-start").focus();
-      //$("#shot-type").css('background-color', 'white');
+      
   });
 
   $(".dir-start-option").click(function(event) {
       $("#dir-start").val(event.currentTarget.children[0].innerHTML);
       $("#dir-box").removeClass("court");
       $("#dir-box").addClass("shot-start");
+      $("#dir-start").blur();
       $("#dir-end").focus();
-      //$("#dir-start").css('background-color', 'white');
   });
 
   $(".dir-end-option").click(function(event) {
       $("#dir-end").val(event.currentTarget.children[0].innerHTML);
       $("#dir-box").removeClass("shot-start");
       $("#dir-box").addClass("shot-end");
+      $("#dir-end").blur()
       $("#shot-outcome").focus();
-      //$("#dir-end").css('background-color', 'white');
   });
 
   $(".shot-outcome-option").click(function(event) {
@@ -732,8 +733,8 @@ $(function() {
           }
         }
       }
+      $("#shot-outcome").blur();
       $("#submit-button").focus();
-      //$("#shot-outcome").css('background-color', 'white');
   });
 
   $("#player-num").focus();
