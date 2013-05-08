@@ -186,6 +186,7 @@ $(function() {
 
   $("#player-num").blur(function() {
     $(this).removeClass('invalid');
+    $("#player-num-feedback").removeClass('invalid');
     $(this).removeClass('valid');
     var text = $("#player-num").val().toLowerCase().trim();
     var valid = (text.length == 0);
@@ -208,6 +209,7 @@ $(function() {
     }
     if (!valid) {
       $("#player-num").addClass('invalid');
+      $("#player-num-feedback").addClass('invalid');
     } else {
       if (text.length) {$("#player-num").addClass('valid');}
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
@@ -234,6 +236,7 @@ $(function() {
       }
     }
     $(this).removeClass('invalid');
+    $("#shot-type-box").removeClass('invalid');
     $(this).removeClass('valid');
     if (text.length != 0) {
       var lower_text = text.toLowerCase();
@@ -249,6 +252,7 @@ $(function() {
       }
       if (!valid) {
         $("#shot-type").addClass('invalid');
+        $("#shot-type-box").addClass('invalid');
       } 
       else{
         if (text.length) {$("#shot-type").addClass('valid');}
@@ -352,6 +356,7 @@ $(function() {
       }
     }
     $(this).removeClass('invalid');
+    $("#shot-outcome-box").removeClass('invalid');
     $(this).removeClass('valid');
     var text = $("#shot-outcome").val().toLowerCase().trim();
     if (text.length != 0) {
@@ -367,6 +372,7 @@ $(function() {
       }
       if (!valid) {
         $("#shot-outcome").addClass('invalid');
+        $("#shot-outcome-box").addClass('invalid');
       } else {
         if (text.length) {$("#shot-outcome").addClass('valid');}
       }
