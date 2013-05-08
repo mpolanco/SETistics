@@ -23,10 +23,23 @@
     <script type="text/javascript" src="SETistics.js"></script>
 </head>
 <body>
+	<div class="hidden" id="recorded-statistics">
+		<div class="cs-title title">Recorded Statistics</div>
+		<table id="statTable">
+			<tr id="statHeader">
+				<td>TimeStamp</td>
+				<td>Player Number</td>
+				<td>Shot Type</td>
+				<td>Start Direction</td>
+				<td>End Direction</td>
+				<td>Outcome</td>
+			</tr>
+		</table>
+	</div>
 	<div class="container-fluid" id="main-container">
 		<div class="row-fluid">
 			<div class="span12" id="title-bar">
-				<div id="title">SETistics</div>
+				<div class="title">SETistics</div>
 			</div>
 		</div>
 		<div class="row-fluid" id="content-row">
@@ -121,7 +134,9 @@
 				</div>
 			</div>
 			<div class="gradient-texture span3" id="command-stack">
-				<div id="cs-title"><a href="recordedStatistics.html" style="text-decoration: none">Recorded Statistics</a></div>
+				<div class="cs-title">
+					<button id="recorded-link">Recorded Statistics</button>
+				</div>
 				<div id="prev-commands"> 
 					<div id="command-marker"> </div>
 				</div>

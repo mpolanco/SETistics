@@ -420,7 +420,7 @@ $(function() {
     end_dir = $('#dir-end').val();
     shot_outcome = $('#shot-outcome').val();
 
-    console.log(player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length);
+    //console.log(player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length);
     if (player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length == 0){
       console.log('hit');
       $(".input").each(function(){
@@ -465,6 +465,8 @@ $(function() {
         'shot-outcome' : shot_outcome,
            'timestamp' : timestamp
       };
+      console.log("Pushing new statistic: " +statistic);
+      console.log("Player#: " +  statistic['player-num']);
       statistics.push(statistic);
 
 
@@ -734,6 +736,66 @@ $(function() {
       }
       $("#submit-button").focus();
       //$("#shot-outcome").css('background-color', 'white');
+  });
+
+
+  /*
+  var statistic = {
+          'player-num' : player_num,
+           'shot-type' : shot_type,
+           'dir-start' : start_dir,
+             'dir-end' : end_dir,
+        'shot-outcome' : shot_outcome,
+           'timestamp' : timestamp
+      };
+  */
+  $("#recorded-link").click(function(event) {
+    $("#main-container").addClass("hidden");
+    $("#recorded-statistics").removeClass("hidden");
+
+    for (var statisticIndex in statistics) {
+      var statistic = statistics[statisticIndex];
+      console.log("Statistic timestamp: " + statistic['timestamp']);
+      console.log("Statistic player #: " + statistic['player-num']);
+      console.log("Statistic shot type: " + statistic['shot-type']);
+      console.log("Statistic start: " + statistic['dir-start']);
+      console.log("Statistic end: " + statistic['dir-end']);
+      console.log("Statistic outcome: " + statistic['timestamp']);
+
+      var row = document.createElement('tr');
+
+      var timestamp = statistic['timestamp'];
+      var timestamp_cell = document.createElement('td');
+      $(timestamp_cell).html(timestamp);
+
+      var player_num = statistic['player-num'];
+      var player_num_cell = document.createElement('td');
+      $(player_num_cell).html(player_num);
+
+      var shot_type = statistic['shot-type'];
+      var shot_type_cell = document.createElement('td');
+      $(shot_type_cell).html(shot_type);
+
+      var start_dir = statistic['dir-start'];
+      var start_dir_cell = document.createElement('td');
+      $(start_dir_cell).html(start_dir);
+
+      var end_dir = statistic['dir-end'];
+      var end_dir_cell = document.createElement('td');
+      $(end_dir_cell).html(end_dir);
+
+      var shot_outcome = statistic['shot-outcome'];
+      var shot_outcome_cell = document.createElement('td');
+      $(shot_outcome_cell).html(shot_outcome);
+
+      $(row).append(timestamp_cell);
+      $(row).append(player_num_cell);
+      $(row).append(shot_type_cell);
+      $(row).append(start_dir_cell);
+      $(row).append(end_dir_cell);
+      $(row).append(shot_outcome_cell);
+      $("#statTable").append(row);
+    }
   });
 
   $("#player-num").focus();
