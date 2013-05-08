@@ -12,6 +12,10 @@ body {
 	height: 100%;
 }
 
+.row-fluid {
+	outline: none;
+}
+
 #content-row {
 	height: 100%;
 	margin: 0;
@@ -25,6 +29,7 @@ body {
 }
 
 #main-container {
+	width: 100%;
 	padding:0px;
 	min-width: 90em;
 	min-height: 37em;
@@ -320,6 +325,22 @@ tr.comRow {
 
 .block {
 	background-image: url(icons/block.png);
+}
+
+.dig {
+	background-image: url(icons/dig.png);
+}
+
+.serve {
+	background-image: url(icons/serve.png);
+}
+
+.spike {
+	background-image: url(icons/spike.png);
+}
+
+.set {
+	background-image: url(icons/set.png);
 }
 
 .kill {

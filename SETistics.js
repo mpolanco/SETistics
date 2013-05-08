@@ -23,7 +23,8 @@ $(function() {
   var shot_type_options = {
     "Block" : "bl",
     "Dig" : "dg",
-    "Serve" : "sr",
+    "Serve" : "sv",
+    "Set" : "st",
     "Spike" : "sp"
   };
   var dir_options = {
@@ -217,27 +218,29 @@ $(function() {
   });
 
   $("#shot-type").blur(function() {
+    var text = $("#shot-type").val();
+    for (var option in shot_type_options) {
+      if (shot_type_options.hasOwnProperty(option)) {
+        $("#shot-type-box").removeClass(option.toLowerCase());
+      }
+    }
     $(this).removeClass('invalid');
-    var text = $("#shot-type").val().toLowerCase();
     if (text.length != 0) {
-      $("#shot-type-box").addClass("block");
+      var lower_text = text.toLowerCase();
       var valid = false;
       for (var option in shot_type_options) {
         var lower_option = option.toLowerCase();
         var lower_shortcut = shot_type_options[option].toLowerCase();
-        if (shot_type_options.hasOwnProperty(option) && (text == lower_option || text == lower_shortcut)) {
+        if (shot_type_options.hasOwnProperty(option) && (lower_text == lower_option || lower_text == lower_shortcut)) {
+          $("#shot-type-box").addClass(lower_option);
           valid = true;
           break;
         }
       }
       if (!valid) {
         $("#shot-type").addClass('invalid');
-      } else {
-        //$("#shot-type").css('background-color', 'white');
-      }
-    } else {
-      $("#shot-type-box").removeClass("block");
-    } 
+      } 
+    }
 
     return false
   });
@@ -627,8 +630,21 @@ $(function() {
   });
 
   $(".shot-type-option").click(function(event) {
-      $("#shot-type").val(event.currentTarget.children[0].innerHTML);
-      $("#shot-type-box").addClass("block");
+      var selection = event.currentTarget.children[0].innerHTML;
+      $("#shot-type").val(selection);
+      for (var option in shot_type_options) {
+        if (shot_type_options.hasOwnProperty(option)) {
+          $("#shot-type-box").removeClass(option.toLowerCase());
+        }
+      }
+      for (var option in shot_type_options) {
+        if (shot_type_options.hasOwnProperty(option)){
+          if (selection == option || selection == shot_type_options[option]) {
+            $("#shot-type-box").addClass(option.toLowerCase());
+            break;
+          }
+        }
+      }
       $("#dir-start").focus();
       //$("#shot-type").css('background-color', 'white');
   });
