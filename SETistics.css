@@ -12,6 +12,10 @@ body {
 	height: 100%;
 }
 
+.row-fluid {
+	outline: none;
+}
+
 #content-row {
 	height: 100%;
 	margin: 0;
