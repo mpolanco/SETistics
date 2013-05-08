@@ -263,6 +263,18 @@ tr.comRow {
 	background-image: url(icons/block.png);
 }
 
+.dig {
+	background-image: url(icons/dig.png);
+}
+
+.serve {
+	background-image: url(icons/serve.png);
+}
+
+.spike {
+	background-image: url(icons/spike.png);
+}
+
 .kill {
 	background-image: url(icons/killshot.png);
 }
