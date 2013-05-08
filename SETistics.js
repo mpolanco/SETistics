@@ -125,12 +125,13 @@ $(function() {
   var command_stack = Array();
 
   $("*").attr("tabindex", -1);
-  $("#player-num").attr("tabindex", 1);
-  $("#shot-type").attr("tabindex", 2);
-  $("#dir-start").attr("tabindex", 3);
-  $("#dir-end").attr("tabindex", 4);
-  $("#shot-outcome").attr("tabindex", 5);
-  $("#submit-button").attr("tabindex", 6);
+  $("#hidden").attr("tabindex", 1);
+  $("#player-num").attr("tabindex", 2);
+  $("#shot-type").attr("tabindex", 3);
+  $("#dir-start").attr("tabindex", 4);
+  $("#dir-end").attr("tabindex", 5);
+  $("#shot-outcome").attr("tabindex", 6);
+  $("#submit-button").attr("tabindex", 7);
 
   $("#player-num-feedback").focus(function(event) {
     $("#player-num-feedback").blur();
@@ -373,6 +374,12 @@ $(function() {
     } 
 
     return false
+  });
+
+  $("#submit-button").keydown(function() {
+    if (event.which == 9) {
+      $("#hidden").focus();
+    }
   });
 
 //***********************************************************************************
