@@ -642,8 +642,6 @@ $(function() {
 
 
     $(fieldIndicator).addClass('sb-fi');
-
-    $(translation).html(translateCommand(command));
     
     $(command_num).html(sb_ele_title);
     $(command_num).addClass('comLabel');
