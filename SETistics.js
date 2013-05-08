@@ -137,6 +137,30 @@ $(function() {
     $("#player-num-feedback").blur();
   });
 
+  var canvas = document.getElementById("court");
+  var ctx = canvas.getContext('2d');
+  ctx.fillStyle = "#91003A";
+  ctx.fillRect(0, 0, 305, 100);
+  ctx.fillStyle = "rgb(150,150,150)";
+  ctx.fillRect(5, 5, 295, 90);
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fillRect(152, 5, 1, 90);
+  ctx.fillRect(92, 5, 1, 90);
+  ctx.fillRect(212, 5, 1, 90);
+  ctx.font = '0.3em Helvetica';
+  ctx.fillText("5", 45, 27);
+  ctx.fillText("6", 45, 57);
+  ctx.fillText("1", 45, 87);
+  ctx.fillText("4", 117, 27);
+  ctx.fillText("3", 117, 57);
+  ctx.fillText("2", 117, 87);
+  ctx.fillText("2", 177, 27);
+  ctx.fillText("3", 177, 57);
+  ctx.fillText("4", 177, 87);
+  ctx.fillText("1", 250, 27);
+  ctx.fillText("6", 250, 57);
+  ctx.fillText("5", 250, 87);
+
 //***********************************************************************************
 //***************************   Key Bindings    *************************************
 //***********************************************************************************
@@ -272,8 +296,6 @@ $(function() {
     $(this).removeClass('valid');
     var text = $("#dir-start").val().toLowerCase().trim();
     if (text.length != 0) {
-      $("#dir-box").removeClass("court");
-      $("#dir-box").addClass("shot-start");
       var valid = false;
       for (var option in dir_options) {
         var lower_option = option.toLowerCase();
@@ -288,10 +310,7 @@ $(function() {
       } else {
         $("#dir-start").addClass('valid');
       }
-    } else {
-      if (text.length) {$("#dir-box").addClass("court");}
-      $("#dir-box").removeClass("shot-start");
-    }
+    } 
 
     return false
   });
@@ -311,8 +330,6 @@ $(function() {
     $(this).removeClass('valid');
     var text = $("#dir-end").val().toLowerCase().trim();
     if (text.length != 0) {
-      $("#dir-box").removeClass("shot-start");
-      $("#dir-box").addClass("shot-end");
       var valid = false;
       for (var option in dir_options) {
         var lower_option = option.toLowerCase();
@@ -327,10 +344,7 @@ $(function() {
       } else {
         $("#dir-end").addClass('valid');
       }
-    } else {
-      if (text.length) {$("#dir-box").addClass("shot-start");}
-      $("#dir-box").removeClass("shot-end");
-    }
+    } 
 
     return false
   });
@@ -676,9 +690,6 @@ $(function() {
         $("#shot-outcome-box").removeClass(option.toLowerCase());
       }
     }
-    $("#dir-box").removeClass("shot-start");
-    $("#dir-box").removeClass("shot-end");
-    $("#dir-box").addClass("court");
   }
 
   function translateCommand(command){
@@ -714,16 +725,12 @@ $(function() {
 
   $(".dir-start-option").click(function(event) {
       $("#dir-start").val(event.currentTarget.children[0].innerHTML);
-      $("#dir-box").removeClass("court");
-      $("#dir-box").addClass("shot-start");
       $("#dir-end").focus();
       //$("#dir-start").css('background-color', 'white');
   });
 
   $(".dir-end-option").click(function(event) {
       $("#dir-end").val(event.currentTarget.children[0].innerHTML);
-      $("#dir-box").removeClass("shot-start");
-      $("#dir-box").addClass("shot-end");
       $("#shot-outcome").focus();
       //$("#dir-end").css('background-color', 'white');
   });

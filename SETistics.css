@@ -310,16 +310,8 @@ tr.comRow {
 	width: 500%;
 }
 
-.court {
-	background-image: url(icons/numberedcourt.png);
-}
-
-.shot-start {
-	background-image: url(icons/shot-start.png);
-}
-
-.shot-end {
-	background-image:  url(icons/shot-end.png);
+#court {
+	font-size: 5em;
 }
 
 .block {
