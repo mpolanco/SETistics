@@ -2,7 +2,7 @@
 // has finished loading in the browser.
 $(function() {
 
-  var statistics = Array();
+  var statistics = {};
 
   var global_current_edit = -1;
 
@@ -512,18 +512,6 @@ $(function() {
     }
     else{
       var timestamp = Date.now();
-      var statistic = {
-          'player-num' : player_num,
-           'shot-type' : shot_type,
-           'dir-start' : start_dir,
-             'dir-end' : end_dir,
-        'shot-outcome' : shot_outcome,
-           'timestamp' : timestamp
-      };
-      console.log("Pushing new statistic: " +statistic);
-      console.log("Player#: " +  statistic['player-num']);
-      statistics.push(statistic);
-
 
       var vals = Array();
       vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
@@ -534,6 +522,17 @@ $(function() {
       vals.push(Array('TimeStamp', timestamp));
       addToCallStack(vals);
 
+      var statistic = {
+          'player-num' : player_num,
+           'shot-type' : shot_type,
+           'dir-start' : start_dir,
+             'dir-end' : end_dir,
+        'shot-outcome' : shot_outcome,
+           'timestamp' : timestamp
+      };
+      console.log("Pushing new statistic: " +statistic);
+      console.log("Player#: " +  statistic['player-num']);
+      statistics[num_commands] = statistic;
     }
 
     $('input').each(function(){
@@ -636,7 +635,9 @@ $(function() {
     $(delete_button).html('<img src="icons/X.png">');
     $(delete_button).click(function(){
       $(outer_wrapper).slideUp("fast", function() { $(this).remove(); } );
+      console.log('WN: '+wrapper_num);
       command_stack.splice(wrapper_num,1);
+      delete statistics[wrapper_num];
     });
     $(delete_button).addClass('edit-button');
 
