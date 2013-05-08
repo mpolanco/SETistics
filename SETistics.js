@@ -344,13 +344,24 @@ $(function() {
     $(this).removeClass('valid');
     var text = $("#dir-start").val().toLowerCase().trim();
     if (text.length != 0) {
+      redraw_court(ctx);
       var valid = false;
       for (var option in dir_options) {
         var lower_option = option.toLowerCase();
-        var lower_shortcut = dir_options[option].toLowerCase();
-        if (dir_options.hasOwnProperty(option) && (text == lower_option || text == lower_shortcut)) {
-          valid = true;
-          break;
+        var shortcut = dir_options[option];
+        var lower_shortcut = shortcut.toLowerCase();
+        if (dir_options.hasOwnProperty(option)) {
+          if (text == lower_option || text == lower_shortcut ||
+              $("#dir-end").val().toLowerCase() == lower_option || $("#dir-end").val().toLowerCase() == lower_shortcut) {
+            if (text == lower_option || text == lower_shortcut) {
+              valid = true;
+            }
+            ctx.fillStyle = "#91003A";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          } else {
+            ctx.fillStyle = "rgb(255, 255, 255)";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          }
         }
       }
       if (!valid) {
@@ -378,13 +389,24 @@ $(function() {
     $(this).removeClass('valid');
     var text = $("#dir-end").val().toLowerCase().trim();
     if (text.length != 0) {
+      redraw_court(ctx);
       var valid = false;
       for (var option in dir_options) {
         var lower_option = option.toLowerCase();
-        var lower_shortcut = dir_options[option].toLowerCase();
-        if (dir_options.hasOwnProperty(option) && (text == lower_option || text == lower_shortcut)) {
-          valid = true;
-          break;
+        var shortcut = dir_options[option];
+        var lower_shortcut = shortcut.toLowerCase();
+        if (dir_options.hasOwnProperty(option)) {
+          if (text == lower_option || text == lower_shortcut ||
+              $("#dir-start").val().toLowerCase() == lower_option || $("#dir-start").val().toLowerCase() == lower_shortcut) {
+            if (text == lower_option || text == lower_shortcut) {
+              valid = true;
+            }
+            ctx.fillStyle = "#91003A";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          } else {
+            ctx.fillStyle = "rgb(255, 255, 255)";
+            ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
+          }
         }
       }
       if (!valid) {
