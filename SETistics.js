@@ -638,15 +638,15 @@ $(function() {
     $("#player-num-feedback").val("");
     $("#shot-type-box").removeClass("block");
     for (var option in shot_type_options) {
-        if (shot_type_options.hasOwnProperty(option)) {
-          $("#shot-type-box").removeClass(option.toLowerCase());
-        }
+      if (shot_type_options.hasOwnProperty(option)) {
+        $("#shot-type-box").removeClass(option.toLowerCase());
       }
-      for (var option in shot_outcome_options) {
-        if (shot_outcome_options.hasOwnProperty(option)) {
-          $("#shot-outcome-box").removeClass(option.toLowerCase());
-        }
+    }
+    for (var option in shot_outcome_options) {
+      if (shot_outcome_options.hasOwnProperty(option)) {
+        $("#shot-outcome-box").removeClass(option.toLowerCase());
       }
+    }
     $("#dir-box").removeClass("shot-start");
     $("#dir-box").removeClass("shot-end");
     $("#dir-box").addClass("court");

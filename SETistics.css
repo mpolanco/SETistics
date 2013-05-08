@@ -346,3 +346,7 @@ tr.comRow {
 .kill {
 	background-image: url(icons/killshot.png);
 }
+
+.error {
+	background-image: url(icons/error.png);
+}
