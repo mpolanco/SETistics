@@ -8,6 +8,34 @@ html {
 body {
 }
 
+#recorded-statistics {
+	outline: none;
+}
+
+#statHeader {
+	font-weight: bold;
+}
+
+#statTable {
+	outline: none;
+}
+
+
+#statTable tr{
+	outline: none;
+}
+
+#statTable tr td{
+	padding: 2em;
+	font-family: Helvetica;
+	text-align: center;
+	outline: none;
+}
+
+.hidden {
+	display: none;
+}
+
 .fill {
 	height: 100%;
 }
@@ -47,7 +75,7 @@ body {
 	outline: none;
 }
 
-#title {
+.title {
 	padding-top: .55em;
 	padding-left: 1em;
 	font-weight: bold;
@@ -89,6 +117,10 @@ body {
 	width: 90%;
 }
 
+#court {
+	outline: none;
+}
+
 .box {
 	height: 100px;
 	background-size: 100% 100%;
@@ -119,13 +151,23 @@ body {
 	outline: none;
 }
 
-#cs-title {
+.cs-title {
 	margin-top: 10px;
 	text-align: center;
+	outline: none;
+}
+
+#recorded-link {
 	font-weight: bold;
 	font-family: Helvetica;
 	font-size: 1.3em;
-	outline: none;
+	color: rgb(15,124,235);
+	background:none;
+	border:none;
+}
+
+#recorded-link:hover {
+	color: rgb(5,90,190);
 }
 
 .gradient-texture {
@@ -275,6 +317,8 @@ tr.comRow {
 .input {
 	width: 67%;
 }
+
+.ui-helper-hidden-accessible { display:none; }
 
 .drop-down {
 	width: 20%;
