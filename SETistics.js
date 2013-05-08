@@ -776,10 +776,14 @@ $(function() {
 
       redraw_court(ctx);
 
+      var lower_selection = selection.toLowerCase();
       for (var option in dir_options) {
         if (dir_options.hasOwnProperty(option)){
+          var lower_option = option.toLowerCase();
           var shortcut = dir_options[option];
-          if (selection == shortcut || $("#dir-end").val() == shortcut) {
+          var lower_shortcut = shortcut.toLowerCase();
+          if (lower_selection == lower_shortcut || $("#dir-end").val().toLowerCase() == lower_shortcut || 
+              lower_selection == lower_option || $("#dir-end").val().toLowerCase() == lower_option) {
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
           } else {
@@ -799,10 +803,14 @@ $(function() {
 
       redraw_court(ctx);
 
+      var lower_selection = selection.toLowerCase();
       for (var option in dir_options) {
         if (dir_options.hasOwnProperty(option)){
+          var lower_option = option.toLowerCase();
           var shortcut = dir_options[option];
-          if (selection == shortcut || $("#dir-start").val() == shortcut) {
+          var lower_shortcut = shortcut.toLowerCase();
+          if (lower_selection == lower_shortcut || $("#dir-start").val().toLowerCase() == lower_shortcut || 
+              lower_selection == lower_option || $("#dir-start").val().toLowerCase() == lower_option) {
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
           } else {
