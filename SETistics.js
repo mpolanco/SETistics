@@ -166,6 +166,11 @@ $(function() {
     $(this).bind('keyup', 'F5', function(){$('#shot-outcome').focus();});
   });
 
+  $("input[type=text]").click(function() {
+    // Select field contents
+    this.select();
+  });
+
   $("#player-num").keyup(function(event) {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 32) {  
