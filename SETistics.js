@@ -446,6 +446,20 @@ $(function() {
     }
   });
 
+  $("#player-num").keydown(function(){
+    if(event.shiftKey && event.keyCode == 9) { 
+      //shift was down when tab was pressed
+      $("#hidden").focus();
+    }
+  });
+
+  $("#submit-button").keydown(function(){
+    if(event.shiftKey && event.keyCode == 9) { 
+      //shift was down when tab was pressed
+      $("#submit-button").focus();
+    }
+  });
+
 //***********************************************************************************
 //********************************* Autocompletes ***********************************
 //***********************************************************************************
@@ -546,10 +560,10 @@ $(function() {
       $(this).removeClass('valid');
       $(this).val('');
     });
-    $('.box').each(function(){
-      $(this).removeClass('invalid');
-      $(this).removeClass('valid');
-    });
+
+    $('#player-num-feedback').removeClass('invalid');
+    $('#shot-type-box').removeClass('invalid');
+    $('#shot-outcome-box').removeClass('invalid');
 
     $("#player-num").focus();
 
