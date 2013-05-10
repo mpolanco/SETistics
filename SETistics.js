@@ -202,6 +202,8 @@ $(function() {
       context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
       context.moveTo(tox, toy);
       context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+      context.strokeStyle = "rgb(255,255,0)";
+      context.lineWidth=3;
       context.stroke();
   }
 
