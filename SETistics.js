@@ -548,6 +548,7 @@ $(function() {
     shot_outcome = $('#shot-outcome').val();
 
     if (player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length == 0){
+      $("#player-num").focus();
       $(".input").each(function(){
         $(this).animate({backgroundColor: "#FFC0CB"},200);
         $(this).animate({backgroundColor: "#FFFFFF" },500);
