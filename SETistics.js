@@ -26,11 +26,11 @@ $(function() {
       "AwayPlayer10" : "a10"
   };
   var shot_type_options = {
-    "Block" : "bl",
-    "Dig" : "dg",
-    "Serve" : "sv",
-    "Set" : "st",
-    "Spike" : "sp"
+    "Block" : "b",
+    "Dig" : "d",
+    "Serve" : "v",
+    "Set" : "s",
+    "Spike" : "x"
   };
   var dir_options = {
     "HomePosition1" : "h1",
@@ -47,9 +47,9 @@ $(function() {
     "AwayPosition6" : "a6"
   };
   var shot_outcome_options = {
-    "Dug" : "dg",
-    "Kill" : "kl",
-    "Error" : "er"
+    "Dug" : "d",
+    "Kill" : "k",
+    "Error" : "e"
   };
   var alternative_player_nums = {
     "h0" : "h00",
