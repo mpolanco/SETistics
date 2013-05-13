@@ -12,18 +12,18 @@ $(function() {
   var youtube_api_player;
 
   var player_num_options = {
-      "HomePlayer1" : "h1",
-      "HomePlayer2" : "h2",
-      "HomePlayer3" : "h3",
-      "HomePlayer4" : "h4",
-      "HomePlayer5" : "h5",
-      "HomePlayer6" : "h6",
-      "AwayPlayer5" : "a5",
-      "AwayPlayer6" : "a6",
-      "AwayPlayer7" : "a7",
-      "AwayPlayer8" : "a8",
-      "AwayPlayer9" : "a9",
-      "AwayPlayer10" : "a10"
+      "Polanco" : "h2",
+      "Wagner" : "h3",
+      "Cattori" : "h5",
+      "Crespo" : "h7",
+      "Dayton" : "h11",
+      "Monheit" : "h13",
+      "Rea" : "a1",
+      "Helbert" : "a2",
+      "Batscha" : "a3",
+      "Schlaepfer" : "a5",
+      "Lowe" : "a8",
+      "Ondina" : "a13"
   };
   var shot_type_options = {
     "Block" : "b",
@@ -284,9 +284,14 @@ $(function() {
     if (!valid) {
       $("#player-num").addClass('invalid');
       $("#player-num-feedback").addClass('invalid');
+      $("#player-num-feedback").val("");
     } else {
       if (text.length) {$("#player-num").addClass('valid');}
-      $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
+      if (text.length == 0) {
+        $("#player-num-feedback").val("");
+      } else {
+        $("#player-num-feedback").val(lower_shortcut.replace(/\D/g,''));
+      }
     }
 
     return false
