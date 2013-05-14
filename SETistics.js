@@ -12,25 +12,25 @@ $(function() {
   var youtube_api_player;
 
   var player_num_options = {
-      "HomePlayer1" : "h1",
-      "HomePlayer2" : "h2",
-      "HomePlayer3" : "h3",
-      "HomePlayer4" : "h4",
-      "HomePlayer5" : "h5",
-      "HomePlayer6" : "h6",
-      "AwayPlayer5" : "a5",
-      "AwayPlayer6" : "a6",
-      "AwayPlayer7" : "a7",
-      "AwayPlayer8" : "a8",
-      "AwayPlayer9" : "a9",
-      "AwayPlayer10" : "a10"
+      "Polanco" : "h2",
+      "Wagner" : "h3",
+      "Cattori" : "h5",
+      "Crespo" : "h7",
+      "Dayton" : "h11",
+      "Monheit" : "h13",
+      "Rea" : "a1",
+      "Helbert" : "a2",
+      "Batscha" : "a3",
+      "Schlaepfer" : "a5",
+      "Lowe" : "a8",
+      "Ondina" : "a13"
   };
   var shot_type_options = {
-    "Block" : "bl",
-    "Dig" : "dg",
-    "Serve" : "sv",
-    "Set" : "st",
-    "Spike" : "sp"
+    "Block" : "b",
+    "Dig" : "d",
+    "Serve" : "v",
+    "Set" : "s",
+    "Spike" : "x"
   };
   var dir_options = {
     "HomePosition1" : "h1",
@@ -47,9 +47,9 @@ $(function() {
     "AwayPosition6" : "a6"
   };
   var shot_outcome_options = {
-    "Dug" : "dg",
-    "Kill" : "kl",
-    "Error" : "er"
+    "Dug" : "d",
+    "Kill" : "k",
+    "Error" : "e"
   };
   var alternative_player_nums = {
     "h0" : "h00",
@@ -234,6 +234,8 @@ $(function() {
       context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
       context.moveTo(tox, toy);
       context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+      context.strokeStyle = "rgb(255,255,0)";
+      context.lineWidth=3;
       context.stroke();
   }
 
@@ -320,9 +322,14 @@ $(function() {
     if (!valid) {
       $("#player-num").addClass('invalid');
       $("#player-num-feedback").addClass('invalid');
+      $("#player-num-feedback").val("");
     } else {
       if (text.length) {$("#player-num").addClass('valid');}
-      $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
+      if (text.length == 0) {
+        $("#player-num-feedback").val("");
+      } else {
+        $("#player-num-feedback").val(lower_shortcut.replace(/\D/g,''));
+      }
     }
 
     return false
@@ -582,6 +589,7 @@ $(function() {
     shot_outcome = $('#shot-outcome').val();
 
     if (player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length == 0){
+      $("#player-num").focus();
       $(".input").each(function(){
         $(this).animate({backgroundColor: "#FFC0CB"},200);
         $(this).animate({backgroundColor: "#FFFFFF" },500);
