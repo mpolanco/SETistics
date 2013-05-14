@@ -122,6 +122,38 @@ $(function() {
     "a5" : 87,
   };
 
+  function translation(command){
+    //player-num translations
+    if(command[0][1] in player_num_options){
+      command[0][1] = player_num_options[command[0][1]];
+    }
+    else if (command[0][1] in alternative_player_nums) {
+      command[0][1] = alternative_player_nums[command[0][1]];
+    }
+
+    //shot type options
+    if (command[1][1] in shot_type_options){
+      command[1][1] = shot_type_options[command[1][1]];
+    }
+
+    //dir options
+    if (command[2][1] in dir_options){
+      command[2][1] = dir_options[command[2][1]];
+    }
+
+    if (command[3][1] in dir_options){
+      command[3][1] = dir_options[command[3][1]];
+    }
+
+    //shot outcome options
+    if (command[4][1] in shot_type_options){
+      command[4][1] = shot_outcome_options[command[4][1]];
+    }    
+
+    return command;
+
+  }
+
   for (var option in player_num_options) {
     if (player_num_options.hasOwnProperty(option)) {
       $('<li><a class="player-num-option">' + option + '<span class="shortcut">' + player_num_options[option] + '</span></a></li>').appendTo("#player-num-options");
@@ -235,6 +267,12 @@ $(function() {
     $(this).bind('keyup', 'F3', function(){$('#dir-start').focus();});
     $(this).bind('keyup', 'F4', function(){$('#dir-end').focus();});
     $(this).bind('keyup', 'F5', function(){$('#shot-outcome').focus();});
+    $(this).keydown(function(){
+      console.log($("#youtube-player"));
+      var div = document.getElementById("youtube-player");
+      var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+      iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}','*');
+    });
   });
 
 //***********************************************************************************
@@ -534,6 +572,9 @@ $(function() {
   });
 
   $("#submit-button").click(function(){
+    var div = document.getElementById("youtube-player");
+    var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+    iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}','*');
     player_num = $('#player-num').val();
     shot_type = $('#shot-type').val();
     start_dir = $('#dir-start').val();
@@ -625,6 +666,34 @@ $(function() {
   }
 
   function createCommandCell(command){
+
+    //player-num translations
+    if(command[0][1] in player_num_options){
+      command[0][1] = player_num_options[command[0][1]];
+    }
+    else if (command[0][1] in alternative_player_nums) {
+      command[0][1] = alternative_player_nums[command[0][1]];
+    }
+
+    //shot type options
+    if (command[1][1] in shot_type_options){
+      command[1][1] = shot_type_options[command[1][1]];
+    }
+
+    //dir options
+    if (command[2][1] in dir_options){
+      command[2][1] = dir_options[command[2][1]];
+    }
+
+    if (command[3][1] in dir_options){
+      command[3][1] = dir_options[command[3][1]];
+    }
+
+    //shot outcome options
+    if (command[4][1] in shot_type_options){
+      command[4][1] = shot_outcome_options[command[4][1]];
+    }   
+    
     var outer_wrapper = document.createElement('div');
     var wrapper = document.createElement('div');
     var table = document.createElement('table');
@@ -667,7 +736,11 @@ $(function() {
 
     for (var i = 0; i < command.length-1; i++) {
       var command_field = document.createElement('div');
-      $(command_field).html(command[i][1]);
+      var com_str = command[i][1];
+      if (com_str.length >=3){
+        com_str = com_str.substring(0,3) + "...";
+      }
+      $(command_field).html(com_str);
       $(command_field).attr('id', command[i][0]+wrapper_num);
       $(command_field).addClass('span2');
       if(command[i][2]){
