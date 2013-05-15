@@ -101,6 +101,7 @@ html,body {
 #youtube-player {
 	height: 65%;
 	background-color: black;
+	outline: none;
 }
 
 /*#ytapiplayer {
