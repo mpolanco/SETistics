@@ -14,6 +14,11 @@
     	var params = { allowScriptAccess: "always" };
     	var atts = { id: "ytapiplayer" };
 		swfobject.embedSWF("http://www.youtube.com/v/RisxlgbLT-I?enablejsapi=1&playerapiid=ytplayer&version=3", "youtube-player", "800", "400", "8", null, null, params, atts);
+
+		function onYouTubePlayerReady(playerId) {
+		  console.log("YOUTUBE PLAYER READY");
+		  youtube_api_player = document.getElementById("ytapiplayer");
+		}
 	</script>-->
     <script type="text/javascript" src="external_js/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
@@ -46,8 +51,12 @@
 			<div class="span9" id="left-content">
 				<div class="row-fluid">
 					<div class="span12" id="youtube-player">
-						<!--<p>No Javascript or Flash? Here is the alternative content.</p> -->
-						<iframe id="youtube-video" src="http://www.youtube.com/v/RisxlgbLT-I?enablejsapi=1&playerapiid=ytplayer&version=3" frameborder="0" allowfullscreen></iframe>
+						<!--<p>No Javascript or Flash? Here is the alternative content.</p> 
+						<embed id="playerid" allowfullscreen="true" allowscriptaccess="always" quality="high" bgcolor="#000000" name="playerid" style="" src="http://www.youtube.com/v/RisxlgbLT-I?enablejsapi=1&version=3$playerapiid=ytplayer" type="application/x-shockwave-flash">-->
+						<!--<iframe id="youtube-video" src="http://www.youtube.com/v/RisxlgbLT-I?enablejsapi=1&playerapiid=ytplayer&version=3" frameborder="0" allowfullscreen></iframe>-->
+						<video id="video" width="100%" height="70%" controls>
+  							<source src="data/Louisville Volleyball_ Aug. 29, 2012 vs. UK Match Point.mp4" type="video/mp4">
+  						</video>
 					</div>
 				</div>
 				<div class="row-fluid" id="input-row">

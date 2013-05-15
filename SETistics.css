@@ -91,12 +91,13 @@ body {
 
 #youtube-player {
 	height: 65%;
+	background-color: black;
 }
 
-#ytapiplayer {
+/*#ytapiplayer {
 	width: 100%;
 	height: 65%;
-}
+}*/
 
 #input-row {
 	height: 35%;

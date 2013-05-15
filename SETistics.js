@@ -11,6 +11,20 @@ $(function() {
 
   var youtube_api_player;
 
+  var video_state = false;
+
+  function toggleVideo(){
+    console.log(video_state);
+    var vid = document.getElementById("video");
+    if (video_state){
+      vid.pause();
+    }
+    else{
+      vid.play();
+    }
+    video_state = !video_state;
+  }
+
   var player_num_options = {
       "Polanco" : "h2",
       "Wagner" : "h3",
@@ -263,17 +277,42 @@ $(function() {
     $('#shot-outcome').focus();
   });
 
+  /*$(document).bind('keypress', 'F8', function(){
+    console.log("hit");
+    toggleVideo();
+  });*/
+  $(document).keyup(function(){
+    if (event.which == 119) {
+        //event.preventDefault();
+        toggleVideo();
+    }
+  });
+
   $('input').each(function(){
     $(this).bind('keyup', 'F1', function(){$('#player-num').focus();});
     $(this).bind('keyup', 'F2', function(){$('#shot-type').focus();});
     $(this).bind('keyup', 'F3', function(){$('#dir-start').focus();});
     $(this).bind('keyup', 'F4', function(){$('#dir-end').focus();});
     $(this).bind('keyup', 'F5', function(){$('#shot-outcome').focus();});
-    $(this).keydown(function(){
-      console.log($("#youtube-player"));
+    $(this).bind('keypress', 'F8', function(){toggleVideo();});
+    $(this).keydown(function(event){
+      /*var div = document.getElementById("ytapiplayer");
       var div = document.getElementById("youtube-player");
       var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
-      iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}','*');
+      iframe.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}','*');
+      div.pauseVideo();*/
+      if (event.which == 119) {
+        //event.preventDefault();
+        toggleVideo();
+      }
+      else if (event.which == 13){
+        
+      }
+      else{
+        var vid = document.getElementById("video");
+        vid.pause();
+        video_state = false;
+      }
     });
   });
 
@@ -579,9 +618,15 @@ $(function() {
   });
 
   $("#submit-button").click(function(){
-    var div = document.getElementById("youtube-player");
+    /*var div = document.getElementById("youtube-player");
     var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
     iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}','*');
+    var div = document.getElementById("ytapiplayer");
+    div.playVideo();*/
+    var vid = document.getElementById("video");
+    vid.play();
+    video_state = true;
+
     player_num = $('#player-num').val();
     shot_type = $('#shot-type').val();
     start_dir = $('#dir-start').val();
@@ -745,7 +790,7 @@ $(function() {
     for (var i = 0; i < command.length-1; i++) {
       var command_field = document.createElement('div');
       var com_str = command[i][1];
-      if (com_str.length >=3){
+      if (com_str.length >3){
         com_str = com_str.substring(0,3) + "...";
       }
       $(command_field).html(com_str);
