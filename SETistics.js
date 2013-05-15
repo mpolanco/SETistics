@@ -131,6 +131,7 @@ $(function() {
     "a5" : 87,
   };
 
+  var disabled = true;
   document.getElementById('dir-start').disabled = "disabled";
   document.getElementById('dir-end').disabled = "disabled";
   $('#dir-start-button').css('pointer-events', 'none');
@@ -378,11 +379,13 @@ $(function() {
     }
 
     if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+      disabled = false;
       document.getElementById('dir-start').disabled = "";
       document.getElementById('dir-end').disabled = "";
       $('#dir-start-button').css('pointer-events', '');
       $('#dir-end-button').css('pointer-events', '');
     } else {
+      disabled = true;
       $("#dir-start").val("");
       $("#dir-end").val("");
       document.getElementById('dir-start').disabled = "disabled";
@@ -438,11 +441,13 @@ $(function() {
     }
 
     if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+      disabled = false;
       document.getElementById('dir-start').disabled = "";
       document.getElementById('dir-end').disabled = "";
       $('#dir-start-button').css('pointer-events', '');
       $('#dir-end-button').css('pointer-events', '');
     } else {
+      disabled = true;
       $("#dir-start").val("");
       $("#dir-end").val("");
       document.getElementById('dir-start').disabled = "disabled";
@@ -458,7 +463,11 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 32) {  
       $("#dir-start").val($("#dir-start").val().split(" ").join(""));
-      $("#dir-end").focus();
+      if (disabled) {
+        $("#submit-button").focus();
+      } else {
+        $("#dir-end").focus();
+      }
     }
     return false;
   });
@@ -589,7 +598,11 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 32) {  
       $("#shot-outcome").val($("#shot-outcome").val().split(" ").join(""));
-      $("#dir-start").focus();
+      if (disabled) {
+        $("#submit-button").focus();
+      } else {
+        $("#dir-start").focus();
+      }
     }
 
     return false;
@@ -681,6 +694,7 @@ $(function() {
     iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}','*');
     var div = document.getElementById("ytapiplayer");
     div.playVideo();*/
+    disabled = true;
     document.getElementById('dir-start').disabled = "disabled";
     document.getElementById('dir-end').disabled = "disabled";
     $('#dir-start-button').css('pointer-events', 'none');
@@ -1014,11 +1028,13 @@ $(function() {
       $("#shot-type").focus();
 
       if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+        disabled = false;
         document.getElementById('dir-start').disabled = "";
         document.getElementById('dir-end').disabled = "";
         $('#dir-start-button').css('pointer-events', '');
         $('#dir-end-button').css('pointer-events', '');
       } else {
+        disabled = true;
         $("#dir-start").val("");
         $("#dir-end").val("");
         document.getElementById('dir-start').disabled = "disabled";
@@ -1049,11 +1065,13 @@ $(function() {
       $("#shot-outcome").focus();
 
       if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+        disabled = false;
         document.getElementById('dir-start').disabled = "";
         document.getElementById('dir-end').disabled = "";
         $('#dir-start-button').css('pointer-events', '');
         $('#dir-end-button').css('pointer-events', '');
       } else {
+        disabled = true;
         $("#dir-start").val("");
         $("#dir-end").val("");
         document.getElementById('dir-start').disabled = "disabled";
@@ -1101,7 +1119,11 @@ $(function() {
       }
       
       $("#dir-start").blur();
-      $("#dir-end").focus();
+      if (disabled) {
+        $("#submit-button").focus();
+      } else {
+        $("#dir-end").focus();
+      }
 
       if (current_from_dir.length != 0 && current_to_dir.length != 0) {
         canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
@@ -1176,7 +1198,11 @@ $(function() {
         }
       }
       $("#shot-outcome").blur();
-      $("#dir-start").focus();
+      if (disabled) {
+        $("#submit-button").focus();
+      } else {
+        $("#dir-start").focus();
+      }
   });
 
 
