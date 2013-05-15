@@ -306,7 +306,7 @@ $(function() {
         toggleVideo();
       }
       else if (event.which == 13){
-        
+
       }
       else{
         var vid = document.getElementById("video");
@@ -428,6 +428,8 @@ $(function() {
   });
 
   $("#dir-start").blur(function() {
+    current_from_dir = "";
+    current_to_dir = "";
     $(this).removeClass('invalid');
     $(this).removeClass('valid');
     var text = $("#dir-start").val().toLowerCase().trim();
@@ -466,8 +468,8 @@ $(function() {
       canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
     }
 
-    current_from_dir = "";
-    current_to_dir = "";
+    //current_from_dir = "";
+    //current_to_dir = "";
 
     return false
   });
@@ -483,6 +485,8 @@ $(function() {
   });
 
   $("#dir-end").blur(function() {
+    current_from_dir = "";
+    current_to_dir = "";
     $(this).removeClass('invalid');
     $(this).removeClass('valid');
     var text = $("#dir-end").val().toLowerCase().trim();
@@ -521,8 +525,8 @@ $(function() {
       canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
     }
 
-    current_from_dir = "";
-    current_to_dir = "";
+    //current_from_dir = "";
+    //current_to_dir = "";
 
     return false
   });
@@ -629,8 +633,10 @@ $(function() {
 
     player_num = $('#player-num').val();
     shot_type = $('#shot-type').val();
-    start_dir = $('#dir-start').val();
-    end_dir = $('#dir-end').val();
+    //start_dir = $('#dir-start').val();
+    //end_dir = $('#dir-end').val();
+    start_dir = current_from_dir;
+    end_dir = current_to_dir;
     shot_outcome = $('#shot-outcome').val();
 
     if (player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length == 0){
@@ -673,9 +679,9 @@ $(function() {
       var vals = Array();
       vals.push(Array('PlayerNumber', player_num, $('#player-num').hasClass('invalid')));
       vals.push(Array('ShotType', shot_type, $('#shot-type').hasClass('invalid')));
+      vals.push(Array('ShotOutcome', shot_outcome, $('#shot-outcome').hasClass('invalid')));
       vals.push(Array('StartDirection', start_dir, $('#dir-start').hasClass('invalid')));
       vals.push(Array('EndDirection', end_dir, $('#dir-end').hasClass('invalid')));
-      vals.push(Array('ShotOutcome', shot_outcome, $('#shot-outcome').hasClass('invalid')));
       vals.push(Array('TimeStamp', timestamp));
       addToCallStack(vals);
 
@@ -705,6 +711,8 @@ $(function() {
     $("#player-num").focus();
 
     resetIcons();
+    current_from_dir = "";
+    current_to_dir = "";
     return false;
   });
 
@@ -734,17 +742,17 @@ $(function() {
     }
 
     //dir options
-    if (command[2][1] in dir_options){
-      command[2][1] = dir_options[command[2][1]];
-    }
-
     if (command[3][1] in dir_options){
       command[3][1] = dir_options[command[3][1]];
     }
 
+    if (command[4][1] in dir_options){
+      command[4][1] = dir_options[command[4][1]];
+    }
+
     //shot outcome options
-    if (command[4][1] in shot_type_options){
-      command[4][1] = shot_outcome_options[command[4][1]];
+    if (command[2][1] in shot_type_options){
+      command[2][1] = shot_outcome_options[command[2][1]];
     }   
     
     var outer_wrapper = document.createElement('div');
@@ -807,9 +815,10 @@ $(function() {
     $(edit_button).click(function(){
       $('#player-num').val($('#'+command[0][0]+wrapper_num).html());
       $('#shot-type').val($('#'+command[1][0]+wrapper_num).html());
-      $('#dir-start').val($('#'+command[2][0]+wrapper_num).html());
-      $('#dir-end').val($('#'+command[3][0]+wrapper_num).html());
-      $('#shot-outcome').val($('#'+command[4][0]+wrapper_num).html());
+      $('#shot-outcome').val($('#'+command[2][0]+wrapper_num).html());
+      $('#dir-start').val($('#'+command[3][0]+wrapper_num).html());
+      $('#dir-end').val($('#'+command[4][0]+wrapper_num).html());
+      
 
       $('#player-num').blur();
       $('#shot-type').blur();
