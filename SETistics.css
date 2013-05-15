@@ -1,11 +1,7 @@
-html, body {
-	height: 100%;
-}
-
-html {
-}
-
-body {
+html,body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 #recorded-statistics {
@@ -214,6 +210,18 @@ body {
 	transition: background-color 0.25s;
 }
 
+.separator-dark {
+	position: relative;
+	padding-top: 14px;
+	padding-left: 14px;
+	border-top: 3px solid rgba(0,0,0,0.3);
+	border-bottom: 1px solid rgba(255,255,255,0.3);
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08);
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08);
+	height: 10%;
+	transition: background-color 0.25s;
+}
+
 input[type=text].transparent{
 	border: none !important;
 	background: none !important;
@@ -232,6 +240,10 @@ tr.comRow {
 }
 
 .separator:hover {
+	background-color: rgb(169,169,169);
+}
+
+.separator-dark:hover {
 	background-color: rgb(169,169,169);
 }
 
@@ -340,30 +352,35 @@ tr.comRow {
 }
 
 #player-num-options {
+	top: -1135%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;
 }
 
 #shot-type-options {
+	top: -510%;
     left: -387%;
 	min-width: 0;
 	width: 500%;
 }
 
 #dir-start-options {
+	top: -600%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;
 }
 
 #dir-end-options {
+	top: -600%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;
 }
 
 #shot-outcome-options {
+	top: -330%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;

@@ -271,15 +271,15 @@ $(function() {
     $('#shot-type').focus();
   });
 
-  $(document).bind('keyup', 'F3', function(){
+  $(document).bind('keyup', 'F4', function(){
     $('#dir-start').focus();
   });
 
-  $(document).bind('keyup', 'F4', function(){
+  $(document).bind('keyup', 'F5', function(){
     $('#dir-end').focus();
   });
 
-  $(document).bind('keyup', 'F5', function(){
+  $(document).bind('keyup', 'F3', function(){
     $('#shot-outcome').focus();
   });
 
@@ -297,9 +297,9 @@ $(function() {
   $('input').each(function(){
     $(this).bind('keyup', 'F1', function(){$('#player-num').focus();});
     $(this).bind('keyup', 'F2', function(){$('#shot-type').focus();});
-    $(this).bind('keyup', 'F3', function(){$('#dir-start').focus();});
-    $(this).bind('keyup', 'F4', function(){$('#dir-end').focus();});
-    $(this).bind('keyup', 'F5', function(){$('#shot-outcome').focus();});
+    $(this).bind('keyup', 'F4', function(){$('#dir-start').focus();});
+    $(this).bind('keyup', 'F5', function(){$('#dir-end').focus();});
+    $(this).bind('keyup', 'F3', function(){$('#shot-outcome').focus();});
     $(this).bind('keypress', 'F8', function(){toggleVideo();});
     $(this).keydown(function(event){
       /*var div = document.getElementById("ytapiplayer");
@@ -921,7 +921,12 @@ $(function() {
       $("#player-num").focus();
       return false;
     });*/
-    $(wrapper).addClass('separator');
+    if (command[2][1] == "k" || command[2][1] == "e"){
+      $(wrapper).addClass('separator-dark');
+    }
+    else{
+      $(wrapper).addClass('separator');
+    }
     $(wrapper).append(labelRow);
     $(wrapper).append('<br>')
     $(wrapper).append(comRow);
