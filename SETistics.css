@@ -1,11 +1,7 @@
-html, body {
-	height: 100%;
-}
-
-html {
-}
-
-body {
+html,body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 #recorded-statistics {
@@ -339,12 +335,14 @@ tr.comRow {
 }
 
 #player-num-options {
+	top: -1135%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;
 }
 
 #shot-type-options {
+	top: -510%;
     left: -387%;
 	min-width: 0;
 	width: 500%;
@@ -363,6 +361,7 @@ tr.comRow {
 }
 
 #shot-outcome-options {
+	top: -330%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;
