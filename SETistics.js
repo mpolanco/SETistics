@@ -721,8 +721,16 @@ $(function() {
     shot_type = $('#shot-type').val();
     //start_dir = $('#dir-start').val();
     //end_dir = $('#dir-end').val();
-    start_dir = current_from_dir;
-    end_dir = current_to_dir;
+    if ($('#dir-start').hasClass('valid')) {
+      start_dir = current_from_dir;
+    } else {
+      start_dir = $('#dir-start').val();
+    }
+    if ($('#dir-end').hasClass('valid')) {
+      end_dir = current_to_dir;
+    } else {
+      end_dir = $('#dir-end').val();
+    }
     shot_outcome = $('#shot-outcome').val();
 
     if (player_num.length + shot_type.length + start_dir.length + end_dir.length + shot_outcome.length == 0){
