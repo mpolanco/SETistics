@@ -242,6 +242,10 @@ tr.comRow {
 	background-color: rgb(169,169,169);
 }
 
+.separator-dark:hover {
+	background-color: rgb(169,169,169);
+}
+
 .button-div{
 	position: relative;
 	top: 0px;
