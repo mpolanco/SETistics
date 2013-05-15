@@ -12,6 +12,19 @@ body {
 	outline: none;
 }
 
+#SETistics-link {
+	font-weight: bold;
+	font-family: Helvetica;
+	font-size: 0.9em;
+	color: rgb(15,124,235);
+	background:none;
+	border:none;
+}
+
+#SETistics-link:hover {
+	color: rgb(5,90,190);
+}
+
 #statHeader {
 	font-weight: bold;
 }

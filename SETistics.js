@@ -1071,7 +1071,9 @@ $(function() {
       };
   */
   $("#recorded-link").click(function(event) {
-    $("#main-container").addClass("hidden");
+    var vid = document.getElementById("video");
+    vid.pause();
+    $("#main-container").addClass("hidden"); 
     $("#recorded-statistics").removeClass("hidden");
 
     for (var statisticIndex in statistics) {
@@ -1105,6 +1107,10 @@ $(function() {
       var shot_type_cell = document.createElement('td');
       $(shot_type_cell).html(shot_type);
 
+      var shot_outcome = statistic['shot-outcome'];
+      var shot_outcome_cell = document.createElement('td');
+      $(shot_outcome_cell).html(shot_outcome);
+
       var start_dir = statistic['dir-start'];
       var start_dir_cell = document.createElement('td');
       $(start_dir_cell).html(start_dir);
@@ -1113,18 +1119,25 @@ $(function() {
       var end_dir_cell = document.createElement('td');
       $(end_dir_cell).html(end_dir);
 
-      var shot_outcome = statistic['shot-outcome'];
-      var shot_outcome_cell = document.createElement('td');
-      $(shot_outcome_cell).html(shot_outcome);
-
       $(row).append(timestamp_cell);
       $(row).append(player_num_cell);
       $(row).append(shot_type_cell);
+      $(row).append(shot_outcome_cell);
       $(row).append(start_dir_cell);
       $(row).append(end_dir_cell);
-      $(row).append(shot_outcome_cell);
       $("#statTable").append(row);
     }
+  });
+
+  $("#SETistics-link").click(function(event) {
+    var statTable = document.getElementById('statTable');
+
+    for(var i = statTable.rows.length - 1; i > 0; i--) {
+        statTable.deleteRow(i);
+    }
+
+    $("#recorded-statistics").addClass("hidden");
+    $("#main-container").removeClass("hidden"); 
   });
 
   $("#player-num").focus();
@@ -1135,7 +1148,3 @@ $(function() {
 //********************************* Video Player  ***********************************
 //***********************************************************************************
 
-function onYouTubePlayerReady(playerId) {
-  console.log("YOUTUBE PLAYER READY");
-  youtube_api_player = document.getElementById("ytapiplayer");
-}
