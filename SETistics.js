@@ -205,9 +205,9 @@ $(function() {
   $("#hidden").attr("tabindex", 1);
   $("#player-num").attr("tabindex", 2);
   $("#shot-type").attr("tabindex", 3);
-  $("#dir-start").attr("tabindex", 4);
-  $("#dir-end").attr("tabindex", 5);
-  $("#shot-outcome").attr("tabindex", 6);
+  $("#shot-outcome").attr("tabindex", 4);
+  $("#dir-start").attr("tabindex", 5);
+  $("#dir-end").attr("tabindex", 6);
   $("#submit-button").attr("tabindex", 7);
 
   $("#player-num-feedback").focus(function(event) {
@@ -271,16 +271,16 @@ $(function() {
     $('#shot-type').focus();
   });
 
+  $(document).bind('keyup', 'F3', function(){
+    $('#shot-outcome').focus();
+  });
+
   $(document).bind('keyup', 'F4', function(){
     $('#dir-start').focus();
   });
 
   $(document).bind('keyup', 'F5', function(){
     $('#dir-end').focus();
-  });
-
-  $(document).bind('keyup', 'F3', function(){
-    $('#shot-outcome').focus();
   });
 
   /*$(document).bind('keypress', 'F8', function(){
@@ -398,7 +398,7 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 32) {  
       $("#shot-type").val($("#shot-type").val().split(" ").join(""));
-      $("#dir-start").focus();
+      $("#shot-outcome").focus();
     }
 
     return false;
@@ -523,7 +523,7 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 32) {  
       $("#dir-end").val($("#dir-end").val().split(" ").join(""));
-      $("#shot-outcome").focus();
+      $("#submit-button").focus();
     }
 
     return false;
@@ -589,7 +589,7 @@ $(function() {
   	// Enter is key 13. Space key is 32. 
     if (event.which == 32) {  
       $("#shot-outcome").val($("#shot-outcome").val().split(" ").join(""));
-      $("#submit-button").focus();
+      $("#dir-start").focus();
     }
 
     return false;
@@ -681,6 +681,11 @@ $(function() {
     iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}','*');
     var div = document.getElementById("ytapiplayer");
     div.playVideo();*/
+    document.getElementById('dir-start').disabled = "disabled";
+    document.getElementById('dir-end').disabled = "disabled";
+    $('#dir-start-button').css('pointer-events', 'none');
+    $('#dir-end-button').css('pointer-events', 'none');
+
     current_shot_type = "";
     var vid = document.getElementById("video");
     vid.play();
@@ -1041,7 +1046,7 @@ $(function() {
         }
       }
       $("#shot-type").blur();
-      $("#dir-start").focus();
+      $("#shot-outcome").focus();
 
       if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
         document.getElementById('dir-start').disabled = "";
@@ -1144,7 +1149,7 @@ $(function() {
       }
 
       $("#dir-end").blur();
-      $("#shot-outcome").focus();
+      $("#submit-button").focus();
 
       if (current_from_dir.length != 0 && current_to_dir.length != 0) {
         canvas_arrow(ctx, position_x[current_from_dir], position_y[current_from_dir], position_x[current_to_dir], position_y[current_to_dir]);
@@ -1171,7 +1176,7 @@ $(function() {
         }
       }
       $("#shot-outcome").blur();
-      $("#submit-button").focus();
+      $("#dir-start").focus();
   });
 
 
