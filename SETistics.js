@@ -131,6 +131,11 @@ $(function() {
     "a5" : 87,
   };
 
+  document.getElementById('dir-start').disabled = "disabled";
+  document.getElementById('dir-end').disabled = "disabled";
+  $('#dir-start-button').css('pointer-events', 'none');
+  $('#dir-end-button').css('pointer-events', 'none');
+
   function translation(command){
     //player-num translations
     if(command[0][1] in player_num_options){
@@ -207,6 +212,12 @@ $(function() {
 
   $("#player-num-feedback").focus(function(event) {
     $("#player-num-feedback").blur();
+  });
+
+  $(".btn-group").each(function() {
+    $(this).focus(function(event) {
+      $(this).blur();
+    });
   });
 
   var redraw_court = function(ctx) {
@@ -366,6 +377,20 @@ $(function() {
       }
     }
 
+    if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+      document.getElementById('dir-start').disabled = "";
+      document.getElementById('dir-end').disabled = "";
+      $('#dir-start-button').css('pointer-events', '');
+      $('#dir-end-button').css('pointer-events', '');
+    } else {
+      $("#dir-start").val("");
+      $("#dir-end").val("");
+      document.getElementById('dir-start').disabled = "disabled";
+      document.getElementById('dir-end').disabled = "disabled";
+      $('#dir-start-button').css('pointer-events', 'none');
+      $('#dir-end-button').css('pointer-events', 'none');
+    }
+
     return false
   });
 
@@ -410,6 +435,20 @@ $(function() {
       else{
         if (text.length) {$("#shot-type").addClass('valid');}
       }
+    }
+
+    if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+      document.getElementById('dir-start').disabled = "";
+      document.getElementById('dir-end').disabled = "";
+      $('#dir-start-button').css('pointer-events', '');
+      $('#dir-end-button').css('pointer-events', '');
+    } else {
+      $("#dir-start").val("");
+      $("#dir-end").val("");
+      document.getElementById('dir-start').disabled = "disabled";
+      document.getElementById('dir-end').disabled = "disabled";
+      $('#dir-start-button').css('pointer-events', 'none');
+      $('#dir-end-button').css('pointer-events', 'none');
     }
 
     return false
@@ -963,6 +1002,20 @@ $(function() {
       $("#player-num-feedback").val($("#player-num").val().replace(/\D/g,''));
       $("#player-num").blur();
       $("#shot-type").focus();
+
+      if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+        document.getElementById('dir-start').disabled = "";
+        document.getElementById('dir-end').disabled = "";
+        $('#dir-start-button').css('pointer-events', '');
+        $('#dir-end-button').css('pointer-events', '');
+      } else {
+        $("#dir-start").val("");
+        $("#dir-end").val("");
+        document.getElementById('dir-start').disabled = "disabled";
+        document.getElementById('dir-end').disabled = "disabled";
+        $('#dir-start-button').css('pointer-events', 'none');
+        $('#dir-end-button').css('pointer-events', 'none');
+      }
   });
 
   $(".shot-type-option").click(function(event) {
@@ -984,7 +1037,20 @@ $(function() {
       }
       $("#shot-type").blur();
       $("#dir-start").focus();
-      
+
+      if ($("#player-num").hasClass('valid') && $("#shot-type").hasClass('valid')) {
+        document.getElementById('dir-start').disabled = "";
+        document.getElementById('dir-end').disabled = "";
+        $('#dir-start-button').css('pointer-events', '');
+        $('#dir-end-button').css('pointer-events', '');
+      } else {
+        $("#dir-start").val("");
+        $("#dir-end").val("");
+        document.getElementById('dir-start').disabled = "disabled";
+        document.getElementById('dir-end').disabled = "disabled";
+        $('#dir-start-button').css('pointer-events', 'none');
+        $('#dir-end-button').css('pointer-events', 'none');
+      }    
   });
 
   $(".dir-start-option").click(function(event) {
