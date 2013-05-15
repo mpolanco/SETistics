@@ -361,12 +361,14 @@ tr.comRow {
 }
 
 #dir-start-options {
+	top: -600%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;
 }
 
 #dir-end-options {
+	top: -600%;
 	left: -387%;
 	min-width: 0;
 	width: 500%;
