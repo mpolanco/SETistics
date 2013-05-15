@@ -8,6 +8,7 @@ $(function() {
 
   var current_from_dir = "";
   var current_to_dir = "";
+  var current_shot_type = "";
 
   var youtube_api_player;
 
@@ -47,18 +48,12 @@ $(function() {
     "Spike" : "x"
   };
   var dir_options = {
-    "HomePosition1" : "h1",
-    "HomePosition2" : "h2",
-    "HomePosition3" : "h3",
-    "HomePosition4" : "h4",
-    "HomePosition5" : "h5",
-    "HomePosition6" : "h6",
-    "AwayPosition1" : "a1",
-    "AwayPosition2" : "a2",
-    "AwayPosition3" : "a3",
-    "AwayPosition4" : "a4",
-    "AwayPosition5" : "a5",
-    "AwayPosition6" : "a6"
+    "Position1" : "1",
+    "Position2" : "2",
+    "Position3" : "3",
+    "Position4" : "4",
+    "Position5" : "5",
+    "Position6" : "6"
   };
   var shot_outcome_options = {
     "Dug" : "d",
@@ -224,19 +219,19 @@ $(function() {
     ctx.fillRect(152, 5, 1, 90);
     ctx.fillRect(92, 5, 1, 90);
     ctx.fillRect(212, 5, 1, 90);
+    for (var pos = 1; pos <= 6; pos++) {
+      var pos_string = pos.toString();
+      var home_pos = "h" + pos_string;
+      var away_pos = "a" + pos_string;
+      ctx.fillText(pos_string, position_x[home_pos], position_y[home_pos]);
+      ctx.fillText(pos_string, position_x[away_pos], position_y[away_pos]);
+    }
   }
 
   var canvas = document.getElementById("court");
   var ctx = canvas.getContext('2d');
-  redraw_court(ctx);
   ctx.font = '1.5em Helvetica';
-  for (var pos = 1; pos <= 6; pos++) {
-    var pos_string = pos.toString();
-    var home_pos = "h" + pos_string;
-    var away_pos = "a" + pos_string;
-    ctx.fillText(pos_string, position_x[home_pos], position_y[home_pos]);
-    ctx.fillText(pos_string, position_x[away_pos], position_y[away_pos]);
-  }
+  redraw_court(ctx);
 
   // draw an arrow from (fromx, fromy) to (tox, toy)
   var canvas_arrow = function(context, fromx, fromy, tox, toy) {
@@ -385,6 +380,7 @@ $(function() {
   });
 
   $("#shot-type").blur(function() {
+    current_shot_type = "";
     var text = $("#shot-type").val().trim();
     for (var option in shot_type_options) {
       if (shot_type_options.hasOwnProperty(option)) {
@@ -401,6 +397,7 @@ $(function() {
         var lower_option = option.toLowerCase();
         var lower_shortcut = shot_type_options[option].toLowerCase();
         if (shot_type_options.hasOwnProperty(option) && (lower_text == lower_option || lower_text == lower_shortcut)) {
+          current_shot_type = lower_shortcut;
           $("#shot-type-box").addClass(lower_option);
           valid = true;
           break;
@@ -443,11 +440,20 @@ $(function() {
         if (dir_options.hasOwnProperty(option)) {
           if (text == lower_option || text == lower_shortcut ||
               $("#dir-end").val().toLowerCase() == lower_option || $("#dir-end").val().toLowerCase() == lower_shortcut) {
+            var from_dir_letter = $("#player-num").val().charAt(0).toLowerCase();
+            var to_dir_letter = from_dir_letter;
+            if (current_shot_type != 's' && current_shot_type != 'd') {
+              if (to_dir_letter == 'h') {
+                to_dir_letter = 'a';
+              } else {
+                to_dir_letter = 'h';
+              }
+            }
             if (text == lower_option || text == lower_shortcut) {
               valid = true;
-              current_from_dir = shortcut;
+              current_from_dir = from_dir_letter + shortcut;
             } else {
-              current_to_dir = shortcut;
+              current_to_dir = to_dir_letter + shortcut;
             }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
@@ -500,11 +506,20 @@ $(function() {
         if (dir_options.hasOwnProperty(option)) {
           if (text == lower_option || text == lower_shortcut ||
               $("#dir-start").val().toLowerCase() == lower_option || $("#dir-start").val().toLowerCase() == lower_shortcut) {
+            var from_dir_letter = $("#player-num").val().charAt(0).toLowerCase();
+            var to_dir_letter = from_dir_letter;
+            if (current_shot_type != 's' && current_shot_type != 'd') {
+              if (to_dir_letter == 'h') {
+                to_dir_letter = 'a';
+              } else {
+                to_dir_letter = 'h';
+              }
+            }
             if (text == lower_option || text == lower_shortcut) {
               valid = true;
-              current_to_dir = shortcut;
+              current_to_dir = to_dir_letter + shortcut;
             } else {
-              current_from_dir = shortcut;
+              current_from_dir = from_dir_letter + shortcut;
             }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
@@ -627,6 +642,7 @@ $(function() {
     iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}','*');
     var div = document.getElementById("ytapiplayer");
     div.playVideo();*/
+    current_shot_type = "";
     var vid = document.getElementById("video");
     vid.play();
     video_state = true;
@@ -951,6 +967,7 @@ $(function() {
 
   $(".shot-type-option").click(function(event) {
       var selection = event.currentTarget.children[0].innerHTML;
+      current_shot_type = selection;
       $("#shot-type").val(selection);
       for (var option in shot_type_options) {
         if (shot_type_options.hasOwnProperty(option)) {
@@ -984,10 +1001,19 @@ $(function() {
           var lower_shortcut = shortcut.toLowerCase();
           if (lower_selection == lower_shortcut || $("#dir-end").val().toLowerCase() == lower_shortcut || 
               lower_selection == lower_option || $("#dir-end").val().toLowerCase() == lower_option) {
+            var from_dir_letter = $("#player-num").val().charAt(0).toLowerCase();
+            var to_dir_letter = from_dir_letter;
+            if (current_shot_type != 's' && current_shot_type != 'd') {
+              if (to_dir_letter == 'h') {
+                to_dir_letter = 'a';
+              } else {
+                to_dir_letter = 'h';
+              }
+            }
             if (lower_selection == lower_shortcut || lower_selection == lower_option) {
-              current_from_dir = shortcut;
+              current_from_dir = from_dir_letter + shortcut;
             } else {
-              current_to_dir = shortcut;
+              current_to_dir = to_dir_letter + shortcut;
             }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
@@ -1023,10 +1049,19 @@ $(function() {
           var lower_shortcut = shortcut.toLowerCase();
           if (lower_selection == lower_shortcut || $("#dir-start").val().toLowerCase() == lower_shortcut || 
               lower_selection == lower_option || $("#dir-start").val().toLowerCase() == lower_option) {
+            var from_dir_letter = $("#player-num").val().charAt(0).toLowerCase();
+            var to_dir_letter = from_dir_letter;
+            if (current_shot_type != 's' && current_shot_type != 'd') {
+              if (to_dir_letter == 'h') {
+                to_dir_letter = 'a';
+              } else {
+                to_dir_letter = 'h';
+              }
+            }
             if (lower_selection == lower_shortcut || lower_selection == lower_option) {
-              current_to_dir = shortcut;
+              current_to_dir = to_dir_letter + shortcut;
             } else {
-              current_from_dir = shortcut;
+              current_from_dir = from_dir_letter + shortcut;
             }
             ctx.fillStyle = "#91003A";
             ctx.fillText(shortcut.charAt(1), position_x[shortcut], position_y[shortcut]);
