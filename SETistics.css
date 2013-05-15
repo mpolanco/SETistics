@@ -213,6 +213,18 @@ body {
 	transition: background-color 0.25s;
 }
 
+.separator-dark {
+	position: relative;
+	padding-top: 14px;
+	padding-left: 14px;
+	border-top: 3px solid rgba(0,0,0,0.3);
+	border-bottom: 1px solid rgba(255,255,255,0.3);
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08);
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08);
+	height: 10%;
+	transition: background-color 0.25s;
+}
+
 input[type=text].transparent{
 	border: none !important;
 	background: none !important;
