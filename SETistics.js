@@ -1242,7 +1242,14 @@ $(function() {
     $("#main-container").addClass("hidden"); 
     $("#recorded-statistics").removeClass("hidden");
 
+    document.getElementById('csv').innerHTML = "";
+
+    var csv_string = "TimeStamp,Player Number,Shot Type,Outcome,Start Direction,End Direction";
+    $('<span>' + csv_string + '</span></br>').appendTo('#csv');
+
     for (var statisticIndex in statistics) {
+      csv_string = '';
+
       var statistic = statistics[statisticIndex];
 
       var row = document.createElement('tr');
@@ -1263,26 +1270,32 @@ $(function() {
 
       // will display time in 10:30:23 format
       var formattedTime = hours + ':' + minutes + ':' + seconds; 
+      csv_string += formattedTime + ',';
       $(timestamp_cell).html(formattedTime);
 
       var player_num = statistic['player-num'];
       var player_num_cell = document.createElement('td');
+      csv_string += player_num + ',';
       $(player_num_cell).html(player_num);
 
       var shot_type = statistic['shot-type'];
       var shot_type_cell = document.createElement('td');
+      csv_string += shot_type + ',';
       $(shot_type_cell).html(shot_type);
 
       var shot_outcome = statistic['shot-outcome'];
       var shot_outcome_cell = document.createElement('td');
+      csv_string += shot_outcome + ',';
       $(shot_outcome_cell).html(shot_outcome);
 
       var start_dir = statistic['dir-start'];
       var start_dir_cell = document.createElement('td');
+      csv_string += start_dir + ',';
       $(start_dir_cell).html(start_dir);
 
       var end_dir = statistic['dir-end'];
       var end_dir_cell = document.createElement('td');
+      csv_string += end_dir;
       $(end_dir_cell).html(end_dir);
 
       $(row).append(timestamp_cell);
@@ -1292,6 +1305,8 @@ $(function() {
       $(row).append(start_dir_cell);
       $(row).append(end_dir_cell);
       $("#statTable").append(row);
+
+      $('<span>' + csv_string + '</span></br>').appendTo('#csv');
     }
   });
 
@@ -1304,6 +1319,8 @@ $(function() {
 
     $("#recorded-statistics").addClass("hidden");
     $("#main-container").removeClass("hidden"); 
+
+    $('#player-num').focus();
   });
 
   $("#player-num").focus();
